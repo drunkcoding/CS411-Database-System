@@ -22,7 +22,7 @@ for table in tables:
 dataframe = []
 
 state_fixture = []
-pk = 1
+#pk = 1
 
 for row in data:
     if not row or len(row) < 10: continue
@@ -39,18 +39,10 @@ for row in data:
 
     print(row_data)
 
-    frame = {'model':'gunviolence.state', 'pk':pk, 'fields':{'name':row_data[0], 'population':row_data[1], 'land_area':row_data[2]}}
+    frame = {'model':'gunviolence.state', 'fields':{'name':row_data[0], 'population':row_data[1], 'land_area':float(row_data[2])}}
     state_fixture.append(frame)
     dataframe.append(row_data)
-    pk += 1
-
-"""
-- model: myapp.person
-  pk: 1
-  fields:
-    first_name: John
-    last_name: Lennon
-"""
+    #pk += 1
 
 with open('state.json', 'w') as f:
     json.dump(state_fixture, f)

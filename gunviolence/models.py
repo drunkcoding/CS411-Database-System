@@ -6,21 +6,21 @@ from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 
 class State(models.Model):
-    name = models.CharField(max_length=64, primary_key=True)
+    name = models.CharField(max_length=64)
     population = models.PositiveIntegerField()
     land_area = models.FloatField()  
 
 class City(models.Model):
-    name = models.CharField(max_length=64, primary_key=True)
-    state = models.ForeignKey(State, on_delete=models.PROTECT)
+    name = models.CharField(max_length=64)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
     population = models.PositiveIntegerField()
     land_area = models.FloatField()     
 
 class Location(models.Model):
     latitude =  models.FloatField(default=40.1020)
     longitude =  models.FloatField(default=-88.2272)
-    state = models.ForeignKey(State, on_delete=models.PROTECT)
-    city = models.ForeignKey(City, on_delete=models.PROTECT)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
     
     class Meta:
         unique_together = (("latitude", "longitude"),)
@@ -28,20 +28,13 @@ class Location(models.Model):
 class IncidentCharacteristic(models.Model):
     characteristic = models.CharField(max_length=1024, choices=settings.CHARACTER_CHOICES)
     count = models.PositiveIntegerField(default=0)
-    state = models.ManyToManyField(State)
-    city = models.ManyToManyField(City)
-
-class UserProfile(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    threshold = models.FloatField(default=1.0)
-    location = models.ForeignKey(Location, on_delete=models.PROTECT)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
 
 class GunViolence(models.Model):
-    id = models.PositiveIntegerField(primary_key=True)
     url = models.URLField()
     date = models.DateField()
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    note = models.CharField(max_length=1024, null=True)
     characteristic = models.ManyToManyField(IncidentCharacteristic) 
 
 class Participant(models.Model):

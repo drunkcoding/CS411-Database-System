@@ -1,3 +1,4 @@
 django
 mysqlclient
 psycopg2
+pandas
