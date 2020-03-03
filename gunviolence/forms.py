@@ -1,4 +1,4 @@
 from django import forms
-from django.apps import apps
 
-
+class SQLForm(forms.Form):
+    query = forms.CharField(label='rawsql', max_length=1024)

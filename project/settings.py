@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'antientropy_cs411',
-        'USER': 'antientropy_cs411',
-        'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+        'NAME': 'cs411',
+        'USER': 'cs411',
+        #'PASSWORD': os.getenv('MYSQL_PASSWORD'),
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

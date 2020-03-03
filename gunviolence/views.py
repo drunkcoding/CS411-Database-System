@@ -1,18 +1,39 @@
-import csv, io, os, logging
+import csv, io, os, logging, json, sys
 import pandas as pd
 from django.shortcuts import render
 from django.contrib import messages
 from django.conf import settings
-from django.db import transaction
+from django.db import transaction, connection
 
 from .models import *
+from .forms import *
 
-"""
 def homepage(request):
-    template = "index.html"
-    context = {}
-    return render(request, template, context)
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SQLForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            query = form.cleaned_data['query']
 
+            cursor = connection.cursor()
+            try:            
+                cursor.execute(query)
+            except:
+                return render(request, 'sample-query.html', {'form': SQLForm(), 'sqldata': json.dumps([[str(sys.exc_info()[1])]])})
+            data = cursor.fetchall()
+            return render(request, 'sample-query.html', {'form': SQLForm(), 'sqldata': json.dumps(data)})
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = SQLForm()
+
+    return render(request, 'sample-query.html', {'form': form})
+"""
 # Create your views here.
 def dummy(request):
 

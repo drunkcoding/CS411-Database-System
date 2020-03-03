@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+    <p id="showData"></p>
+
+    {% if sqldata %}
+        <script>
+            (function () {
+                var obj = {{ sqldata|safe }}
+          
+                var table = document.createElement("table");
+                var tr = table.insertRow(-1);                   // TABLE ROW.
+                for (var i = 0; i < obj[0].length; i++) {
+                    var th = document.createElement("th");      // TABLE HEADER.
+                    th.innerHTML = "";
+                    tr.appendChild(th);
+                }
+                for (var i = 0; i < obj.length; i++) {
+
+                    tr = table.insertRow(-1);
+
+                    for (var j = 0; j < obj[0].length; j++) {
+                        var tabCell = tr.insertCell(-1);
+                        tabCell.innerHTML = obj[i][j];
+                    }
+                }
+                var divContainer = document.getElementById("showData");
+                divContainer.innerHTML = "";
+                divContainer.appendChild(table);
+            })();
+        </script>
+    {% endif %}
+    
+</body>
+</html>

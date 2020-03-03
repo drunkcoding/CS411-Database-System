@@ -21,5 +21,5 @@ from gunviolence.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('dummy/', dummy),
-    #path('', homepage),
+    path('', homepage),
 ]
