@@ -16,15 +16,6 @@ class City(models.Model):
     population = models.PositiveIntegerField()
     land_area = models.FloatField()     
 
-class Location(models.Model):
-    latitude =  models.FloatField(default=40.1020)
-    longitude =  models.FloatField(default=-88.2272)
-    state = models.ForeignKey(State, on_delete=models.CASCADE)
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
-    
-    class Meta:
-        unique_together = (("latitude", "longitude"),)
-
 class IncidentCharacteristic(models.Model):
     characteristic = models.CharField(max_length=1024, choices=settings.CHARACTER_CHOICES)
     count = models.PositiveIntegerField(default=0)
@@ -34,8 +25,42 @@ class IncidentCharacteristic(models.Model):
 class GunViolence(models.Model):
     url = models.URLField()
     date = models.DateField()
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    latitude =  models.FloatField(default=40.1020)
+    longitude =  models.FloatField(default=-88.2272)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
     characteristic = models.ManyToManyField(IncidentCharacteristic) 
+
+class GunViolenceRaw(models.Model):
+    incident_id = models.PositiveIntegerField(primary_key=True)
+    date = models.DateField()
+    state = models.CharField(max_length=64)
+    city_or_county = models.CharField(max_length=64)
+    address = models.TextField(null=True)
+    n_killed = models.PositiveSmallIntegerField(null=True)
+    n_injured = models.PositiveSmallIntegerField(null=True)
+    incident_url = models.URLField(null=True)
+    source_url = models.URLField(null=True)
+    incident_url_fields_missing = models.CharField(max_length=8)
+    congressional_district = models.PositiveSmallIntegerField(null=True)
+    gun_stolen = models.CharField(max_length=64, null=True)
+    gun_type = models.CharField(max_length=64, null=True)
+    incident_characteristics = models.TextField(null=True)
+    latitude =  models.FloatField(null=True)
+    location_description = models.TextField(null=True)
+    longitude =  models.FloatField(null=True)
+    n_guns_involved = models.PositiveSmallIntegerField(null=True)
+    notes = models.TextField(null=True)
+    participant_age = models.TextField(null=True)
+    participant_age_group = models.TextField(null=True)
+    participant_gender = models.TextField(null=True)
+    participant_name = models.TextField(null=True)
+    participant_relationship = models.TextField(null=True)
+    participant_status = models.TextField(null=True)
+    participant_type = models.TextField(null=True)
+    sources = models.URLField(null=True)
+    state_house_district = models.PositiveSmallIntegerField(null=True)
+    state_senate_district = models.PositiveSmallIntegerField(null=True)
 
 class Participant(models.Model):
     name = models.CharField(max_length=64)

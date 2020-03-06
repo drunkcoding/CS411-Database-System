@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Create a heatmap layer</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+<style>
+    .mapboxgl-popup {
+    max-width: 400px;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+</style>
+</head>
+<body>
+<div id="map"></div>
+ 
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoidGhpbmtpbmdyZWVkIiwiYSI6ImNrN2JnODFpMTAzemEzZWxrdjVmMWs1aDgifQ.ilp7OlnOWSrRkVltnP8biQ';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-120, 50],
+        zoom: 2
+    });
+ 
+    map.on('load', function() {
+    // Add a geojson point source.
+    // Heatmap layers also work with a vector tile source.
+    map.addSource('earthquakes', {
+    'type': 'geojson',
+    'data': {{ geo|safe }}
+    });
+    
+    map.addLayer(
+        {
+            'id': 'earthquakes-heat',
+            'type': 'heatmap',
+            'source': 'earthquakes',
+            'maxzoom': 9,
+            'paint': {
+                // Increase the heatmap weight based on frequency and property magnitude
+                'heatmap-weight': ['interpolate',['linear'],['get', 'involve'],0,0,6,1],
+                // Increase the heatmap color weight weight by zoom level
+                // heatmap-intensity is a multiplier on top of heatmap-weight
+                'heatmap-intensity': ['interpolate',['linear'],['zoom'],0,1,9,3],
+                // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
+                // Begin color ramp at 0-stop with a 0-transparancy color
+                // to create a blur-like effect.
+                'heatmap-color': [
+                    'interpolate',['linear'],['heatmap-density'],
+                    0,'rgba(0, 0, 77,0)',
+                    0.05,'rgb(51, 51, 255)',
+                    0.1,'rgb(77, 77, 255)',
+                    0.15, 'rgb(102, 102, 255)',
+                    0.2,'rgb(128, 128, 255)',
+                    0.25,'rgb(153, 153, 255)',
+                    0.35,'rgb(179, 179, 255)',
+                    0.4,'rgb(204, 204, 255)',
+                    0.45,'rgb(230, 230, 255)',
+                    0.5,'rgb(255, 255, 255)',
+                    0.55, 'rgb(255, 230, 230)',
+                    0.6, 'rgb(255, 204, 204)',
+                    0.65, 'rgb(255, 179, 179)',
+                    0.7, 'rgb(255, 153, 153)',
+                    0.75, 'rgb(255, 128, 128)',
+                    0.8, 'rgb(255, 102, 102)',
+                    0.85, 'rgb(255, 77, 77)',
+                    0.9,'rgb(255, 51, 51)',
+                    0.95,'rgb(255, 26, 26)',
+                    1,'rgb(255, 0, 0)'
+                ],
+                // Adjust the heatmap radius by zoom level
+                'heatmap-radius': ['interpolate',['linear'],['zoom'],0,2,9,20],
+                // Transition from heatmap to circle layer by zoom level
+                'heatmap-opacity': ['interpolate',['linear'],['zoom'],7,1,9,0]
+            }
+        },
+        'waterway-label'
+    );
+    
+    map.addLayer(
+        {
+            'id': 'earthquakes-point',
+            'type': 'circle',
+            'source': 'earthquakes',
+            'minzoom': 7,
+            'paint': {
+                // Size circle radius by earthquake magnitude and zoom level
+                'circle-radius': [
+                    'interpolate',['linear'],['zoom'],7,
+                    ['interpolate', ['linear'], ['get', 'mag'], 1, 1, 6, 4],16,
+                    ['interpolate', ['linear'], ['get', 'mag'], 1, 5, 6, 50]
+                ],
+                // Color circle by earthquake magnitude
+                'circle-color': [
+                    'interpolate',['linear'],['get', 'mag'],
+                    1,'rgba(33,102,172,0)',
+                    2,'rgb(103,169,207)',
+                    3,'rgb(209,229,240)',
+                    4,'rgb(253,219,199)',
+                    5,'rgb(239,138,98)',
+                    6,'rgb(178,24,43)'
+                ],
+                'circle-stroke-color': 'white',
+                'circle-stroke-width': 1,
+                // Transition from heatmap to circle layer by zoom level
+                'circle-opacity': [
+                    'interpolate',['linear'],['zoom'],7,0,8,1
+                ]
+            }
+        },
+        'waterway-label'
+    );
+
+    });
+</script>
+ 
+</body>
+</html>

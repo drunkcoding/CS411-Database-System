@@ -20,6 +20,7 @@ from gunviolence.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('heatmap/', heatmap),
     #path('dummy/', dummy),
     path('', homepage),
 ]

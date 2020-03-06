@@ -33,6 +33,29 @@ def homepage(request):
         form = SQLForm()
 
     return render(request, 'sample-query.html', {'form': form})
+
+def heatmap(request):
+    locations = GunViolenceRaw.objects.all()\
+        .filter(latitude__isnull=False, longitude__isnull=False)\
+        .filter(n_killed__isnull=False, n_injured__isnull=False)\
+        .values('latitude', 'longitude', "n_killed", "n_injured")
+    geo = {
+        "type": "FeatureCollection",
+        "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+        "features": []
+    }
+    for location in locations:
+        geo['features'].append(
+            { 
+                "type": "Feature", 
+                "properties": {
+                    "involve": location['n_killed']+location['n_injured']
+                }, 
+                "geometry": { "type": "Point", "coordinates": [ location['longitude'], location['latitude'], 0.0 ] }
+            }
+        )
+    return render(request, 'heatmap.html', {'geo':json.dumps(geo)})
+
 """
 # Create your views here.
 def dummy(request):
@@ -45,13 +68,15 @@ def dummy(request):
 
     state_file = os.path.join(settings.MEDIA_DIR, "state.csv")
     city_file = os.path.join(settings.MEDIA_DIR, "city.csv")
-    data_file = os.path.join(settings.MEDIA_DIR, "gun-violence-data.csv")
+    character_file = os.path.join(settings.MEDIA_DIR, "character.csv")
+    #data_file = os.path.join(settings.MEDIA_DIR, "gun-violence-data.csv")
 
     state_df = pd.read_csv(state_file, header=0)
     city_df = pd.read_csv(city_file, header=0)
-    data_df = pd.read_csv(data_file, header=0)
+    character_df = pd.read_csv(character_file, header=0)
+    #data_df = pd.read_csv(data_file, header=0)
 
-    Location.objects.all().delete()
+    # Location.objects.all().delete()
     # City.objects.all().delete()
     # State.objects.all().delete()
 
@@ -77,25 +102,6 @@ def dummy(request):
                 land_area = row['land_area']
             )
             cities[row['name']] = city
-
-    locations = {}
-
-    data_df = data_df.dropna(subset=['latitude', 'longitude'])
-
-    with transaction.atomic():
-        for index, row in data_df.iterrows():
-            if row['city_or_county'] in cities:
-                location, created = Location.objects.get_or_create(
-                    latitude=row['latitude'],
-                    state = states[row['state']],
-                    longitude = row['longitude'],
-                    city = cities[row['city_or_county']]
-                )
-                locations[row['incident_id']] = location
-            else:
-                logging.info("%s, %s skipped" % (row['city_or_county'], row['state']))
-
-    logging.info("locations import completed")
 
     return render(request, template, context)    
 """
