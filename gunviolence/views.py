@@ -35,26 +35,37 @@ def homepage(request):
     return render(request, 'sample-query.html', {'form': form})
 
 def heatmap(request):
-    locations = GunViolenceRaw.objects.all()\
-        .filter(latitude__isnull=False, longitude__isnull=False)\
-        .filter(n_killed__isnull=False, n_injured__isnull=False)\
-        .values('latitude', 'longitude', "n_killed", "n_injured")
+
     geo = {
-        "type": "FeatureCollection",
-        "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-        "features": []
-    }
-    for location in locations:
-        geo['features'].append(
-            { 
-                "type": "Feature", 
-                "properties": {
-                    "involve": location['n_killed']+location['n_injured']
-                }, 
-                "geometry": { "type": "Point", "coordinates": [ location['longitude'], location['latitude'], 0.0 ] }
-            }
-        )
-    return render(request, 'heatmap.html', {'geo':json.dumps(geo)})
+            "type": "FeatureCollection",
+            "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+            "features": []
+        }
+
+    date_range = DateRangeForm()
+
+    if request.method == 'POST':
+        date_range = DateRangeForm(request.POST)
+
+        if date_range.is_valid():
+            locations = GunViolenceRaw.objects.all()\
+            .filter(latitude__isnull=False, longitude__isnull=False)\
+            .filter(n_killed__isnull=False, n_injured__isnull=False)\
+            .filter(date__range=[date_range.cleaned_data['from_date'], date_range.cleaned_data['to_date']])\
+            .values('latitude', 'longitude', "n_killed", "n_injured")
+
+            for location in locations:
+                geo['features'].append(
+                    { 
+                        "type": "Feature", 
+                        "properties": {
+                            "involve": location['n_killed']+location['n_injured']
+                        }, 
+                        "geometry": { "type": "Point", "coordinates": [ location['longitude'], location['latitude'], 0.0 ] }
+                    } 
+                )
+    
+    return render(request, 'heatmap.html', {'geo':json.dumps(geo), 'daterange':date_range})
 
 """
 # Create your views here.
