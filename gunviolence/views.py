@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.conf import settings
 from django.db import transaction, connection
-
+from django.http import JsonResponse
 from .models import *
 from .forms import *
 
@@ -34,6 +34,16 @@ def homepage(request):
 
     return render(request, 'sample-query.html', {'form': form})
 
+def boundary(request):
+    print(request.GET)
+    locations = GunViolenceRaw.objects.all()\
+        .filter(latitude__isnull=False, longitude__isnull=False)\
+        .filter(n_killed__isnull=False, n_injured__isnull=False)\
+        .exclude(latitude=0.0, longitude=0.0)\
+        .filter(date__range=[date_range.cleaned_data['from_date'], date_range.cleaned_data['to_date']])\
+        .values('latitude', 'longitude', "n_killed", "n_injured")
+    return JsonResponse({}, verify=False)
+
 def heatmap(request):
 
     geo = {
@@ -47,23 +57,26 @@ def heatmap(request):
     if request.method == 'POST':
         date_range = DateRangeForm(request.POST)
 
-        if date_range.is_valid():
-            locations = GunViolenceRaw.objects.all()\
-            .filter(latitude__isnull=False, longitude__isnull=False)\
-            .filter(n_killed__isnull=False, n_injured__isnull=False)\
-            .filter(date__range=[date_range.cleaned_data['from_date'], date_range.cleaned_data['to_date']])\
-            .values('latitude', 'longitude', "n_killed", "n_injured")
+    if date_range.is_valid():
+        locations = GunViolenceRaw.objects.all()\
+        .filter(latitude__isnull=False, longitude__isnull=False)\
+        .filter(n_killed__isnull=False, n_injured__isnull=False)\
+        .filter(source_url__isnull=False)\
+        .exclude(latitude=0.0, longitude=0.0)\
+        .filter(date__range=[date_range.cleaned_data['from_date'], date_range.cleaned_data['to_date']])\
+        .values('latitude', 'longitude', "n_killed", "n_injured", "source_url")
 
-            for location in locations:
-                geo['features'].append(
-                    { 
-                        "type": "Feature", 
-                        "properties": {
-                            "involve": location['n_killed']+location['n_injured']
-                        }, 
-                        "geometry": { "type": "Point", "coordinates": [ location['longitude'], location['latitude'], 0.0 ] }
-                    } 
-                )
+        for location in locations:
+            geo['features'].append(
+                { 
+                    "type": "Feature", 
+                    "properties": {
+                        "involve": location['n_killed']+location['n_injured'],
+                        "source_url": location['source_url']
+                    }, 
+                    "geometry": { "type": "Point", "coordinates": [ location['longitude'], location['latitude'], 0.0 ] }
+                } 
+            )
     
     return render(request, 'heatmap.html', {'geo':json.dumps(geo), 'daterange':date_range})
 
