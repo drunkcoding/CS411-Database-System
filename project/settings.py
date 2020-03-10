@@ -10,15 +10,13 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """,
 import os
 import itertools
+import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 STATIC_DIR = os.path.join(BASE_DIR,'static')
 MEDIA_DIR = os.path.join(BASE_DIR,'media')
-
-BOOTSTRAP_CSS = os.path.join(os.path.join(STATIC_DIR, 'css'),'bootstrap.css')
-BOOTSTRAP_JS = os.path.join(os.path.join(STATIC_DIR, 'js'),'bootstrap.js')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -31,6 +29,24 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 # Application definition
 
@@ -84,7 +100,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'antientropy_cs411',
         'USER': 'antientropy_cs411',
-        'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+        'PASSWORD': "I0t$$Gh#&TYkLniNcedbx4",
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -280,3 +296,9 @@ CHARACTER_CHOICES =  makeChoices([
     "Political Violence",                                                                                 
     "NAV"
 ])           
+
+
+# GeoJSON US States data
+GEOSTATES = None
+with open(os.path.join(MEDIA_DIR, "gz_states.json"), "r") as f:
+    GEOSTATES = json.loads(f.read().strip())

@@ -63,6 +63,7 @@
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [-88.2272, 40.1020],
             zoom: 4,
+            maxzoom: 20,
             maxBounds: [['-133.41939491845818', '23.017523213871456'],['-63.82091914427555', '50.85158440021044']]
         });
 
@@ -73,173 +74,65 @@
         // Heatmap layers also work with a vector tile source.
         map.addSource('gunviolence', {
             'type': 'geojson',
-            'data': {{ geo|safe }},
+            'data': {{ points|safe }},
             //cluster: true,
         });
-
-        map.addSource('counties', {
-            'type': 'vector',
-            'url': 'mapbox://mapbox.82pkq93d'
-        });
-
-        map.addLayer(
-            {
-                'id': 'counties',
-                'type': 'fill',
-                'source': 'counties',
-                'source-layer': 'original',
-                'minzoom':5,
-                'maxzoom': 10,
-                'paint': {
-                    'fill-outline-color': 'rgba(0,0,0,0.1)',
-                    'fill-color': 'rgba(0,0,0,0.1)'
-                }
-            },
-            'settlement-label'
-        );
-
-        map.addLayer(
-            {
-                'id': 'counties-highlighted',
-                'type': 'fill',
-                'source': 'counties',
-                'source-layer': 'original',
-                'minzoom':5,
-                'maxzoom': 10,
-                'paint': {
-                    'fill-outline-color': '#484896',
-                    'fill-color': '#6e599f',
-                    'fill-opacity': 0.75
-                },
-                'filter': ['in', 'FIPS', '']
-            },
-            'settlement-label'
-        ); // Place polygon under these labels.
 
         // Add a source for the state polygons.
         map.addSource('states', {
             'type': 'geojson',
-            'data': 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_1_states_provinces_shp.geojson'
+            'data': {{ states|safe }}
         });
 
-        // Add a layer showing the state polygons.
-        map.addLayer({
-            'id': 'states-layer',
-            'type': 'fill',
-            'source': 'states',
-            'maxzoom': 5,
-            'paint': {
-                'fill-outline-color': 'rgba(0,0,0,0.1)',
-                'fill-color': 'rgba(0,0,0,0.1)'
-            }
-        });
-            
-        map.on('click', function(e) {
-            // set bbox as 5px reactangle area around clicked point
-            var bbox = [
-                [e.point.x - 5, e.point.y - 5],
-                [e.point.x + 5, e.point.y + 5]
-            ];
-            var features = map.queryRenderedFeatures(bbox, {
-                layers: ['counties']
-            });
-            
-            // Run through the selected features and set a filter
-            // to match features with unique FIPS codes to activate
-            // the `counties-highlighted` layer.
-            var filter = features.reduce(
-                function(memo, feature) {
-                    memo.push(feature.properties.FIPS);
-                    return memo;
-                },
-                ['in', 'FIPS']
-            );
-            
-            map.setFilter('counties-highlighted', filter);
-        });
-        
-        /*
         map.addLayer(
             {
-                'id': 'gunviolence-heat',
-                'type': 'heatmap',
-                'source': 'gunviolence',
+                'id': 'state-involve',
+                'source': 'states',
                 'maxzoom': 9,
+                'type': 'fill',
                 'paint': {
-                    // Increase the heatmap weight based on frequency and property magnitude
-                    'heatmap-weight': ['interpolate',['linear'],['get', 'involve'],0,0,10,1],
-                    // Increase the heatmap color weight weight by zoom level
-                    // heatmap-intensity is a multiplier on top of heatmap-weight
-                    'heatmap-intensity': ['interpolate',['linear'],['zoom'],0,2,7,1],
-                    // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
-                    // Begin color ramp at 0-stop with a 0-transparancy color
-                    // to create a blur-like effect.
-                    'heatmap-color': [
-                        'interpolate',['linear'],['heatmap-density'],
-                        0,'rgba(255, 255, 255,0)',
-                        0.05,'rgb(255, 255, 0)',
-                        0.1,'rgb(255, 224, 0)',
-                        0.15, 'rgb(255, 193, 0)',
-                        0.2,'rgb(255, 162, 0)',
-                        0.25,'rgb(255, 131, 0)',
-                        0.35,'rgb(255, 100, 0)',
-                        0.4,'rgb(255, 69, 0)',
-                        0.45,'rgb(255, 38, 0)',
-                        0.5,'rgb(255, 0, 0)',
-                        0.55, 'rgb(230, 0, 0)',
-                        0.6, 'rgb(205, 0, 0)',
-                        0.65, 'rgb(180, 0, 0)',
-                        0.7, 'rgb(155, 0, 0)',
-                        0.75, 'rgb(100, 0, 0)',
-                        0.8, 'rgb(130, 0, 0)',
-                        0.85, 'rgb(105, 0, 0)',
-                        0.9,'rgb(80, 0, 0)',
-                        0.95,'rgb(55, 0, 0)',
-                        1,'rgb(20, 0, 0)'
+                    'fill-color': [
+                        'interpolate',
+                        ['linear'],
+                        ['get', 'involve'],
+                        {{state_min}},
+                        ['to-color', '#eff3ff'],
+                        {{state_max}},
+                        ['to-color', '#08519c']
                     ],
-                    // Adjust the heatmap radius by zoom level
-                    'heatmap-radius': ['interpolate',['linear'],['zoom'],0,2,9,20],
-                    // Transition from heatmap to circle layer by zoom level
-                    'heatmap-opacity': ['interpolate',['linear'],['zoom'],7,1,9,0]
+                    'fill-opacity': [
+                        'interpolate',['linear'],['zoom'],0,1,9,0
+                    ]
                 }
             },
             'waterway-label'
         );
-        */
         
         map.addLayer(
             {
                 'id': 'gunviolence-point',
                 'type': 'circle',
                 'source': 'gunviolence',
-                'minzoom': 9,
+                'minzoom': 7,
                 'paint': {
-                    // Size circle radius by earthquake magnitude and zoom level
                     'circle-radius': [
-                        'interpolate',['linear'],['zoom'],9,
+                        'interpolate',['linear'],['zoom'],7,
                         ['interpolate', ['linear'], ['get', 'involve'], 0, 1, 10, 5],24,
                         ['interpolate', ['linear'], ['get', 'involve'], 0, 10, 10, 100]
                     ],
-                    // Color circle by earthquake magnitude
                     'circle-color': [
-                        'interpolate',['linear'],['get', 'involve'],
-                        0,'rgba(255, 255, 0,0)', 
-                        1,'rgb(255, 204, 0)', 
-                        2,'rgb(255, 153, 0)',
-                        3,'rgb(255, 102, 0)',
-                        4,'rgb(255, 51, 0)',
-                        5,'rgb(255, 0, 0)',
-                        6,'rgb(204, 0, 0)',
-                        7,'rgb(153, 0, 0)',
-                        8,'rgb(102, 0, 0)',
-                        9,'rgb(51, 0, 0)',
-                        10,'rgb(0, 0, 0)',
+                        'interpolate',
+                        ['linear'],
+                        ['get', 'involve'],
+                        {{case_min}},
+                        ['to-color', '#eff3ff'],
+                        {{case_max}},
+                        ['to-color', '#08519c']
                     ],
                     'circle-stroke-color': 'white',
                     'circle-stroke-width': 1,
-                    // Transition from heatmap to circle layer by zoom level
                     'circle-opacity': [
-                        'interpolate',['linear'],['zoom'],9,0,16,1
+                        'interpolate',['linear'],['zoom'],7,0,16,1
                     ]
                 }
             },
@@ -251,13 +144,14 @@
             window.location.replace(e.features[0].properties.source_url);
         });
 
-
+        /*
         map.on('zoomend', function() {
                 var features = map.queryRenderedFeatures({layers:['gunviolence-point']});
                 console.log(features);
                 console.log(map.getZoom());
             }
         )
+        */
 
         });
     </script>

@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.conf import settings
 from django.db import transaction, connection
+from django.db.models import Sum, F
 from django.http import JsonResponse
 from .models import *
 from .forms import *
@@ -34,6 +35,7 @@ def homepage(request):
 
     return render(request, 'sample-query.html', {'form': form})
 
+"""
 def boundary(request):
     print(request.GET)
     locations = GunViolenceRaw.objects.all()\
@@ -43,16 +45,25 @@ def boundary(request):
         .filter(date__range=[date_range.cleaned_data['from_date'], date_range.cleaned_data['to_date']])\
         .values('latitude', 'longitude', "n_killed", "n_injured")
     return JsonResponse({}, verify=False)
+"""
 
 def heatmap(request):
 
-    geo = {
+    points = {
             "type": "FeatureCollection",
             "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
             "features": []
         }
 
+    states = settings.GEOSTATES.copy()    
+
     date_range = DateRangeForm()
+
+    state_min = 0
+    state_max = 1
+
+    case_max = 0
+    case_min = 1
 
     if request.method == 'POST':
         date_range = DateRangeForm(request.POST)
@@ -66,19 +77,57 @@ def heatmap(request):
         .filter(date__range=[date_range.cleaned_data['from_date'], date_range.cleaned_data['to_date']])\
         .values('latitude', 'longitude', "n_killed", "n_injured", "source_url")
 
+        state_sum = GunViolenceRaw.objects.all()\
+        .filter(latitude__isnull=False, longitude__isnull=False)\
+        .filter(n_killed__isnull=False, n_injured__isnull=False)\
+        .filter(source_url__isnull=False)\
+        .exclude(latitude=0.0, longitude=0.0)\
+        .filter(date__range=[date_range.cleaned_data['from_date'], date_range.cleaned_data['to_date']])\
+        .values('state').annotate(n_killed=Sum('n_killed'), n_injured=Sum('n_injured'))
+
+        case_max = 0
+        case_min = 1000
+
         for location in locations:
-            geo['features'].append(
+            n_involve = location['n_killed']+location['n_injured']
+            points['features'].append(
                 { 
                     "type": "Feature", 
                     "properties": {
-                        "involve": location['n_killed']+location['n_injured'],
+                        "involve": n_involve,
                         "source_url": location['source_url']
                     }, 
                     "geometry": { "type": "Point", "coordinates": [ location['longitude'], location['latitude'], 0.0 ] }
                 } 
             )
+            if n_involve < case_min: case_min = n_involve
+            if n_involve > case_max: case_max = n_involve
+        
+        state_min = 1000000000
+        state_max = 0
+        for i in range(len(states['features'])):
+            states['features'][i]['properties']['involve'] = 0
+            for row in state_sum:
+                if row['state'] == states['features'][i]['properties']['NAME']:
+                    n_involve = int(row['n_killed']) + int(row['n_injured'])
+                    states['features'][i]['properties']['involve'] = n_involve / states['features'][i]['properties']['CENSUSAREA'] * 100000
+                    if n_involve < state_min: state_min = n_involve
+                    if n_involve > state_max: state_max = n_involve
+                    break
     
-    return render(request, 'heatmap.html', {'geo':json.dumps(geo), 'daterange':date_range})
+    return render(
+        request, 
+        'heatmap.html', 
+        {
+            'points':json.dumps(points), 
+            'daterange':date_range, 
+            'states':json.dumps(states),
+            'state_min':state_min,
+            'state_max':state_max,
+            'case_min':case_min,
+            'case_max':case_max,
+        }
+    )
 
 """
 # Create your views here.
