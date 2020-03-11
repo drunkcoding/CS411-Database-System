@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% load settings_value %}
+
+{% block content %}
+    <div class="container-fluid">
+      <!-- Header Row -->
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body header-title text-center">
+              USA Gun Violence Cases by Anti-Entropy Team
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <!-- Overall Statistics -->
+        <div class="col-2">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="text-center">Total Killed</h4>
+              <h2 class="text-center red">{% if total_killed %} {{ total_killed }} {% else %} -- {% endif %}</h2>
+              <h4 class="text-center">Total Injured</h4>
+              <h2 class="text-center red">{% if total_injured %} {{ total_injured }} {% else %} -- {% endif %}</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <div class="card-body map-box" id="mapid">
+              <iframe id="heatmap" name="heatmap" src="{% url 'heatmap'%}"></iframe>
+            </div>
+            <div class="card-overlay top">
+              <div class="card-overlay-inner">
+                  <form method="post" action="" name='dateform'> {% csrf_token %}
+                      {{ daterange.as_ul }}
+                      <input type="submit" value="Submit" name="querydate"/>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>             
+
+      </div>
+
+      <!--
+      <div class="row">
+        <div class="col-2 pr-0">
+          <div class="row">
+            <div class="col-12 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="text-center">Total Confirmed</h4>
+                  <h1 class="text-center red">119.132</h1>
+                  <h4 class="text-center">Total Confirmed</h4>
+                  <h1 class="text-center red">119.132</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title text-center">Confirmed Cases by Country/Region</div>
+                </div>
+                <ul class="list-group list-group-flush tab-box">
+                  <li class="list-group-item"><span class="red">80.956</span> China</li>
+                  <li class="list-group-item"><span class="red">10.149</span> Italy</li>
+                  <li class="list-group-item"><span class="red">926</span> Iran (Islamic Republic of)</li>
+                  <li class="list-group-item"><span class="red">2.556</span> Republic of Korea</li>
+                  <li class="list-group-item"><span class="red">1.926</span> France</li>
+                  <li class="list-group-item"><span class="red">956</span> Spain</li>
+                  <li class="list-group-item"><span class="red">256</span> Germany</li>
+                  <li class="list-group-item"><span class="red">156</span> US</li>
+                  <li class="list-group-item"><span class="red">256</span> Others</li>
+                  <li class="list-group-item"><span class="red">56</span> Japan</li>
+                  <li class="list-group-item"><span class="red">6</span> Switzerland</li>
+                  <li class="list-group-item"><span class="red">256</span> Norway</li>
+                  <li class="list-group-item"><span class="red">23</span> Netherlands</li>
+                  <li class="list-group-item"><span class="red">526</span> UK</li>
+                  <li class="list-group-item"><span class="red">256</span> Sweden</li>
+                  <li class="list-group-item"><span class="red">256</span> Sweden</li>
+                  <li class="list-group-item"><span class="red">256</span> Sweden</li>
+                  <li class="list-group-item"><span class="red">256</span> Sweden</li>
+                  <li class="list-group-item"><span class="red">256</span> Sweden</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body normal-box text-center">
+                  <div style="font-size: 1.5vh;">Last Updated at (M/D/YYYY)</div>
+                  <div style="font-size: 2vh;font-weight: bold">2:13:16 CH, 3/11/2020</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 pr-0">
+          <div class="row">
+            <div class="col-12 mb-2">
+                <div class="card">
+                <div class="card-body map-box" id="mapid">
+                  <iframe src="{% url 'heatmap'%}"></iframe>
+                </div>
+                </div>
+              </div>             
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="row">
+            <div class="col-6 pr-0 mb-2">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title text-center">
+                  <div>Total Deaths</div>
+                  <span class="red" style="font-size: 5vh; font-weight: bold">4.284</span>
+                  </div>
+                </div>
+                <ul class="list-group list-group-flush tab-box-2">
+                  <li class="list-group-item">
+                    <span class="white">3,046</span> deaths<br/>
+                    <span class="white">Hubei</span> China
+                  </li>
+                  <li class="list-group-item">
+                    <span class="white">631</span> deaths<br/>
+                    Italy
+                  </li>
+                  <li class="list-group-item">
+                    <span class="white">291</span> deaths<br/>
+                    Iran (Islamic Republic of)
+                  </li>
+                  <li class="list-group-item">
+                    <span class="white">35</span> deaths<br/>
+                    Republic of Korea
+                  </li>
+                  <li class="list-group-item">
+                    <span class="white">54</span> deaths<br/>
+                    France
+                  </li>
+                  <li class="list-group-item">
+                    <span class="white">22</span> deaths<br/>
+                    <span class="white">Washington</span> US
+                  </li>
+                  <li class="list-group-item">
+                    <span class="white">13</span> deaths<br/>
+                    <span class="white">Heman</span> China
+                  </li>
+                  <li class="list-group-item">
+                    <span class="white">10</span> deaths<br/>
+                    <span class="white">Heilongjiang</span> China
+                  </li>
+                  <li class="list-group-item">
+                    <span class="white">8</span> deaths<br/>
+                    Japan
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title text-center">
+                  <div>Total Recovers</div>
+                  <span class="green" style="font-size: 5vh; font-weight: bold">4.284</span>
+                  </div>
+                </div>
+                <ul class="list-group list-group-flush tab-box-2">
+                  <li class="list-group-item">
+                    <span class="green">49.062 recovered</span><br/>
+                    <span class="white">Hubei</span> China
+                  </li>
+                  <li class="list-group-item">
+                    <span class="green">49.062 recovered</span><br/>
+                    Italy
+                  </li>
+                  <li class="list-group-item">
+                    <span class="green">49.062 recovered</span><br/>
+                    Iran (Islamic Republic of)
+                  </li>
+                  <li class="list-group-item">
+                    <span class="green">49.062 recovered</span><br/>
+                    Republic of Korea
+                  </li>
+                  <li class="list-group-item">
+                    <span class="green">49.062 recovered</span><br/>
+                    France
+                  </li>
+                  <li class="list-group-item">
+                    <span class="green">49.062 recovered</span><br/>
+                    <span class="white">Washington</span> US
+                  </li>
+                  <li class="list-group-item">
+                    <span class="green">49.062 recovered</span><br/>
+                    <span class="white">Heman</span> China
+                  </li>
+                  <li class="list-group-item">
+                    <span class="green">49.062 recovered</span><br/>
+                    <span class="white">Heilongjiang</span> China
+                  </li>
+                  <li class="list-group-item">
+                    <span class="green">49.062 recovered</span><br/>
+                    Japan
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body chart-box">
+                  <canvas id="lineChart"></canvas>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      -->
+    </div>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+  {% if total_killed and total_injured %} 
+    document.getElementById('heatmap').contentWindow.location.reload();
+    console.log("reload heatmap")
+  {% endif %}
+</script>
+
+{% endblock %}

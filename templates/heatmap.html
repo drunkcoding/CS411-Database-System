@@ -3,12 +3,17 @@
 {% block content %}
 
 <style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+
+<style>
     .map-overlay {
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     position: absolute;
     width: 25%;
-    top: 0;
-    right: 0;
+    bottom: 0;
+    left: 0;
     padding: 10px;
     }
      
@@ -44,25 +49,25 @@
 
     <div id="map"></div>
 
-    <div class="map-overlay top">
+    <!--
+        <div class="map-overlay top">
         <div class="map-overlay-inner">
             <form method="post" action="" name='dateform'> {% csrf_token %}
                 {{ daterange.as_table }}
                 <input type="submit" value="Submit" name="querydate"/>
             </form>
         </div>
-        <div class="map-overlay-inner">
-            <div id="involve_hist"></div>
-        </div>
     </div>
+    -->
+    
 
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoidGhpbmtpbmdyZWVkIiwiYSI6ImNrN2JnODFpMTAzemEzZWxrdjVmMWs1aDgifQ.ilp7OlnOWSrRkVltnP8biQ';
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [-88.2272, 40.1020],
-            zoom: 4,
+            style: 'mapbox://styles/mapbox/dark-v10',
+            // center: [-88.2272, 40.1020],
+            zoom: 0,
             maxzoom: 20,
             maxBounds: [['-133.41939491845818', '23.017523213871456'],['-63.82091914427555', '50.85158440021044']]
         });
@@ -132,7 +137,7 @@
                     'circle-stroke-color': 'white',
                     'circle-stroke-width': 1,
                     'circle-opacity': [
-                        'interpolate',['linear'],['zoom'],7,0,16,1
+                        'interpolate',['linear'],['zoom'],7,0,9,1
                     ]
                 }
             },

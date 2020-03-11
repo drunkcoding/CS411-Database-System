@@ -20,8 +20,8 @@ from gunviolence.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('heatmap/', heatmap),
-    # path('boundary/', boundary),
+    path('heatmap/', heatmap, name='heatmap'),
+    path('dashboard/', dashboard),
     #path('dummy/', dummy),
     path('', homepage),
 ]

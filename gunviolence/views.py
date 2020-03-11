@@ -35,17 +35,43 @@ def homepage(request):
 
     return render(request, 'sample-query.html', {'form': form})
 
-"""
-def boundary(request):
-    print(request.GET)
-    locations = GunViolenceRaw.objects.all()\
+
+def dashboard(request):
+
+    date_range = DateRangeForm()
+
+    if request.method == 'POST':
+        date_range = DateRangeForm(request.POST)
+
+    if date_range.is_valid():
+        request.session['date_range'] = request.POST
+
+        total_count = GunViolenceRaw.objects\
         .filter(latitude__isnull=False, longitude__isnull=False)\
         .filter(n_killed__isnull=False, n_injured__isnull=False)\
+        .filter(source_url__isnull=False)\
         .exclude(latitude=0.0, longitude=0.0)\
         .filter(date__range=[date_range.cleaned_data['from_date'], date_range.cleaned_data['to_date']])\
-        .values('latitude', 'longitude', "n_killed", "n_injured")
-    return JsonResponse({}, verify=False)
-"""
+        .aggregate(total_killed=Sum('n_killed'), total_injured=Sum('n_injured'))
+
+        return render(
+            request, 
+            'dashboard.html', 
+            {
+                'daterange':date_range,
+                'total_killed': total_count['total_killed'],
+                'total_injured': total_count['total_injured'],
+            }
+        )
+
+    return render(
+        request, 
+        'dashboard.html', 
+        {
+            'daterange':date_range,
+        }
+    )
+
 
 def heatmap(request):
 
@@ -57,16 +83,13 @@ def heatmap(request):
 
     states = settings.GEOSTATES.copy()    
 
-    date_range = DateRangeForm()
+    date_range = DateRangeForm(request.session.get('date_range'))
 
     state_min = 0
     state_max = 1
 
-    case_max = 0
-    case_min = 1
-
-    if request.method == 'POST':
-        date_range = DateRangeForm(request.POST)
+    case_min = 0
+    case_max = 1
 
     if date_range.is_valid():
         locations = GunViolenceRaw.objects.all()\
@@ -126,6 +149,7 @@ def heatmap(request):
             'state_max':state_max,
             'case_min':case_min,
             'case_max':case_max,
+            'mapbox_token': settings.MAPBOX_TOKEN,
         }
     )
 
