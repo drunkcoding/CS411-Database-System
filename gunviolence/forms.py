@@ -1,4 +1,5 @@
 from django import forms
+from .models import *
 import datetime
 
 class SQLForm(forms.Form):
@@ -7,3 +8,8 @@ class SQLForm(forms.Form):
 class DateRangeForm(forms.Form):
     from_date = forms.DateField(initial=datetime.date(year=2014,month=4,day=11))
     to_date = forms.DateField(initial=datetime.date(year=2014,month=4,day=12))
+
+class IncidentForm(forms.ModelForm):
+    class Meta:
+        model = GunViolenceRaw
+        fields = '__all__'    

@@ -4,77 +4,33 @@
 
 <style>
 	body { margin: 0; padding: 0; }
-	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    .mapboxgl-popup {
+        position: absolute; 
+        top: 0; 
+        bottom: 0; 
+        width: 100%;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        background: #212121;
+    }
 </style>
 
-<style>
-    .map-overlay {
-    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    position: absolute;
-    width: 25%;
-    bottom: 0;
-    left: 0;
-    padding: 10px;
-    }
-     
-    .map-overlay .map-overlay-inner {
-    background-color: #fff;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-    padding: 10px;
-    margin-bottom: 10px;
-    }
-     
-    .map-overlay h2 {
-    line-height: 24px;
-    display: block;
-    margin: 0 0 10px;
-    }
-     
-    .map-overlay .legend .bar {
-    height: 10px;
-    width: 100%;
-    background: linear-gradient(to right, #fca107, #7f3121);
-    }
-     
-    .map-overlay input {
-    background-color: transparent;
-    display: inline-block;
-    width: 100%;
-    position: relative;
-    margin: 0;
-    cursor: ew-resize;
-    }
-    </style>
-
     <div id="map"></div>
-
-    <!--
-        <div class="map-overlay top">
-        <div class="map-overlay-inner">
-            <form method="post" action="" name='dateform'> {% csrf_token %}
-                {{ daterange.as_table }}
-                <input type="submit" value="Submit" name="querydate"/>
-            </form>
-        </div>
-    </div>
-    -->
-    
 
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoidGhpbmtpbmdyZWVkIiwiYSI6ImNrN2JnODFpMTAzemEzZWxrdjVmMWs1aDgifQ.ilp7OlnOWSrRkVltnP8biQ';
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/dark-v10',
-            // center: [-88.2272, 40.1020],
-            zoom: 0,
             maxzoom: 20,
             maxBounds: [['-133.41939491845818', '23.017523213871456'],['-63.82091914427555', '50.85158440021044']]
         });
-
-        
            
         map.on('load', function() {
+
+        {% if map_zoom %} map.setZoom({{map_zoom}}); {% endif %}
+        {% if map_center %}  map.setCenter({{map_center}}), {% endif %}    
+
         // Add a geojson point source.
         // Heatmap layers also work with a vector tile source.
         map.addSource('gunviolence', {
@@ -91,7 +47,7 @@
 
         map.addLayer(
             {
-                'id': 'state-involve',
+                'id': 'states-layer',
                 'source': 'states',
                 'maxzoom': 9,
                 'type': 'fill',
@@ -145,18 +101,51 @@
         );
 
         map.on('click', 'gunviolence-point', function(e) {
-            console.log(e.features[0].properties);
-            window.location.replace(e.features[0].properties.source_url);
+            //var iid = e.features[0].properties.incident_id
+            //console.log("click on point " + iid.toString());
+            //var redirect_url = "{% url 'single_case' 1234 %}";
+            //redirect_url = redirect_url.replace(1234, iid);
+            //parent.onClickIncidentPoint(e.features[0].properties.incident_id)
+            parent.document.location.href = e.features[0].properties.source_url;
         });
 
-        /*
+        map.on('click', 'states-layer', function(e) {
+            console.log("click on layer");
+        });
+        
+        // Change the cursor to a pointer when the mouse is over the states layer.
+        map.on('mouseenter', 'states-layer', function() {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'states-layer', function() {
+            map.getCanvas().style.cursor = '';
+        });
+
         map.on('zoomend', function() {
                 var features = map.queryRenderedFeatures({layers:['gunviolence-point']});
                 console.log(features);
                 console.log(map.getZoom());
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'save_map_meta' %}",
+                    dataType: "json",
+                    data: {
+                        "map_zoom": map.getZoom(),
+                        "map_center": map.getCenter().toArray(),
+                    },
+                    success: function(data){
+                        console.log("success");
+                        console.log(data);
+                    },
+                    failure: function(data){
+                        console.log("failure");
+                        console.log(data);
+                    },
+                });
             }
         )
-        */
 
         });
     </script>

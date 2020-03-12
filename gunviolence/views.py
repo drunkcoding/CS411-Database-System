@@ -1,6 +1,6 @@
 import csv, io, os, logging, json, sys
 import pandas as pd
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.conf import settings
 from django.db import transaction, connection
@@ -8,6 +8,7 @@ from django.db.models import Sum, F
 from django.http import JsonResponse
 from .models import *
 from .forms import *
+from .utils import *
 
 def homepage(request):
     # if this is a POST request we need to process the form data
@@ -38,39 +39,32 @@ def homepage(request):
 
 def dashboard(request):
 
-    date_range = DateRangeForm()
+    template_name = 'dashboard.html'
+    context = {}
+
+    date_form = DateRangeForm(request.session.get('date_form'))
+    total_count = request.session.get('total_count')
+    state_count = request.session.get('state_count')
 
     if request.method == 'POST':
-        date_range = DateRangeForm(request.POST)
+        date_form = DateRangeForm(request.POST)
 
-    if date_range.is_valid():
-        request.session['date_range'] = request.POST
+    total_count = requestTotalCount(date_form)
+    state_count = requestStateCount(date_form)
 
-        total_count = GunViolenceRaw.objects\
-        .filter(latitude__isnull=False, longitude__isnull=False)\
-        .filter(n_killed__isnull=False, n_injured__isnull=False)\
-        .filter(source_url__isnull=False)\
-        .exclude(latitude=0.0, longitude=0.0)\
-        .filter(date__range=[date_range.cleaned_data['from_date'], date_range.cleaned_data['to_date']])\
-        .aggregate(total_killed=Sum('n_killed'), total_injured=Sum('n_injured'))
+    context['date_form'] = DateRangeForm()
 
-        return render(
-            request, 
-            'dashboard.html', 
-            {
-                'daterange':date_range,
-                'total_killed': total_count['total_killed'],
-                'total_injured': total_count['total_injured'],
-            }
-        )
+    if date_form.is_valid(): 
+        context['date_form'] = date_form
+        request.session['date_form'] = request.POST
+    if state_count != None: 
+        context['state_count'] = state_count
+        request.session['state_count'] = state_count
+    if total_count != None: 
+        context['total_count'] = total_count
+        request.session['total_count'] = total_count
 
-    return render(
-        request, 
-        'dashboard.html', 
-        {
-            'daterange':date_range,
-        }
-    )
+    return render(request, template_name, context)
 
 
 def heatmap(request):
@@ -83,7 +77,8 @@ def heatmap(request):
 
     states = settings.GEOSTATES.copy()    
 
-    date_range = DateRangeForm(request.session.get('date_range'))
+    date_form = DateRangeForm(request.session.get('date_form'))
+    state_count = request.session.get('state_count')
 
     state_min = 0
     state_max = 1
@@ -91,67 +86,84 @@ def heatmap(request):
     case_min = 0
     case_max = 1
 
-    if date_range.is_valid():
-        locations = GunViolenceRaw.objects.all()\
-        .filter(latitude__isnull=False, longitude__isnull=False)\
-        .filter(n_killed__isnull=False, n_injured__isnull=False)\
-        .filter(source_url__isnull=False)\
-        .exclude(latitude=0.0, longitude=0.0)\
-        .filter(date__range=[date_range.cleaned_data['from_date'], date_range.cleaned_data['to_date']])\
-        .values('latitude', 'longitude', "n_killed", "n_injured", "source_url")
-
-        state_sum = GunViolenceRaw.objects.all()\
-        .filter(latitude__isnull=False, longitude__isnull=False)\
-        .filter(n_killed__isnull=False, n_injured__isnull=False)\
-        .filter(source_url__isnull=False)\
-        .exclude(latitude=0.0, longitude=0.0)\
-        .filter(date__range=[date_range.cleaned_data['from_date'], date_range.cleaned_data['to_date']])\
-        .values('state').annotate(n_killed=Sum('n_killed'), n_injured=Sum('n_injured'))
+    if date_form.is_valid():
+        locations = requestCaseLocation(date_form)
 
         case_max = 0
         case_min = 1000
 
         for location in locations:
-            n_involve = location['n_killed']+location['n_injured']
+            n_involve = location['n_killed'] + location['n_injured']
             points['features'].append(
                 { 
                     "type": "Feature", 
                     "properties": {
                         "involve": n_involve,
-                        "source_url": location['source_url']
+                        "incident_id": location['incident_id'],
+                        "source_url": location['incident_url'],
                     }, 
                     "geometry": { "type": "Point", "coordinates": [ location['longitude'], location['latitude'], 0.0 ] }
-                } 
+                }
             )
             if n_involve < case_min: case_min = n_involve
             if n_involve > case_max: case_max = n_involve
-        
+
+    if state_count != None:    
         state_min = 1000000000
         state_max = 0
         for i in range(len(states['features'])):
             states['features'][i]['properties']['involve'] = 0
-            for row in state_sum:
+            for row in state_count:
                 if row['state'] == states['features'][i]['properties']['NAME']:
-                    n_involve = int(row['n_killed']) + int(row['n_injured'])
-                    states['features'][i]['properties']['involve'] = n_involve / states['features'][i]['properties']['CENSUSAREA'] * 100000
+                    n_involve = int(row['count'])
+                    states['features'][i]['properties']['involve'] = n_involve
                     if n_involve < state_min: state_min = n_involve
                     if n_involve > state_max: state_max = n_involve
                     break
-    
-    return render(
-        request, 
-        'heatmap.html', 
-        {
+
+    context = {
             'points':json.dumps(points), 
-            'daterange':date_range, 
+            'date_form':date_form, 
             'states':json.dumps(states),
             'state_min':state_min,
             'state_max':state_max,
             'case_min':case_min,
             'case_max':case_max,
-            'mapbox_token': settings.MAPBOX_TOKEN,
         }
-    )
+
+    map_zoom = request.session.get('map_zoom')
+    map_center = request.session.get('map_center')
+
+    print(request.session.get('map_zoom'))
+    print(request.session.get('map_center'))
+
+    if map_zoom: context['map_zoom'] = map_zoom;
+    if map_center: context['map_center'] = map_center;
+
+    return render(request, 'heatmap.html', context)
+
+def saveMapMeta(request):
+
+    print(request.GET)
+    print(request.GET.get('map_zoom'))
+    print(request.GET.getlist('map_center[]'))
+    request.session['map_zoom'] = float(request.GET.get('map_zoom'))
+    request.session['map_center'] = [float(x) for x in request.GET.getlist('map_center[]')]
+
+    return JsonResponse({})
+
+def singleCaseView(request, incident_id):
+    template_name = 'single_case_view.html'
+    context = {}
+    context['incident_form'] = IncidentForm()
+    print(incident_id)
+    return render(request, template_name, context)
+
+def testpage(request):
+    template_name = 'test.html'
+    context = {}
+
+    return render(request, template_name, context)
 
 """
 # Create your views here.

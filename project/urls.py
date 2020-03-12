@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
 from gunviolence.views import *
 
@@ -23,5 +23,8 @@ urlpatterns = [
     path('heatmap/', heatmap, name='heatmap'),
     path('dashboard/', dashboard),
     #path('dummy/', dummy),
-    path('', homepage),
+    path('', homepage, name='homepage'),
+    path('testpage/', testpage, name='testpage'),
+    path('save_map_meta/', saveMapMeta, name='save_map_meta'),
+    path('single_case_view/<int:incident_id>/', singleCaseView, name='single_case'),
 ]

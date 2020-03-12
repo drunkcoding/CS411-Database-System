@@ -17,13 +17,45 @@
       <div class="row">
 
         <!-- Overall Statistics -->
-        <div class="col-2">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="text-center">Total Killed</h4>
-              <h2 class="text-center red">{% if total_killed %} {{ total_killed }} {% else %} -- {% endif %}</h2>
-              <h4 class="text-center">Total Injured</h4>
-              <h2 class="text-center red">{% if total_injured %} {{ total_injured }} {% else %} -- {% endif %}</h2>
+        <div class="col-2 pr-0">
+          <div class="row">
+            <div class="col pr-0">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="text-center">Total Killed</h4>
+                  <h2 class="text-center red">{% if total_count %} {{ total_count.total_killed }} {% else %} -- {% endif %}</h2>
+                  <h4 class="text-center">Total Injured</h4>
+                  <h2 class="text-center red">{% if total_count %} {{ total_count.total_injured }} {% else %} -- {% endif %}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col pr-0">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title text-center">People Harmed by State</div>
+                </div>
+                <ul class="list-group list-group-flush tab-box-2">
+                  {% for rank in state_count %}
+                    <li class="list-group-item"><span class="red"> {{ rank.count }} </span> {{ rank.state }} </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Date Range Selection -->
+          <div class="row">
+            <div class="col pr-0">
+              <div class="card">
+                <div class="card-body">
+                  <form method="post" action="" name='dateform'> {% csrf_token %}
+                    {{ date_form.as_table }}
+                    <input type="submit" value="Submit" name="querydate"/>
+                  </form>                    
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -31,15 +63,11 @@
         <div class="col">
           <div class="card">
             <div class="card-body map-box" id="mapid">
-              <iframe id="heatmap" name="heatmap" src="{% url 'heatmap'%}"></iframe>
-            </div>
-            <div class="card-overlay top">
-              <div class="card-overlay-inner">
-                  <form method="post" action="" name='dateform'> {% csrf_token %}
-                      {{ daterange.as_ul }}
-                      <input type="submit" value="Submit" name="querydate"/>
-                  </form>
-              </div>
+              {% if display_charts %}
+                <iframe id="heatmap" name="heatmap" src="{% url 'testpage'%}"></iframe>
+              {% else %}
+                <iframe id="heatmap" name="heatmap" src="{% url 'heatmap'%}"></iframe>
+              {% endif %}
             </div>
           </div>
         </div>             
@@ -232,10 +260,18 @@
 {% block scripts %}
 
 <script>
-  {% if total_killed and total_injured %} 
-    document.getElementById('heatmap').contentWindow.location.reload();
-    console.log("reload heatmap")
-  {% endif %}
+  window.onbeforeunload = function() { document.getElementById('mapid').contentWindow.location.reload(); }
+
+  //{% if total_count %} 
+  //  document.getElementById('mapid').contentWindow.location.reload();
+  //{% endif %}
+  
+  function onClickIncidentPoint(incident_id) {
+    var redirect_url = "{% url 'single_case' 1234 %}";
+    redirect_url = redirect_url.replace(1234, incident_id);
+    window.location.replace(redirect_url);
+  }
+
 </script>
 
 {% endblock %}
