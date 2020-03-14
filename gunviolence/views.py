@@ -41,18 +41,38 @@ def dashboard(request):
 
     template_name = 'dashboard.html'
     context = {}
+    context['date_form'] = DateRangeForm()
 
     date_form = DateRangeForm(request.session.get('date_form'))
     total_count = request.session.get('total_count')
     state_count = request.session.get('state_count')
+    display_chart = request.session.get('display_chart')
+    locations = []
+
+    state_min = 0
+    state_max = 1
+
+    case_min = 0
+    case_max = 1
 
     if request.method == 'POST':
         date_form = DateRangeForm(request.POST)
 
-    total_count = requestTotalCount(date_form)
-    state_count = requestStateCount(date_form)
+    if not date_form.is_valid(): return render(request, template_name, context)
 
+    if total_count != None: total_count = requestTotalCount(date_form)
 
+    if state_count != None: 
+        state_count = requestStateCount(date_form)
+        df_state_count = pd.DataFrame(state_count)
+        state_min = df_state_count.total_harm.min()
+        state_max = df_state_count.total_harm.max()
+
+    locations = requestCaseLocation(date_form)
+    df_location = pd.DataFrame(locations)
+    df_location['total_harm'] = df_location.n_killed + df_location.n_injured
+    case_min = df_location.total_harm.min()
+    case_max = df_location.total_harm.max()
 
     points = {
             "type": "FeatureCollection",
@@ -62,45 +82,27 @@ def dashboard(request):
 
     states = settings.GEOSTATES.copy()    
 
-    state_min = 0
-    state_max = 1
-
-    case_min = 0
-    case_max = 1
-
-    if date_form.is_valid():
-        locations = requestCaseLocation(date_form)
-
-        case_max = 0
-        case_min = 1000
-
-        for location in locations:
-            n_involve = location['n_killed'] + location['n_injured']
-            points['features'].append(
-                { 
-                    "type": "Feature", 
-                    "properties": {
-                        "involve": n_involve,
-                        "incident_id": location['incident_id'],
-                        "source_url": location['incident_url'],
-                    }, 
-                    "geometry": { "type": "Point", "coordinates": [ location['longitude'], location['latitude'], 0.0 ] }
-                }
-            )
-            if n_involve < case_min: case_min = n_involve
-            if n_involve > case_max: case_max = n_involve
+    for location in locations:
+        n_involve = location['n_killed'] + location['n_injured']
+        points['features'].append(
+            { 
+                "type": "Feature", 
+                "properties": {
+                    "involve": n_involve,
+                    "incident_id": location['incident_id'],
+                    "source_url": location['incident_url'],
+                }, 
+                "geometry": { "type": "Point", "coordinates": [ location['longitude'], location['latitude'], 0.0 ] }
+            }
+        )
 
     if state_count != None:    
-        state_min = 1000000000
-        state_max = 0
         for i in range(len(states['features'])):
             states['features'][i]['properties']['involve'] = 0
             for row in state_count:
                 if row['state'] == states['features'][i]['properties']['NAME']:
-                    n_involve = int(row['count'])
+                    n_involve = int(row['total_harm'])
                     states['features'][i]['properties']['involve'] = n_involve
-                    if n_involve < state_min: state_min = n_involve
-                    if n_involve > state_max: state_max = n_involve
                     break
 
     context = {
@@ -114,100 +116,21 @@ def dashboard(request):
         }
 
 
-    context['date_form'] = DateRangeForm()
+    context['date_form'] = date_form
+    context['total_count'] = total_count
+    context['state_count'] = state_count
 
-    if date_form.is_valid(): 
-        context['date_form'] = date_form
-        request.session['date_form'] = request.POST
-    if state_count != None: 
-        context['state_count'] = state_count
-        request.session['state_count'] = state_count
-    if total_count != None: 
-        context['total_count'] = total_count
-        request.session['total_count'] = total_count
+    request.session['total_count'] = total_count
+    request.session['date_form'] = request.POST
+    request.session['state_count'] = state_count
 
     map_zoom = request.session.get('map_zoom')
     map_center = request.session.get('map_center')
 
     if map_zoom: context['map_zoom'] = map_zoom;
     if map_center: context['map_center'] = map_center;
-
 
     return render(request, template_name, context)
-
-"""
-def heatmap(request):
-
-    points = {
-            "type": "FeatureCollection",
-            "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-            "features": []
-        }
-
-    states = settings.GEOSTATES.copy()    
-
-    date_form = DateRangeForm(request.session.get('date_form'))
-    state_count = request.session.get('state_count')
-
-    state_min = 0
-    state_max = 1
-
-    case_min = 0
-    case_max = 1
-
-    if date_form.is_valid():
-        locations = requestCaseLocation(date_form)
-
-        case_max = 0
-        case_min = 1000
-
-        for location in locations:
-            n_involve = location['n_killed'] + location['n_injured']
-            points['features'].append(
-                { 
-                    "type": "Feature", 
-                    "properties": {
-                        "involve": n_involve,
-                        "incident_id": location['incident_id'],
-                        "source_url": location['incident_url'],
-                    }, 
-                    "geometry": { "type": "Point", "coordinates": [ location['longitude'], location['latitude'], 0.0 ] }
-                }
-            )
-            if n_involve < case_min: case_min = n_involve
-            if n_involve > case_max: case_max = n_involve
-
-    if state_count != None:    
-        state_min = 1000000000
-        state_max = 0
-        for i in range(len(states['features'])):
-            states['features'][i]['properties']['involve'] = 0
-            for row in state_count:
-                if row['state'] == states['features'][i]['properties']['NAME']:
-                    n_involve = int(row['count'])
-                    states['features'][i]['properties']['involve'] = n_involve
-                    if n_involve < state_min: state_min = n_involve
-                    if n_involve > state_max: state_max = n_involve
-                    break
-
-    context = {
-            'points':json.dumps(points), 
-            'date_form':date_form, 
-            'states':json.dumps(states),
-            'state_min':state_min,
-            'state_max':state_max,
-            'case_min':case_min,
-            'case_max':case_max,
-        }
-
-    map_zoom = request.session.get('map_zoom')
-    map_center = request.session.get('map_center')
-
-    if map_zoom: context['map_zoom'] = map_zoom;
-    if map_center: context['map_center'] = map_center;
-
-    return render(request, 'heatmap.html', context)
-"""
 
 def saveMapMeta(request):
 
@@ -215,13 +138,6 @@ def saveMapMeta(request):
     request.session['map_center'] = [float(x) for x in request.GET.getlist('map_center[]')]
 
     return JsonResponse({})
-
-def singleCaseView(request, incident_id):
-    template_name = 'single_case_view.html'
-    context = {}
-    context['incident_form'] = IncidentForm()
-    print(incident_id)
-    return render(request, template_name, context)
 
 def testpage(request):
     template_name = 'test.html'

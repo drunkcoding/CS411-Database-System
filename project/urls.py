@@ -17,14 +17,14 @@ from django.contrib import admin
 from django.urls import path, re_path
 
 from gunviolence.views import *
+from gunviolence.data_views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('heatmap/', heatmap, name='heatmap'),
     path('dashboard/', dashboard),
-    #path('dummy/', dummy),
+    # path('dummy/', dummy),
     path('', homepage, name='homepage'),
-    path('testpage/', testpage, name='testpage'),
+    # path('testpage/', testpage, name='testpage'),
     path('save_map_meta/', saveMapMeta, name='save_map_meta'),
-    path('single_case_view/<int:incident_id>/', singleCaseView, name='single_case'),
+    # path('state_count/<state>/', stateCountEachDate, name='state_count'),
 ]

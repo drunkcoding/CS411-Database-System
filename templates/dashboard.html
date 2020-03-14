@@ -43,7 +43,7 @@
               </div>
               <ul class="list-group list-group-flush tab-box-2">
                 {% for rank in state_count %}
-                  <li class="list-group-item"><span class="red"> {{ rank.count }} </span> {{ rank.state }} </li>
+                  <li class="list-group-item"><span class="red"> {{ rank.total_harm }} </span> {{ rank.state }} </li>
                 {% endfor %}
               </ul>
             </div>
@@ -67,7 +67,7 @@
 
       <div class="col">
         <div class="card">
-          <div class="card-body map-box" id="mapid">
+          <div class="card-body map-box" id="mapid" ondblclick="alterFunc()">
             <div id="map"></div>
           </div>
         </div>
@@ -80,6 +80,9 @@
 {% block scripts %}
 
 <script>
+
+function alterFunc() {alert("a")}
+
   mapboxgl.accessToken = 'pk.eyJ1IjoidGhpbmtpbmdyZWVkIiwiYSI6ImNrN2JnODFpMTAzemEzZWxrdjVmMWs1aDgifQ.ilp7OlnOWSrRkVltnP8biQ';
   var map = new mapboxgl.Map({
       container: 'map',
@@ -109,75 +112,77 @@
 
   map.addLayer(
       {
-          'id': 'states-layer',
-          'source': 'states',
-          'maxzoom': 9,
-          'type': 'fill',
-          'paint': {
-              'fill-color': [
-                  'interpolate',
-                  ['linear'],
-                  ['get', 'involve'],
-                  {{state_min}},
-                  ['to-color', '#eff3ff'],
-                  {{state_max}},
-                  ['to-color', '#08519c']
-              ],
-              'fill-opacity': [
-                  'interpolate',['linear'],['zoom'],0,1,9,0
-              ]
-          }
+        'id': 'states-layer',
+        'source': 'states',
+        'maxzoom': 9,
+        'type': 'fill',
+        'paint': {
+            'fill-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'involve'],
+                {{state_min}},
+                ['to-color', '#eff3ff'],
+                {{state_max}},
+                ['to-color', '#08519c']
+            ],
+            'fill-opacity': [
+                'interpolate',['linear'],['zoom'],0,1,9,0
+            ]
+        }
       },
       'waterway-label'
   );
   
   map.addLayer(
       {
-          'id': 'gunviolence-point',
-          'type': 'circle',
-          'source': 'gunviolence',
-          'minzoom': 7,
-          'paint': {
-              'circle-radius': [
-                  'interpolate',['linear'],['zoom'],7,
-                  ['interpolate', ['linear'], ['get', 'involve'], 0, 1, 10, 5],24,
-                  ['interpolate', ['linear'], ['get', 'involve'], 0, 10, 10, 100]
-              ],
-              'circle-color': [
-                  'interpolate',
-                  ['linear'],
-                  ['get', 'involve'],
-                  {{case_min}},
-                  ['to-color', '#eff3ff'],
-                  {{case_max}},
-                  ['to-color', '#08519c']
-              ],
-              'circle-stroke-color': 'white',
-              'circle-stroke-width': 1,
-              'circle-opacity': [
-                  'interpolate',['linear'],['zoom'],7,0,9,1
-              ]
-          }
+        'id': 'gunviolence-point',
+        'type': 'circle',
+        'source': 'gunviolence',
+        'minzoom': 7,
+        'paint': {
+            'circle-radius': [
+                'interpolate',['linear'],['zoom'],7,
+                ['interpolate', ['linear'], ['get', 'involve'], 0, 1, 10, 5],24,
+                ['interpolate', ['linear'], ['get', 'involve'], 0, 10, 10, 100]
+            ],
+            'circle-color': [
+                'interpolate',
+                ['linear'],
+                ['get', 'involve'],
+                {{case_min}},
+                ['to-color', '#eff3ff'],
+                {{case_max}},
+                ['to-color', '#08519c']
+            ],
+            'circle-stroke-color': 'white',
+            'circle-stroke-width': 1,
+            'circle-opacity': [
+                'interpolate',['linear'],['zoom'],7,0,9,1
+            ]
+        }
       },
       'waterway-label'
   );
 
   map.on('click', 'gunviolence-point', function(e) {
-      window.location.replace(e.features[0].properties.source_url);
+    console.log("gunviolence-point");
+    window.location.href = e.features[0].properties.source_url;
   });
 
   map.on('click', 'states-layer', function(e) {
-      console.log("click on layer");
+    console.log("click on states-layer");
+    var state = e.features[0].properties.NAME;
   });
   
   // Change the cursor to a pointer when the mouse is over the states layer.
   map.on('mouseenter', 'states-layer', function() {
-      map.getCanvas().style.cursor = 'pointer';
+    map.getCanvas().style.cursor = 'pointer';
   });
   
   // Change it back to a pointer when it leaves.
   map.on('mouseleave', 'states-layer', function() {
-      map.getCanvas().style.cursor = '';
+    map.getCanvas().style.cursor = '';
   });
 
   map.on('zoomend', function() {

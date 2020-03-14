@@ -20,7 +20,7 @@ def requestStateCount(date_form):
     return list(
         filterGunViolenceRawEmptyData()\
         .filter(date__range=[date_form.cleaned_data['from_date'], date_form.cleaned_data['to_date']])\
-        .values('state').annotate(count=Sum(F('n_killed')+F('n_injured'))).order_by('-count')
+        .values('state').annotate(total_harm=Sum(F('n_killed')+F('n_injured'))).order_by('-total_harm')
     )
 
 def requestCaseLocation(date_form):
