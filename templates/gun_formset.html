@@ -1,0 +1,36 @@
+{% load formset_tags %}
+<div id="div_gun_formset" data-formset-prefix="{{ gun_formset.prefix }}">
+    {{ gun_formset.management_form }}
+
+    <div data-formset-body>
+        <!-- New forms will be inserted in here -->
+        {% for form in gun_formset %}
+            <div data-formset-form>
+                {{ form.as_ul }}
+                <button type="button" data-formset-delete-button>Delete form</button>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- The empty form template. By wrapping this in a <script> tag, the
+    __prefix__ placeholder can easily be replaced in both attributes and
+    any scripts -->
+    <script type="form-template" data-formset-empty-form>
+        {% escapescript %}
+            <div data-formset-form>
+                {{ gun_formset.empty_form.as_ul }}
+                <button type="button" data-formset-delete-button>Delete form</button>
+            </div>
+        {% endescapescript %}
+    </script>
+
+    <!-- This button will add a new form when clicked -->
+    <input type="button" value="Add gun" data-formset-add>
+
+    <script>jQuery(function($) {
+        $("#div_gun_formset").formset({
+            animateForms: true
+        });
+    });</script>
+
+</div>

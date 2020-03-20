@@ -2,23 +2,6 @@
 {% load settings_value %}
 
 {% block content %}
-
-  <style>
-      #map { position: relative; height: 86vh; }
-  </style>
-
-  <div class="container-fluid">
-    <!-- Header Row -->
-    <div class="row">
-      <div class="col">
-        <div class="card">
-          <div class="card-body header-title text-center">
-            USA Gun Violence Cases by Anti-Entropy Team
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="row">
 
       <!-- Overall Statistics -->
@@ -74,7 +57,6 @@
       </div>             
 
     </div>
-  </div>
 {% endblock %}
 
 {% block scripts %}
@@ -94,7 +76,7 @@ function alterFunc() {alert("a")}
   map.on('load', function() {
 
   {% if map_zoom %} map.setZoom({{map_zoom}}); {% endif %}
-  {% if map_center %}  map.setCenter({{map_center}}), {% endif %}    
+  {% if map_center %}  map.setCenter({{map_center}}); {% endif %}    
 
   // Add a geojson point source.
   // Heatmap layers also work with a vector tile source.
@@ -189,8 +171,9 @@ function alterFunc() {alert("a")}
           var features = map.queryRenderedFeatures({layers:['gunviolence-point']});
           console.log(features);
           console.log(map.getZoom());
+
           $.ajax({
-              type: "GET",
+              type: "POST",
               url: "{% url 'save_map_meta' %}",
               dataType: "json",
               data: {

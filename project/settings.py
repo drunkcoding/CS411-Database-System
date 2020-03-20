@@ -23,6 +23,7 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '2b%)naz)7da3zhgn7l07l4$04^1^l0#*y#77mv&++-7#w^8&i-'
+MAPBOX_TOKEN = 'pk.eyJ1IjoidGhpbmtpbmdyZWVkIiwiYSI6ImNrN2JnODFpMTAzemEzZWxrdjVmMWs1aDgifQ.ilp7OlnOWSrRkVltnP8biQ'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -51,12 +52,13 @@ LOGGING = {
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jquery',
+    'djangoformsetjs',
     'gunviolence',
 ]
 
@@ -81,6 +83,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                #'django.template.context_processors.static',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
@@ -186,6 +189,64 @@ RELATION_CHOICES = makeChoices([
     'Home Invasion - Perp Knows Victim'
 ])
 AGEGROUP_CHOICES = makeChoices(['Adult 18+', 'Teen 12-17', 'Child 0-11'])
+STATE_CHOICES = makeChoices([
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennsylvania',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming',
+    'District of Columbia',
+    'American Samoa',
+    'Guam',
+    'Northern Mariana Islands',
+    'Puerto Rico',
+    'U.S. Virgin Islands',
+])
 CHARACTER_CHOICES =  makeChoices([
     "Shot - Wounded/Injured",                                                                             
     "Shot - Dead (murder, accidental, suicide)",                                                          

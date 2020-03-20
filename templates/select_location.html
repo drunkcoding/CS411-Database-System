@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load formset_tags %}
+
+{% block content %}
+
+<style>
+	body { margin: 0; padding: 0; }
+  #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+
+<div class="row">
+  <div class="col-3 pr-0">
+    <div class="row">
+      <div class="col pr-0">
+        <div class="card overflow-auto">
+          <div class="card-body">
+            <form id="incident_form" action="{% url 'save_incident_form' %}" method="post">{% csrf_token %}
+              {{ incident_form.as_ul }}
+              <button type="submit">Submit</button>
+            </form>
+            <form id="characteristic_formset" action="{% url 'save_characteristic_formset' %}" method="post">{% csrf_token %}
+              {% include 'characteristic_formset.html' %}
+              <button type="submit">Submit</button>
+            </form>
+            <form id="gun_formset" action="{% url 'save_gun_formset' %}" method="post">{% csrf_token %}
+              {% include 'gun_formset.html' %}
+              <button type="submit">Submit</button>
+            </form>
+            <form id="participant_formset" action="{% url 'save_participant_formset' %}" method="post">{% csrf_token %}
+              {% include 'participant_formset.html' %}
+              <button type="submit">Submit</button>
+            </form>
+            <button type="submit">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <div class="card-body map-box" id="mapid" ondblclick="alterFunc()">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+{% endblock %}
+
+{% block scripts %}
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoidGhpbmtpbmdyZWVkIiwiYSI6ImNrN2JnODFpMTAzemEzZWxrdjVmMWs1aDgifQ.ilp7OlnOWSrRkVltnP8biQ';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v10',
+    maxzoom: 20,
+    maxBounds: [['-133.41939491845818', '23.017523213871456'],['-63.82091914427555', '50.85158440021044']]
+  });
+
+  map.on('click', function(e) {
+    $("#id_latitude").val(e.lngLat.toArray()[1]);
+    $("#id_longitude").val(e.lngLat.toArray()[0]);
+  });
+
+  formEventCapture('#incident_form');
+  formEventCapture('#characteristic_formset');
+  formEventCapture('#gun_formset');
+  formEventCapture('#participant_formset');
+
+</script>
+{% endblock %}

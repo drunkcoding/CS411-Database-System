@@ -5,11 +5,15 @@ from django.contrib import messages
 from django.conf import settings
 from django.db import transaction, connection
 from django.db.models import Sum, F
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from .models import *
 from .forms import *
 from .utils import *
 
+import logging
+logger = logging.getLogger(__name__)
+
+"""
 def homepage(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
@@ -35,7 +39,7 @@ def homepage(request):
         form = SQLForm()
 
     return render(request, 'sample-query.html', {'form': form})
-
+"""
 
 def dashboard(request):
 
@@ -60,13 +64,12 @@ def dashboard(request):
 
     if not date_form.is_valid(): return render(request, template_name, context)
 
-    if total_count != None: total_count = requestTotalCount(date_form)
-
-    if state_count != None: 
-        state_count = requestStateCount(date_form)
-        df_state_count = pd.DataFrame(state_count)
-        state_min = df_state_count.total_harm.min()
-        state_max = df_state_count.total_harm.max()
+    total_count = requestTotalCount(date_form)
+    
+    state_count = requestStateCount(date_form)
+    df_state_count = pd.DataFrame(state_count)
+    state_min = df_state_count.total_harm.min()
+    state_max = df_state_count.total_harm.max()
 
     locations = requestCaseLocation(date_form)
     df_location = pd.DataFrame(locations)
@@ -124,26 +127,64 @@ def dashboard(request):
     request.session['date_form'] = request.POST
     request.session['state_count'] = state_count
 
-    map_zoom = request.session.get('map_zoom')
-    map_center = request.session.get('map_center')
-
-    if map_zoom: context['map_zoom'] = map_zoom;
-    if map_center: context['map_center'] = map_center;
+    context['map_zoom'] = request.session.get('map_zoom')
+    context['map_center'] = request.session.get('map_center')
 
     return render(request, template_name, context)
 
 def saveMapMeta(request):
-
-    request.session['map_zoom'] = float(request.GET.get('map_zoom'))
-    request.session['map_center'] = [float(x) for x in request.GET.getlist('map_center[]')]
+    request.session['map_zoom'] = float(request.POST.get('map_zoom'))
+    request.session['map_center'] = [float(x) for x in request.POST.getlist('map_center[]')]
 
     return JsonResponse({})
 
+def saveIncidentForm(request):
+    incident_form = IncidentForm(request.POST)
+    if incident_form.is_valid(): 
+        request.session['incident_form'] = request.POST
+        return JsonResponse({'Retcode':0})
+
+    return JsonResponse({'Retcode':-1})    
+
+def saveCharacteristicFormSet(request):
+    characteristic_formset = CharacteristicFormSet(request.POST)
+    if characteristic_formset.is_valid(): 
+        request.session['characteristic_formset'] = request.POST
+        return JsonResponse({'Retcode':0})
+
+    return JsonResponse({'Retcode':-1})    
+
+def saveGunFormSet(request):
+    gun_formset = GunFormSet(request.POST)
+    if gun_formset.is_valid(): 
+        request.session['gun_formset'] = request.POST
+        return JsonResponse({'Retcode':0})
+
+    return JsonResponse({'Retcode':-1})  
+
+def saveParticipantFormSet(request):
+    participant_formset = ParticipantFormSet(request.POST)
+    if participant_formset.is_valid(): 
+        request.session['participant_formset'] = request.POST
+        return JsonResponse({'Retcode':0})
+
+    return JsonResponse({'Retcode':-1})      
+
+def selectLocation(request):
+    template_name = 'select_location.html'
+    context = {}
+    context['characteristic_formset'] = CharacteristicFormSet()
+    context['gun_formset'] = GunFormSet()
+    context['incident_form'] = IncidentForm()
+    context['participant_formset'] = ParticipantFormSet()
+    return render(request, template_name, context)
+"""
 def testpage(request):
     template_name = 'test.html'
     context = {}
 
     return render(request, template_name, context)
+"""
 
 """
 # Create your views here.
