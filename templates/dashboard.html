@@ -82,7 +82,7 @@ function alterFunc() {alert("a")}
   // Heatmap layers also work with a vector tile source.
   map.addSource('gunviolence', {
       'type': 'geojson',
-      'data': {{ points|safe }},
+      'data': {{ points|safe }}
       //cluster: true,
   });
 
@@ -147,9 +147,33 @@ function alterFunc() {alert("a")}
       'waterway-label'
   );
 
+  /*    
   map.on('click', 'gunviolence-point', function(e) {
     console.log("gunviolence-point");
     window.location.href = e.features[0].properties.source_url;
+  });
+  */
+
+  map.on('dblclick', 'gunviolence-point', function(e) {
+    console.log("gunviolence-del");
+
+    $.ajax({
+        type: "POST",
+        url: "{% url 'delete_incident' %}",
+        dataType: "json",
+        data: {
+            "incident_id": e.features[0].properties.incident_id,
+        },
+        success: function(data){
+            console.log("success");
+            console.log(data);
+            location.reload(true);
+        },
+        failure: function(data){
+            console.log("failure");
+            console.log(data);
+        },
+    });
   });
 
   map.on('click', 'states-layer', function(e) {
@@ -161,7 +185,7 @@ function alterFunc() {alert("a")}
   map.on('mouseenter', 'states-layer', function() {
     map.getCanvas().style.cursor = 'pointer';
   });
-  
+    
   // Change it back to a pointer when it leaves.
   map.on('mouseleave', 'states-layer', function() {
     map.getCanvas().style.cursor = '';

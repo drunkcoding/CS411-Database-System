@@ -32,7 +32,7 @@ class GunViolence(models.Model):
     characteristic = models.ManyToManyField(IncidentCharacteristic) 
 
 class GunViolenceRaw(models.Model):
-    incident_id = models.PositiveIntegerField(primary_key=True)
+    incident_id = models.AutoField(primary_key=True)
     date = models.DateField()
     state = models.CharField(max_length=64)
     city_or_county = models.CharField(max_length=64)
@@ -41,7 +41,7 @@ class GunViolenceRaw(models.Model):
     n_injured = models.PositiveSmallIntegerField(null=True)
     incident_url = models.URLField(null=True)
     source_url = models.URLField(null=True)
-    incident_url_fields_missing = models.CharField(max_length=8)
+    incident_url_fields_missing = models.CharField(max_length=8, null=True)
     congressional_district = models.PositiveSmallIntegerField(null=True)
     gun_stolen = models.CharField(max_length=64, null=True)
     gun_type = models.CharField(max_length=64, null=True)

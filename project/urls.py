@@ -30,5 +30,6 @@ urlpatterns = [
     path('save_gun_formset/', saveGunFormSet, name='save_gun_formset'),
     path('save_participant_formset/', saveParticipantFormSet, name='save_participant_formset'),
     path('select_location/', selectLocation, name='select_location'),
+    path('delete_incident/', deleteIncident, name='delete_incident'),
     # path('state_count/<state>/', stateCountEachDate, name='state_count'),
 ]

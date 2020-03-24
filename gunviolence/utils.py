@@ -1,6 +1,10 @@
 from .models import *
 from django.db.models import Sum, F
 
+def formsetFormat(formset, field):
+    data = [(i,form.cleaned_data[field]) for i, form in enumerate(formset) if 'DELETE' in form.cleaned_data and not form.cleaned_data['DELETE']]
+    return '||'.join(["%s:%s" % tup for tup in data])
+
 def filterGunViolenceRawEmptyData():
     return GunViolenceRaw.objects\
         .filter(latitude__isnull=False, longitude__isnull=False)\

@@ -12,7 +12,7 @@ class DateRangeForm(forms.Form):
 
 class IncidentForm(forms.Form):
     date = forms.DateField()
-    state = forms.ChoiceField(choices=settings.STATE_CHOICES)
+    state = forms.CharField()
     address = forms.CharField(required=False, max_length=1024)
     n_killed = forms.IntegerField(min_value=0)
     n_injured = forms.IntegerField(min_value=0)
