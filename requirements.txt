@@ -1,4 +1,5 @@
+wheel
 django
 mysqlclient
-psycopg2
-pandas
+django-jquery
+django-formset-js
