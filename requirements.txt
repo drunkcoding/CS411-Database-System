@@ -1,5 +1,6 @@
 wheel
 django
 mysqlclient
+psycopg2
 django-jquery
 django-formset-js
