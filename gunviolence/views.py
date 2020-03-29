@@ -28,7 +28,7 @@ def homepage(request):
             query = form.cleaned_data['query']
 
             cursor = connection.cursor()
-            try:            
+            try:
                 cursor.execute(query)
             except:
                 return render(request, 'sample-query.html', {'form': SQLForm(), 'sqldata': json.dumps([[str(sys.exc_info()[1])]])})
@@ -66,7 +66,7 @@ def dashboard(request):
     if not date_form.is_valid(): return render(request, template_name, context)
 
     total_count = requestTotalCount(date_form)
-    
+
     state_count = requestStateCount(date_form)
     df_state_count = pd.DataFrame(state_count)
     state_min = df_state_count.total_harm.min()
@@ -84,23 +84,23 @@ def dashboard(request):
             "features": []
         }
 
-    states = settings.GEOSTATES.copy()    
+    states = settings.GEOSTATES.copy()
 
     for location in locations:
         n_involve = location['n_killed'] + location['n_injured']
         points['features'].append(
-            { 
-                "type": "Feature", 
+            {
+                "type": "Feature",
                 "properties": {
                     "involve": n_involve,
                     "incident_id": location['incident_id'],
                     "source_url": location['incident_url'],
-                }, 
+                },
                 "geometry": { "type": "Point", "coordinates": [ location['longitude'], location['latitude'], 0.0 ] }
             }
         )
 
-    if state_count != None:    
+    if state_count != None:
         for i in range(len(states['features'])):
             states['features'][i]['properties']['involve'] = 0
             for row in state_count:
@@ -110,8 +110,8 @@ def dashboard(request):
                     break
 
     context = {
-            'points':json.dumps(points), 
-            'date_form':date_form, 
+            'points':json.dumps(points),
+            'date_form':date_form,
             'states':json.dumps(states),
             'state_min':state_min,
             'state_max':state_max,
@@ -149,35 +149,35 @@ def saveMapMeta(request):
 def saveIncidentForm(request):
     incident_form = IncidentForm(request.POST)
     print(request.POST)
-    if incident_form.is_valid(): 
+    if incident_form.is_valid():
         request.session['incident_form'] = request.POST
         return JsonResponse({'Retcode':0})
 
-    return JsonResponse({'Retcode':-1})    
+    return JsonResponse({'Retcode':-1})
 
 def saveCharacteristicFormSet(request):
     characteristic_formset = CharacteristicFormSet(request.POST)
-    if characteristic_formset.is_valid(): 
+    if characteristic_formset.is_valid():
         request.session['characteristic_formset'] = request.POST
         return JsonResponse({'Retcode':0})
 
-    return JsonResponse({'Retcode':-1})    
+    return JsonResponse({'Retcode':-1})
 
 def saveGunFormSet(request):
     gun_formset = GunFormSet(request.POST)
-    if gun_formset.is_valid(): 
+    if gun_formset.is_valid():
         request.session['gun_formset'] = request.POST
         return JsonResponse({'Retcode':0})
 
-    return JsonResponse({'Retcode':-1})  
+    return JsonResponse({'Retcode':-1})
 
 def saveParticipantFormSet(request):
     participant_formset = ParticipantFormSet(request.POST)
-    if participant_formset.is_valid(): 
+    if participant_formset.is_valid():
         request.session['participant_formset'] = request.POST
         return JsonResponse({'Retcode':0})
 
-    return JsonResponse({'Retcode':-1})      
+    return JsonResponse({'Retcode':-1})
 
 def selectLocation(request):
     template_name = 'select_location.html'
@@ -230,6 +230,19 @@ def selectLocation(request):
         obj.save()
 
     return render(request, template_name, context)
+
+def manualInputRaw(request):
+    if request.method == 'POST':
+        filled_form = ManualInputForm(request.POST)
+        if filled_form.is_valid():
+            filled_form.save()
+            note = 'Data input successful!'
+            new_form = ManualInputForm()
+            return render(request, 'manualInput.html', {'manualInputForm':new_form, 'note':note})
+    else:
+        form = ManualInputForm()
+        return render(request, 'manualInput.html', {'manualInputForm':form})
+
 """
 def testpage(request):
     template_name = 'test.html'
@@ -267,8 +280,8 @@ def dummy(request):
     with transaction.atomic():
         for index, row in state_df.iterrows():
             state, created = State.objects.get_or_create(
-                name=row['name'], 
-                population=row['population'], 
+                name=row['name'],
+                population=row['population'],
                 land_area = row['land_area']
             )
             states[row['name']] = state
@@ -285,5 +298,5 @@ def dummy(request):
             )
             cities[row['name']] = city
 
-    return render(request, template, context)    
+    return render(request, template, context)
 """

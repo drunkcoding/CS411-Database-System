@@ -39,4 +39,19 @@ class ParticipantForm(forms.Form):
     gender = forms.ChoiceField(choices=settings.GENDER_CHOICES)
     relationship = forms.ChoiceField(choices=settings.RELATION_CHOICES)
 
-ParticipantFormSet = forms.formset_factory(ParticipantForm, can_delete=True)    
+ParticipantFormSet = forms.formset_factory(ParticipantForm, can_delete=True)
+
+class ManualInputForm(forms.ModelForm):
+    class Meta:
+        model = GunViolenceRaw
+        fields = ['date', 'state', 'city_or_county']
+
+
+        #
+        # fields = ['incident_id', 'date', 'state', 'city_or_county', 'address',
+        # 'n_killed', 'n_injured', 'source_url', 'incident_url_fields_missing',
+        # 'congressional_district', 'gun_stolen', 'gun_type', 'incident_characteristics',
+        # 'latitude', 'location_description', 'longitude', 'n_guns_involved',
+        # 'notes', 'participant_age', 'participant_age_group', 'participant_gender',
+        # 'participant_name', 'participant_relationship', 'participant_status',
+        # 'participant_type', 'sources', 'state_house_district', 'state_senate_district']

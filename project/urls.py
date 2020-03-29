@@ -31,5 +31,6 @@ urlpatterns = [
     path('save_participant_formset/', saveParticipantFormSet, name='save_participant_formset'),
     path('select_location/', selectLocation, name='select_location'),
     path('delete_incident/', deleteIncident, name='delete_incident'),
+    path('manual_input/', manualInputRaw, name= 'manual_input'),
     # path('state_count/<state>/', stateCountEachDate, name='state_count'),
 ]

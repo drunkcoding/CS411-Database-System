@@ -1,0 +1,11 @@
+<h1>Manual Data Input Tool</h1>
+
+<h2>{{ note }}</h2>
+
+<form action="{% url 'manual_input' %}" method="post">
+  {% csrf_token %}
+  <table>
+  {{ manualInputForm.as_table }}
+  </table>
+  <input type="submit" value="Submit">
+</form>
