@@ -4,8 +4,17 @@
 {% block content %}
 
 <style>
-	body { margin: 0; padding: 0; }
-  #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+  }
 </style>
 
 <div class="row">
@@ -18,7 +27,8 @@
               {{ incident_form.as_ul }}
               <button type="submit">Submit</button>
             </form>
-            <form id="characteristic_formset" action="{% url 'save_characteristic_formset' %}" method="post">{% csrf_token %}
+            <form id="characteristic_formset" action="{% url 'save_characteristic_formset' %}" method="post">
+              {% csrf_token %}
               {% include 'characteristic_formset.html' %}
               <button type="submit">Submit</button>
             </form>
@@ -47,57 +57,65 @@
     </div>
   </div>
 </div>
- 
+
+{% include "import_form.html" %}
+
 {% endblock %}
 
 {% block scripts %}
 <script>
-
-  mapboxgl.accessToken = 'pk.eyJ1IjoidGhpbmtpbmdyZWVkIiwiYSI6ImNrN2JnODFpMTAzemEzZWxrdjVmMWs1aDgifQ.ilp7OlnOWSrRkVltnP8biQ';
+  mapboxgl.accessToken =
+    'pk.eyJ1IjoidGhpbmtpbmdyZWVkIiwiYSI6ImNrN2JnODFpMTAzemEzZWxrdjVmMWs1aDgifQ.ilp7OlnOWSrRkVltnP8biQ';
   var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v10',
     maxzoom: 20,
-    maxBounds: [['-133.41939491845818', '23.017523213871456'],['-63.82091914427555', '50.85158440021044']]
+    maxBounds: [
+      ['-133.41939491845818', '23.017523213871456'],
+      ['-63.82091914427555', '50.85158440021044']
+    ]
   });
 
-  map.on('load', function() {
+  map.on('load', function () {
     map.addSource('states', {
-        'type': 'geojson',
-        'data': {{ states|safe }}
+      'type': 'geojson',
+      'data': {{states|safe}}
     });
 
-    map.addLayer(
-        {
-          'id': 'states-layer',
-          'source': 'states',
-          'type': 'fill',
-          'paint': {
-              'fill-color': "#eff3ff",
-              'fill-opacity': 0.5,
-          }
-        },
-        'waterway-label'
+    map.addLayer({
+        'id': 'states-layer',
+        'source': 'states',
+        'type': 'fill',
+        'paint': {
+          'fill-color': "#eff3ff",
+          'fill-opacity': 0.5,
+        }
+      },
+      'waterway-label'
     );
 
-    map.on('click', 'states-layer', function(e) {
+    map.on('click', 'states-layer', function (e) {
       $("#id_latitude").val(e.lngLat.toArray()[1]);
       $("#id_longitude").val(e.lngLat.toArray()[0]);
       $("#id_state").val(e.features[0].properties.NAME);
       console.log(e.features[0].properties);
     });
-  });  
 
-  $(document).ready(function() {
+    map.on('click', function (e) {
+      console.log("any click");
+      console.log(e);
+    });
+  });
+
+  $(document).ready(function () {
     $("#id_state").prop("readonly", true);
     $("#id_latitude").prop("readonly", true);
     $("#id_longitude").prop("readonly", true);
   });
 
-  formEventCapture('#incident_form');
-  formEventCapture('#characteristic_formset');
-  formEventCapture('#gun_formset');
-  formEventCapture('#participant_formset');
-
+  importEventCapture('#incident_form');
+  importEventCapture('#characteristic_formset');
+  importEventCapture('#gun_formset');
+  importEventCapture('#participant_formset');
 </script>
 {% endblock %}

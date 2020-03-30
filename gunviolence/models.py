@@ -31,6 +31,21 @@ class GunViolence(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     characteristic = models.ManyToManyField(IncidentCharacteristic) 
 
+class GunViolenceJson(models.Model):
+    id = models.AutoField(primary_key=True)
+    date = models.DateField()
+    state = models.CharField(max_length=64)
+    city = models.CharField(max_length=64)
+    latitude =  models.FloatField(null=True)
+    longitude =  models.FloatField(null=True)
+    address = models.TextField(null=True)
+    n_killed = models.PositiveSmallIntegerField(null=True)
+    n_injured = models.PositiveSmallIntegerField(null=True)
+    participants = models.TextField(null=True)
+    characteristics = models.TextField(null=True)
+    guns = models.TextField(null=True)
+    notes = models.TextField(null=True)
+
 class GunViolenceRaw(models.Model):
     incident_id = models.AutoField(primary_key=True)
     date = models.DateField()
@@ -65,9 +80,8 @@ class GunViolenceRaw(models.Model):
 class Participant(models.Model):
     name = models.CharField(max_length=64)
     age = models.PositiveSmallIntegerField()
-    gender = models.PositiveSmallIntegerField(choices=settings.GENDER_CHOICES)
-    harm = models.PositiveSmallIntegerField(choices=settings.HARM_CHOICES)
-    type = models.PositiveSmallIntegerField(choices=settings.PTYPE_CHOICES)
-    relationship = models.PositiveSmallIntegerField(choices=settings.RELATION_CHOICES, null=True, help_text="relation to all victims")
+    gender = models.CharField(max_length = 10, choices=settings.GENDER_CHOICES)
+    harm = models.CharField(max_length = 64, choices=settings.HARM_CHOICES)
+    type = models.CharField(max_length = 64,choices=settings.PTYPE_CHOICES)
+    relationship = models.CharField(max_length = 64, choices=settings.RELATION_CHOICES, null=True, help_text="relation to all victims")
     involve = models.ForeignKey(GunViolence, on_delete=models.CASCADE)
-

@@ -1,52 +1,77 @@
-import csv, io, os, logging, json, sys
+import csv, io, os, logging, json, sys, datetime
 import pandas as pd
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.conf import settings
 from django.db import transaction, connection
-from django.db.models import Sum, F
 from django.http import JsonResponse, HttpResponse
 from .models import *
 from .forms import *
 from .utils import *
 
-import uuid
 import logging
 logger = logging.getLogger(__name__)
 
-"""
-def homepage(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = SQLForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            query = form.cleaned_data['query']
-
-            cursor = connection.cursor()
-            try:
-                cursor.execute(query)
-            except:
-                return render(request, 'sample-query.html', {'form': SQLForm(), 'sqldata': json.dumps([[str(sys.exc_info()[1])]])})
-            data = cursor.fetchall()
-            return render(request, 'sample-query.html', {'form': SQLForm(), 'sqldata': json.dumps(data)})
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = SQLForm()
-
-    return render(request, 'sample-query.html', {'form': form})
-"""
-
 def dashboard(request):
-
+    """
+    with open(os.path.join(settings.MEDIA_DIR, 'mass_shootings_full.json'), 'rb') as f:
+        data = json.load(f)
+        
+        for item in data:
+            incident, created = GunViolenceJson.objects.get_or_create(
+                id=item.get('id'),
+                date=datetime.datetime.strptime(item.get('date'), '%Y-%m-%d').date(),
+                state = item.get('state'),
+                city = item.get('city'),
+                latitude = item.get('lat'),
+                longitude = item.get('lng'),
+                address = item.get('address'),
+                n_killed = item.get('killed'),
+                n_injured = item.get('injured'),
+                participants = json.dumps(item.get('details', {}).get('participants', [])),
+                characteristics = json.dumps([{'characteristic': x} for x in item.get('details', {}).get('characteristics', [])]),
+                guns = json.dumps(item.get('details', {}).get('guns', [])),
+            )
+    """
     template_name = 'dashboard.html'
     context = {}
     context['date_form'] = DateRangeForm()
+    context['states'] = settings.GEOSTATES.copy()
+    context['characteristic_form'] = CharacteristicForm()
+    context['participant_form'] = ParticipantForm()
+    context['gun_form'] = GunForm()
+    #context['characteristic_formset'] = CharacteristicFormSet()
+    #context['gun_formset'] = GunFormSet()
+    context['incident_form'] = IncidentForm()
+    #context['participant_formset'] = ParticipantFormSet()
+
+    print(request.POST)
+    
+    incident_id = request.session.get('incident_id')
+    if incident_id != None:
+        print("incident_id", incident_id)
+        incident = GunViolenceJson.objects.get(id=incident_id)
+        if incident:
+            context['incident_form'] = IncidentForm(initial={
+                'id':incident.id,
+                'date':incident.date,
+                'state':incident.state,
+                'address':incident.address,
+                'n_killed':incident.n_killed,
+                'n_injured':incident.n_injured,
+                'latitude':incident.latitude,
+                'longitude':incident.longitude,
+                'notes':incident.notes,
+            })
+            print(json.loads(incident.characteristics))
+            print(json.loads(incident.guns))
+            print(json.loads(incident.participants))
+            context['gun_formset'] = Json2formset(GunForm, incident.guns)
+            context['characteristic_formset'] = Json2formset(CharacteristicForm, incident.characteristics)
+            context['participant_formset'] = Json2formset(ParticipantForm, incident.participants)
+
+        del request.session['incident_id']
+        context['scroll_to_form'] = True
 
     date_form = DateRangeForm(request.session.get('date_form'))
     total_count = request.session.get('total_count')
@@ -93,8 +118,7 @@ def dashboard(request):
                 "type": "Feature",
                 "properties": {
                     "involve": n_involve,
-                    "incident_id": location['incident_id'],
-                    "source_url": location['incident_url'],
+                    "incident_id": location['id'],
                 },
                 "geometry": { "type": "Point", "coordinates": [ location['longitude'], location['latitude'], 0.0 ] }
             }
@@ -109,16 +133,13 @@ def dashboard(request):
                     states['features'][i]['properties']['involve'] = n_involve
                     break
 
-    context = {
-            'points':json.dumps(points),
-            'date_form':date_form,
-            'states':json.dumps(states),
-            'state_min':state_min,
-            'state_max':state_max,
-            'case_min':case_min,
-            'case_max':case_max,
-        }
-
+    context['points'] = json.dumps(points)
+    context['date_form'] = date_form
+    context['states'] = json.dumps(states)
+    context['state_min'] = state_min
+    context['state_max'] = state_max
+    context['case_min'] = case_min
+    context['case_max'] = case_max
 
     context['date_form'] = date_form
     context['total_count'] = total_count
@@ -133,52 +154,7 @@ def dashboard(request):
 
     return render(request, template_name, context)
 
-def deleteIncident(request):
-    if request.method == 'POST':
-        incident_id = int(request.POST.get('incident_id'))
-        GunViolenceRaw.objects.filter(incident_id=incident_id).delete()
-
-    return JsonResponse({})
-
-def saveMapMeta(request):
-    request.session['map_zoom'] = float(request.POST.get('map_zoom'))
-    request.session['map_center'] = [float(x) for x in request.POST.getlist('map_center[]')]
-
-    return JsonResponse({})
-
-def saveIncidentForm(request):
-    incident_form = IncidentForm(request.POST)
-    print(request.POST)
-    if incident_form.is_valid():
-        request.session['incident_form'] = request.POST
-        return JsonResponse({'Retcode':0})
-
-    return JsonResponse({'Retcode':-1})
-
-def saveCharacteristicFormSet(request):
-    characteristic_formset = CharacteristicFormSet(request.POST)
-    if characteristic_formset.is_valid():
-        request.session['characteristic_formset'] = request.POST
-        return JsonResponse({'Retcode':0})
-
-    return JsonResponse({'Retcode':-1})
-
-def saveGunFormSet(request):
-    gun_formset = GunFormSet(request.POST)
-    if gun_formset.is_valid():
-        request.session['gun_formset'] = request.POST
-        return JsonResponse({'Retcode':0})
-
-    return JsonResponse({'Retcode':-1})
-
-def saveParticipantFormSet(request):
-    participant_formset = ParticipantFormSet(request.POST)
-    if participant_formset.is_valid():
-        request.session['participant_formset'] = request.POST
-        return JsonResponse({'Retcode':0})
-
-    return JsonResponse({'Retcode':-1})
-
+"""
 def selectLocation(request):
     template_name = 'select_location.html'
     context = {}
@@ -214,22 +190,22 @@ def selectLocation(request):
         obj.latitude = incident_form['latitude'].value()
         obj.longitude = incident_form['longitude'].value()
         obj.notes = incident_form['notes'].value()
-        obj.location_description = incident_form['location_description'].value()
         obj.incident_url_fields_missing = "FALSE"
 
-        obj.incident_characteristics = formsetFormat(characteristic_formset, 'characteristic')
-        obj.gun_stolen = formsetFormat(gun_formset, 'stolen')
-        obj.gun_type = formsetFormat(gun_formset, 'type')
-        obj.participant_name = formsetFormat(participant_formset, 'name')
-        obj.participant_status = formsetFormat(participant_formset, 'status')
-        obj.participant_age = formsetFormat(participant_formset, 'age')
-        obj.participant_type = formsetFormat(participant_formset, 'type')
-        obj.participant_gender = formsetFormat(participant_formset, 'gender')
-        obj.participant_relationship = formsetFormat(participant_formset, 'relationship')
+        obj.incident_characteristics = formsetEncode(characteristic_formset, 'characteristic')
+        obj.gun_stolen = formsetEncode(gun_formset, 'stolen')
+        obj.gun_type = formsetEncode(gun_formset, 'type')
+        obj.participant_name = formsetEncode(participant_formset, 'name')
+        obj.participant_status = formsetEncode(participant_formset, 'status')
+        obj.participant_age = formsetEncode(participant_formset, 'age')
+        obj.participant_type = formsetEncode(participant_formset, 'type')
+        obj.participant_gender = formsetEncode(participant_formset, 'gender')
+        obj.participant_relationship = formsetEncode(participant_formset, 'relationship')
 
         obj.save()
 
     return render(request, template_name, context)
+"""
 
 def manualInputRaw(request):
     if request.method == 'POST':
@@ -242,14 +218,6 @@ def manualInputRaw(request):
     else:
         form = ManualInputForm()
         return render(request, 'manualInput.html', {'manualInputForm':form})
-
-"""
-def testpage(request):
-    template_name = 'test.html'
-    context = {}
-
-    return render(request, template_name, context)
-"""
 
 """
 # Create your views here.

@@ -14,9 +14,9 @@ import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
-STATIC_DIR = os.path.join(BASE_DIR,'static')
-MEDIA_DIR = os.path.join(BASE_DIR,'media')
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -35,15 +35,15 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'file': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': 'debug.log',
+            'filename': 'info.log',
         },
     },
     'loggers': {
         'django': {
             'handlers': ['file'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True,
         },
     },
@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jquery',
     'djangoformsetjs',
     'gunviolence',
 ]
@@ -78,13 +77,13 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR,],
+        'DIRS': [TEMPLATE_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                #'django.template.context_processors.static',
+                'django.template.context_processors.static',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
@@ -148,7 +147,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [STATIC_DIR,]
+STATICFILES_DIRS = [STATIC_DIR, ]
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
@@ -157,18 +156,21 @@ LOGIN_URL = '/userauth/login/'
 
 # Site constant values
 
+
 def makeChoices(choicelist):
     result = []
     for i in range(len(choicelist)):
-        result.append((i,choicelist[i]))
+        result.append((choicelist[i].lower(), choicelist[i].lower()))
     return result
+
 
 def makePermutationChoices(choicelist):
     result = []
-    for i in range(1,len(choicelist)+1):
-        for ele in list(itertools.combinations(choicelist,i)):
+    for i in range(1, len(choicelist)+1):
+        for ele in list(itertools.combinations(choicelist, i)):
             result.append(', '.join(list(ele)))
     return makeChoices(result)
+
 
 GUNSTOLEN_CHOICES = makeChoices(['Unknown', 'Not-stolen', 'Stolen'])
 GENDER_CHOICES = makeChoices(['Male', 'Female'])
@@ -248,7 +250,7 @@ STATE_CHOICES = makeChoices([
     'Puerto Rico',
     'U.S. Virgin Islands',
 ])
-CHARACTER_CHOICES =  makeChoices([
+CHARACTER_CHOICES = makeChoices([
     "Shot - Wounded/Injured",
     "Shot - Dead (murder, accidental, suicide)",
     "Shots Fired - No Injuries",
