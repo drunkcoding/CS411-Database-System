@@ -8,7 +8,7 @@
       <div class="col-2 pr-0">
         <div class="row">
           <div class="col pr-0">
-            <div class="card">
+            <div class="card" style="height: 20vh">
               <div class="card-body">
                 <h4 class="text-center">Total Killed</h4>
                 <h2 class="text-center red">{% if total_count %} {{ total_count.total_killed }} {% else %} -- {% endif %}</h2>
@@ -20,7 +20,7 @@
         </div>
         <div class="row">
           <div class="col pr-0">
-            <div class="card">
+            <div class="card" style="height: 40vh">
               <div class="card-body">
                 <div class="card-title text-center">People Harmed by State</div>
               </div>
@@ -36,7 +36,7 @@
         <!-- Date Range Selection -->
         <div class="row">
           <div class="col pr-0">
-            <div class="card">
+            <div class="card" style="height: 25vh">
               <div class="card-body">
                 <form method="post" action="" name='dateform'> {% csrf_token %}
                   {{ date_form.as_ul }}

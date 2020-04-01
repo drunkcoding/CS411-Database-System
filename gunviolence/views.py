@@ -76,7 +76,11 @@ def dashboard(request):
     date_form = DateRangeForm(request.session.get('date_form'))
     total_count = request.session.get('total_count')
     state_count = request.session.get('state_count')
-    display_chart = request.session.get('display_chart')
+    
+    context['date_form'] = date_form
+    context['total_count'] = total_count
+    context['state_count'] = state_count
+
     locations = []
 
     state_min = 0
@@ -141,7 +145,6 @@ def dashboard(request):
     context['case_min'] = case_min
     context['case_max'] = case_max
 
-    context['date_form'] = date_form
     context['total_count'] = total_count
     context['state_count'] = state_count
 

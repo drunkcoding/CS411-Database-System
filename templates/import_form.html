@@ -2,7 +2,7 @@
 <form>
 <div class="row">
     <div class="col pr-0"> 
-        <div class="card overflow-auto">
+        <div class="card overflow-auto" style="height: 85vh">
         <div class="card-body">
             <form id="incident_form">
             <h3> Incident Info</h3>
@@ -12,21 +12,21 @@
         </div>
     </div>
     <div class="col pr-0"> 
-        <div class="card overflow-auto">
+        <div class="card overflow-auto" style="height: 85vh">
         <div class="card-body">
             {% include 'characteristics.html' %}
         </div>
         </div>
     </div>
     <div class="col pr-0"> 
-        <div class="card overflow-auto">
+        <div class="card overflow-auto" style="height: 85vh">
         <div class="card-body">
             {% include 'guns.html' %}
         </div>
         </div>
     </div>
     <div class="col pr-0"> 
-        <div class="card overflow-auto">
+        <div class="card overflow-auto" style="height: 85vh">
         <div class="card-body">
             {% include 'participants.html' %}
         </div>
@@ -49,6 +49,13 @@
     </div>
     </div>
     </div>
+    <div class="col" id="incident-delete">
+    <div class="card">
+    <div class="card-body">
+        <button type="submit" onclick="$('#import_form').hide(); $('body, html').animate({scrollTop: $('#title').offset().top}, 600);">Cancel</button>
+    </div>
+    </div>
+    </div>
 </div>
 </div>
 
@@ -58,7 +65,7 @@
         $("#import_form #id_latitude").prop("readonly", true);
         $("#import_form #id_longitude").prop("readonly", true);
         $("#import_form #id_id").prop("readonly", true);
-        $('#import_form').show();
+        $('#import_form').hide();
         
         {% if scroll_to_form %}
             $('#import_form').show();
@@ -83,13 +90,10 @@
             url: action, // the file to call
             success: function(response) { // on success..
                 console.log(response)
-                if (response.Retcode == 0) {
-                    $('body, html').animate({
-                        scrollTop: $("#title").offset().top
-                    }, 600);
+                if (response.Retcode != 0) {
+                    alert('Invalid Form');
                 }
-                else alert('Invalid Form');
-                $('#import_form').hide();
+                // $('#import_form').hide();
                 location.reload(true);
             },
             error: function(e, x, r) { // on error..

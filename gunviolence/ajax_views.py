@@ -18,7 +18,9 @@ def saveIncidentID(request):
 
 @require_http_methods(["POST"])
 def deleteIncident(request):
-    incident_id = int(request.POST.get('incident_id'))
+    id = request.POST.get('id')
+    if id == None or len(id) == 0: return JsonResponse({'Retcode':0})
+    incident_id = int(id)
     print("delete", incident_id)
     GunViolenceJson.objects.filter(id=incident_id).delete()
 
