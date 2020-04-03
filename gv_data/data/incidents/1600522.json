@@ -1,0 +1,108 @@
+{
+  "id": 1600522,
+  "url": "https://www.gunviolencearchive.org/incident/1600522",
+  "title": "1-19-2020 Texas San Antonio 7-1",
+  "date": "1-19-2020",
+  "address": "Ventura San Antonio, 1011 Avenue B, San Antonio, Texas",
+  "geo": [
+    29.4355,
+    -98.4813
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "Alejandro \"Alex\" Robles",
+      "age": "25",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Robert Jay Martinez III",
+      "age": "21",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Gloria Davila",
+      "age": "46",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "16",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "19",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Kiernan Williams",
+      "age": "19",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "Bar/club incident - in or around establishment"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1600522-www.kens5.com-1579561211.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1600522-www.kens5.com-1579561211.png",
+      "url": "https://www.kens5.com/article/news/crime/shooting-ventura-bar-san-antonio-river-walk/273-a7ba8482-6046-4e40-bf5b-40928d66dba3"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1600522-www.firstcoastnews.com-1579528814.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1600522-www.firstcoastnews.com-1579528814.png",
+      "url": "https://www.firstcoastnews.com/article/news/national/shooting-ventura-bar-san-antonio-river-walk/77-a7ba8482-6046-4e40-bf5b-40928d66dba3"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1600522-www.myhighplains.com-1579561212.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1600522-www.myhighplains.com-1579561212.png",
+      "url": "https://www.myhighplains.com/news/national/police-2-dead-5-injured-after-shooting-in-san-antonio-club/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1600522-news4sanantonio.com-1579816810.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1600522-news4sanantonio.com-1579816810.png",
+      "url": "https://news4sanantonio.com/news/local/ventura-shooting-victims-recovering-from-injuries-after-deadly-shooting"
+    }
+  ],
+  "congressional_district": "35",
+  "state_senate_district": "26",
+  "state_house_district": "123"
+}

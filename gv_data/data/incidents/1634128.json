@@ -1,0 +1,88 @@
+{
+  "id": 1634128,
+  "url": "https://www.gunviolencearchive.org/incident/1634128",
+  "title": "3-04-2020 California Tulare 6-0",
+  "date": "3-04-2020",
+  "address": "111 W Tulare Ave, Tulare, California",
+  "geo": [
+    36.2291,
+    -119.331
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "Demetrius Perry Jones",
+      "age": "23",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Maleah Meitzenheimer",
+      "age": "7",
+      "age_group": "child 0-11",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Child Involved Incident",
+    "Child injured (not child shooter)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "House party / Block Party / Park Party",
+    "Gang involvement"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1634128-www.turnto23.com-1583420409.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1634128-www.turnto23.com-1583420409.png",
+      "url": "https://www.turnto23.com/news/state/1-killed-5-injured-including-7-year-old-child-in-tulare-shooting"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1634128-www.eastbaytimes.com-1583445610.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1634128-www.eastbaytimes.com-1583445610.png",
+      "url": "https://www.eastbaytimes.com/2020/03/05/tulare-california-police-6-shot-1-killed-after-funeral/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1634128-www.visaliatimesdelta.com-1583905505.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1634128-www.visaliatimesdelta.com-1583905505.png",
+      "url": "https://www.visaliatimesdelta.com/story/news/2020/03/09/tulare-girl-recovering-after-being-shot-7-times/5000205002/"
+    }
+  ],
+  "congressional_district": "22",
+  "state_senate_district": "16",
+  "state_house_district": "26"
+}

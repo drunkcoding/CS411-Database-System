@@ -1,0 +1,67 @@
+{
+  "id": 1622340,
+  "url": "https://www.gunviolencearchive.org/incident/1622340",
+  "title": "2-15-2020 Louisiana New Orleans 4-0",
+  "date": "2-15-2020",
+  "address": "Dryades St and 2nd St, New Orleans, Louisiana",
+  "geo": [
+    29.9348,
+    -90.0854
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1622340-www.wdsu.com-1581832810.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1622340-www.wdsu.com-1581832810.png",
+      "url": "https://www.wdsu.com/article/nopd-investigating-shooting-involving-three-victim/30947575"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1622340-www.wwltv.com-1581834607.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1622340-www.wwltv.com-1581834607.png",
+      "url": "https://www.wwltv.com/article/news/local/nopd-three-people-shot-blocks-away-from-st-charles-parade-route/289-67ea8748-cf88-4b7a-b2a9-0e7f82ab29cb"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1622340-www.nola.com-1581838206.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1622340-www.nola.com-1581838206.png",
+      "url": "https://www.nola.com/news/crime_police/article_921eb0f4-5059-11ea-bcd6-37521d8b30fd.html"
+    }
+  ],
+  "congressional_district": "2",
+  "state_senate_district": "5",
+  "state_house_district": "91"
+}

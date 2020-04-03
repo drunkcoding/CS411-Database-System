@@ -1,0 +1,106 @@
+{
+  "id": 1640317,
+  "url": "https://www.gunviolencearchive.org/incident/1640317",
+  "title": "3-15-2020 Missouri Springfield 6-1",
+  "date": "3-15-2020",
+  "address": "Kum & Go, 3264 E Battlefield Rd, Springfield, Missouri",
+  "geo": [
+    37.1578,
+    -93.2289
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "participant_characteristics": [
+        "Law Enforcement"
+      ],
+      "name": "Officer Christopher Walsh",
+      "age": "32",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Troy D. Rapp",
+      "age": "57",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Shannon R. Perkins",
+      "age": "46",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Matthew J. Hicks-Morris",
+      "age": "22",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "participant_characteristics": [
+        "Law Enforcement"
+      ],
+      "name": "Officer Josiah Overton",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Joaquin S. Roman",
+      "age": "31",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Suicide^",
+    "Murder/Suicide",
+    "Officer Involved Incident",
+    "Officer Involved Shooting - Officer shot",
+    "Officer Involved Shooting - Officer killed",
+    "Mass Murder (4+ deceased victims excluding the subject/suspect/perpetrator , one location)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1640317-www.news-leader.com-1584364509.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1640317-www.news-leader.com-1584364509.png",
+      "url": "https://www.news-leader.com/story/news/crime/2020/03/16/springfield-police-respond-active-shooting-incident-1-dead/5056941002/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1640317-www.ky3.com-1584364511.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1640317-www.ky3.com-1584364511.png",
+      "url": "https://www.ky3.com/content/news/Incident-at-Kum--Go-closes-East-Chestnut-near-highway-65-568823461.html"
+    },
+    {
+      "url": "https://www.springfieldmo.gov/CivicAlerts.aspx?AID=6579"
+    }
+  ],
+  "congressional_district": "7",
+  "state_senate_district": "30",
+  "state_house_district": "136"
+}

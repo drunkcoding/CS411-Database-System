@@ -1,0 +1,81 @@
+{
+  "id": 1585746,
+  "url": "https://www.gunviolencearchive.org/incident/1585746",
+  "title": "1-01-2020 Ohio Cleveland 4-1",
+  "date": "1-01-2020",
+  "address": "Club Medusa, 1437 St Clair Ave NE, Cleveland, Ohio",
+  "geo": [
+    41.5065,
+    -81.6858
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "age": "24",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "25",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "25",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "30",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Jaron Heard",
+      "age": "26",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "Bar/club incident - in or around establishment",
+    "Possession of gun by felon or prohibited person"
+  ],
+  "guns": [
+    {
+      "type": "handgun",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1585746-www.cleveland.com-1577921405.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1585746-www.cleveland.com-1577921405.png",
+      "url": "https://www.cleveland.com/crime/2020/01/13-people-shot-in-violent-nine-hour-stretch-late-new-years-eve-early-new-years-day-in-cleveland.html"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1585746-www.cleveland.com-1578022207.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1585746-www.cleveland.com-1578022207.png",
+      "url": "https://www.cleveland.com/metro/2020/01/fight-in-vip-section-of-downtown-cleveland-club-led-to-quadruple-shooting-police-say.html"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1585746-www.cleveland.com-1578200417.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1585746-www.cleveland.com-1578200417.png",
+      "url": "https://www.cleveland.com/metro/2020/01/man-charged-in-new-years-day-quadruple-shooting-at-downtown-cleveland-nightclub.html"
+    }
+  ],
+  "congressional_district": "11",
+  "state_senate_district": "21",
+  "state_house_district": "10"
+}

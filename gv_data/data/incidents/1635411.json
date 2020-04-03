@@ -1,0 +1,96 @@
+{
+  "id": 1635411,
+  "url": "https://www.gunviolencearchive.org/incident/1635411",
+  "title": "3-07-2020 Illinois Chicago 7-2",
+  "date": "3-07-2020",
+  "address": "900 block of E 79th St, Chicago, Illinois",
+  "geo": [
+    41.7513,
+    -87.6028
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "age": "36",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "37",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "30",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "29",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "24",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "37",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "32",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Drive-by (car to street, car to car)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "House party / Block Party / Park Party"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot_2020-03-08%207%20shot%20in%20Grand%20Crossing%2C%20suspects%20in%20custody%20after%20Dan%20Ryan%20crash%20police.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot_2020-03-08%207%20shot%20in%20Grand%20Crossing%2C%20suspects%20in%20custody%20after%20Dan%20Ryan%20crash%20police.png",
+      "url": "https://chicago.suntimes.com/crime/2020/3/7/21169077/grand-crossing-gun-violence-suspects-custody-dan-ryan-6-shot-79th"
+    }
+  ],
+  "congressional_district": "1",
+  "state_senate_district": "3",
+  "state_house_district": "5"
+}

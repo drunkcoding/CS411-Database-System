@@ -1,0 +1,96 @@
+{
+  "id": 1588308,
+  "url": "https://www.gunviolencearchive.org/incident/1588308",
+  "title": "1-04-2020 Florida Ocala 4-3",
+  "date": "1-04-2020",
+  "address": "800 block of NW Sixth Terrace, Ocala, Florida",
+  "geo": [
+    29.1943,
+    -82.1439
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "Cortney Graham Sr",
+      "age": "45",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "age": "43",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "19",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "18",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed"
+    },
+    {
+      "type": "subject-suspect",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed"
+    },
+    {
+      "type": "subject-suspect",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot%202020-01-04%20at%202.43.59%20PM.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot%202020-01-04%20at%202.43.59%20PM.png",
+      "url": "https://www.ocala.com/news/20200104/four-injured-in-shooting-at-nw-ocala-site-of-earlier-car-fire"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot%202020-01-05%20at%203.58.45%20PM.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot%202020-01-05%20at%203.58.45%20PM.png",
+      "url": "https://www.ocala.com/news/20200104/one-dead-3-injured-in-shooting-at-nw-ocala-site-of-earlier-car-fire"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1588308-www.clickorlando.com-1578350711.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1588308-www.clickorlando.com-1578350711.png",
+      "url": "https://www.clickorlando.com/news/local/2020/01/06/1-killed-3-wounded-in-ocala-shooting/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot%202020-01-07%20at%203.38.24%20PM.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot%202020-01-07%20at%203.38.24%20PM.png",
+      "url": "https://www.ocala.com/news/20200107/more-details-released-about-fatal-shooting-on-saturday-in-ocala"
+    }
+  ],
+  "congressional_district": "3",
+  "state_senate_district": "8",
+  "state_house_district": "20"
+}

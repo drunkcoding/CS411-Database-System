@@ -1,0 +1,77 @@
+{
+  "id": 1648832,
+  "url": "https://www.gunviolencearchive.org/incident/1648832",
+  "title": "3-30-2020 Pennsylvania Philadelphia 5-1",
+  "date": "3-30-2020",
+  "address": "2000 block of W Harold St, Philadelphia, Pennsylvania",
+  "geo": [
+    39.9946,
+    -75.1678
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "age": "1",
+      "age_group": "child 0-11",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "14",
+      "age_group": "teen 12-17",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "18",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "25",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "42",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Child Involved Incident",
+    "Child injured (not child shooter)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "House party / Block Party / Park Party"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/PA_PHIL_033020.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/PA_PHIL_033020.png",
+      "url": "https://philadelphia.cbslocal.com/2020/03/31/police-5-people-including-boy-juvenile-shot-in-north-philadelphia/"
+    }
+  ],
+  "congressional_district": "3",
+  "state_senate_district": "3",
+  "state_house_district": "181"
+}

@@ -1,0 +1,72 @@
+{
+  "id": 1586839,
+  "url": "https://www.gunviolencearchive.org/incident/1586839",
+  "title": "1-02-2020 New York Brooklyn 4-0",
+  "date": "1-02-2020",
+  "address": "Iglacias Sol De Justicia church, 6120 3rd Ave, Brooklyn, New York",
+  "geo": [
+    40.6412,
+    -74.0219
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "age": "37",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "24",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "42",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "23",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Drive-by (car to street, car to car)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screen%20Shot%202020-01-02%20at%208.40.11%20PM.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screen%20Shot%202020-01-02%20at%208.40.11%20PM.png",
+      "url": "https://twitter.com/NYC_Alerts911/status/1212905792900349954"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1586839-www.nydailynews.com-1578029411.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1586839-www.nydailynews.com-1578029411.png",
+      "url": "https://www.nydailynews.com/new-york/nyc-crime/ny-brooklyn-sunset-park-shooting-20200103-xkdqwwfl5jdlxlhycpgr7pi4gq-story.html"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1586839-nypost.com-1578061805.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1586839-nypost.com-1578061805.png",
+      "url": "https://nypost.com/2020/01/02/four-people-wounded-during-drive-by-shooting-in-brooklyn/"
+    }
+  ],
+  "congressional_district": "7",
+  "state_senate_district": "23",
+  "state_house_district": "51"
+}

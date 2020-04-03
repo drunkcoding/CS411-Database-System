@@ -1,0 +1,129 @@
+{
+  "id": 1599331,
+  "url": "https://www.gunviolencearchive.org/incident/1599331",
+  "title": "1-17-2020 Utah Grantsville 5-1",
+  "date": "1-17-2020",
+  "address": "93 Eastmoor Dr, Grantsville, Utah",
+  "geo": [
+    40.598,
+    -112.431
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "Consuelo Alejandra Colin Haynie",
+      "age": "52",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Alexis Haynie",
+      "age": "15",
+      "age_group": "teen 12-17",
+      "gender": "female",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Mathew Haynie",
+      "age": "14",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Milan Haynie",
+      "age": "12",
+      "age_group": "teen 12-17",
+      "gender": "female",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Colin Loyd Haynie",
+      "age": "50",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "relationship": "family",
+      "name": "Colin Jeffrey \"CJ\" Haynie",
+      "age": "16",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Mass Murder (4+ deceased victims excluding the subject/suspect/perpetrator , one location)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "handgun",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot_2020-01-17%20Police%20investigating%20possible%20quadruple%20homicide%20in%20Grantsville.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot_2020-01-17%20Police%20investigating%20possible%20quadruple%20homicide%20in%20Grantsville.png",
+      "url": "https://www.sltrib.com/news/2020/01/18/police-investigating/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1599331-fox13now.com-1579328108.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1599331-fox13now.com-1579328108.png",
+      "url": "https://fox13now.com/2020/01/17/grantsville-police-4-dead-1-injured-in-apparent-homicide/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1599331-kjzz.com-1579328110.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1599331-kjzz.com-1579328110.png",
+      "url": "https://kjzz.com/news/local/mother-four-children-dead-in-grantsville-shooting"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1599331-kutv.com-1579328112.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1599331-kutv.com-1579328112.png",
+      "url": "https://kutv.com/news/local/mother-four-children-dead-in-grantsville-shooting"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot_2020-01-18%20Boy%20arrested%20after%20shooting%20that%20killed%204%20in%20small%20Utah%20town.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot_2020-01-18%20Boy%20arrested%20after%20shooting%20that%20killed%204%20in%20small%20Utah%20town.png",
+      "url": "https://www.koat.com/article/4-killed-1-wounded-in-utah-shooting-1579344019/30575212"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot_2020-01-18%20Police%20investigating%20quadruple%20homicide%20in%20Grantsville.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot_2020-01-18%20Police%20investigating%20quadruple%20homicide%20in%20Grantsville.png",
+      "url": "https://www.sltrib.com/news/2020/01/18/police-investigating/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1599331-kutv.com-1579560305.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1599331-kutv.com-1579560305.png",
+      "url": "https://kutv.com/news/local/police-search-for-answers-after-3-children-woman-shot-to-death-in-grantsville-home"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot_2020-01-23%20DA%20Teen%20%27methodically%27%20shot%205%20family%20members%20over%205%20hours%20in%20Utah%20home.jpg",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot_2020-01-23%20DA%20Teen%20%27methodically%27%20shot%205%20family%20members%20over%205%20hours%20in%20Utah%20home.jpg",
+      "url": "https://kutv.com/news/local/timeline-01-23-2020"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1599331-www.ksl.com-1579822207.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1599331-www.ksl.com-1579822207.png",
+      "url": "https://www.ksl.com/article/46708370/this-loss-is-almost-unbearable-grantsville-father-speaks-out-about-deadly-family-shooting"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot_2020-01-27%20Bail%20set%20at%20%244%20million%20for%2016-year-old%20boy%20charged%20with%20shooting%2C%20killing%20mom%20and%20siblings.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot_2020-01-27%20Bail%20set%20at%20%244%20million%20for%2016-year-old%20boy%20charged%20with%20shooting%2C%20killing%20mom%20and%20siblings.png",
+      "url": "https://www.ksl.com/article/46709699/grantsville-killings-bail-set-at-4-million-for-16-year-old-boy-charged-with-shooting-killing-mom-and-siblings"
+    }
+  ],
+  "congressional_district": "2",
+  "state_senate_district": "17",
+  "state_house_district": "68"
+}

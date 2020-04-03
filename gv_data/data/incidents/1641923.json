@@ -1,0 +1,62 @@
+{
+  "id": 1641923,
+  "url": "https://www.gunviolencearchive.org/incident/1641923",
+  "title": "3-18-2020 Florida Jacksonville 5-0",
+  "date": "3-18-2020",
+  "address": "Hampton Ridge Apartment, 11501 Harts Rd, Jacksonville, Florida",
+  "geo": [
+    30.4416,
+    -81.6566
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "age": "3",
+      "age_group": "child 0-11",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1641923-www.news4jax.com-1584593105.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1641923-www.news4jax.com-1584593105.png",
+      "url": "https://www.news4jax.com/news/local/2020/03/19/police-1-dead-3-year-old-injured-in-shooting-on-harts-road/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1641923-www.actionnewsjax.com-1584593106.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1641923-www.actionnewsjax.com-1584593106.png",
+      "url": "https://www.actionnewsjax.com/news/local/duval-county/5-shot-including-3-year-old-harts-road/JMRQ36BFIJE2FI7PMY5LIA3NSU/"
+    }
+  ],
+  "congressional_district": "5",
+  "state_senate_district": "6",
+  "state_house_district": "14"
+}

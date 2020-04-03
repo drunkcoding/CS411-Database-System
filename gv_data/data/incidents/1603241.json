@@ -1,0 +1,152 @@
+{
+  "id": 1603241,
+  "url": "https://www.gunviolencearchive.org/incident/1603241",
+  "title": "1-22-2020 Washington Seattle 7-3",
+  "date": "1-22-2020",
+  "address": "McDonalds, 1530 3rd Ave, Seattle, Washington",
+  "geo": [
+    47.6107,
+    -122.338
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "Tanya Jackson",
+      "age": "50",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "age": "55",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "name": "Judah",
+      "age": "9",
+      "age_group": "child 0-11",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "35",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "32",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "34",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "49",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Marquise Latrelle Tolbert",
+      "age": "24",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "William Ray Tolliver",
+      "age": "24",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Jamel Jackson",
+      "age": "21",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured, arrested"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Accidental Shooting",
+    "Accidental Shooting - Death",
+    "Accidental Shooting - Injury",
+    "Stray bullet",
+    "Child Involved Incident",
+    "Child injured (not child shooter)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "Shootout (where VENN diagram of shooters and victims overlap)",
+    "Gang involvement",
+    "Possession of gun by felon or prohibited person",
+    "Assault weapon (AR-15, AK-47, and ALL variants defined by law enforcement)"
+  ],
+  "guns": [
+    {
+      "type": "rifle",
+      "stolen": "unknown"
+    },
+    {
+      "type": "handgun",
+      "stolen": "unknown"
+    },
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1603241-www.kiro7.com-1579746607.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1603241-www.kiro7.com-1579746607.png",
+      "url": "https://www.kiro7.com/news/local/multiple-people-shot-downtown-seattle-police-say/IECNIRBVOZFYTAEJNDDUUQI4QI/?fbclid=IwAR1t6V2FpSL-X9co-XLmf__7zRhnK6dy2wSH8aEwlYksD_dBbKLocF8pEpc"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1603241-www.king5.com-1579746609.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1603241-www.king5.com-1579746609.png",
+      "url": "https://www.king5.com/article/news/crime/seattle-police-downtown-shooting/281-e597dc9b-4942-4335-be08-fa3f25e60a6f"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1603241-komonews.com-1579746610.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1603241-komonews.com-1579746610.png",
+      "url": "https://komonews.com/news/local/suspect-sought-after-several-people-hurt-during-shooting-in-downtown-seattle"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1603241-katu.com-1579803306.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1603241-katu.com-1579803306.png",
+      "url": "https://katu.com/news/nation-world/suspect-sought-after-several-people-hurt-during-shooting-in-downtown-seattle"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1603241-www.seattletimes.com-1579846512.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1603241-www.seattletimes.com-1579846512.png",
+      "url": "https://www.seattletimes.com/seattle-news/crime/20-shell-casings-from-three-guns-found-after-third-and-pine-shooting-amid-uptick-in-gang-activity/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot_2020-02-01%20Men%20wanted%20by%20police%20in%20Seattle%20shooting%20arrested%20in%20Nevada.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot_2020-02-01%20Men%20wanted%20by%20police%20in%20Seattle%20shooting%20arrested%20in%20Nevada.png",
+      "url": "https://elkodaily.com/news/national/men-wanted-by-police-in-seattle-shooting-arrested-in-nevada/article_79359dd0-e55d-5ebd-93a2-1b2d0ada3bec.html"
+    }
+  ],
+  "congressional_district": "7",
+  "state_senate_district": "43",
+  "state_house_district": "43"
+}

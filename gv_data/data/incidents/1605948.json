@@ -1,0 +1,92 @@
+{
+  "id": 1605948,
+  "url": "https://www.gunviolencearchive.org/incident/1605948",
+  "title": "1-26-2020 Missouri Cape Girardeau 5-3",
+  "date": "1-26-2020",
+  "address": "The River Banquet Center, 631 S Sprigg St, Cape Girardeau, Missouri",
+  "geo": [
+    37.2949,
+    -89.5284
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Myron Andrews",
+      "age": "25",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Marquelis Andrews",
+      "age": "23",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Jaquavion Anderson",
+      "age": "25",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/screencapture-kmov-news-police-injured-in-missouri-banquet-hall-shooting-article-86cf6a3d-300e-545e-bf3a-ebe667355b32-html-2020-01-26-15_49_17.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/screencapture-kmov-news-police-injured-in-missouri-banquet-hall-shooting-article-86cf6a3d-300e-545e-bf3a-ebe667355b32-html-2020-01-26-15_49_17.png",
+      "url": "https://www.kmov.com/news/police-injured-in-missouri-banquet-hall-shooting/article_86cf6a3d-300e-545e-bf3a-ebe667355b32.html"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/screencapture-kfvs12-2020-01-26-injured-overnight-shooting-south-sprigg-st-cape-girardeau-mo-2020-01-26-15_50_32.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/screencapture-kfvs12-2020-01-26-injured-overnight-shooting-south-sprigg-st-cape-girardeau-mo-2020-01-26-15_50_32.png",
+      "url": "https://www.kfvs12.com/2020/01/26/injured-overnight-shooting-south-sprigg-st-cape-girardeau-mo/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1605948-www.wpsdlocal6.com-1581385505.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1605948-www.wpsdlocal6.com-1581385505.png",
+      "url": "https://www.wpsdlocal6.com/news/two-shooting-suspects-sought-in-cape-girardeau-missouri/article_d536a114-4c56-11ea-8c75-cf301ed03a51.html"
+    }
+  ],
+  "congressional_district": "8",
+  "state_senate_district": "27",
+  "state_house_district": "147"
+}

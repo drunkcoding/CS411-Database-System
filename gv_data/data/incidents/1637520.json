@@ -1,0 +1,72 @@
+{
+  "id": 1637520,
+  "url": "https://www.gunviolencearchive.org/incident/1637520",
+  "title": "3-10-2020 Pennsylvania Chester 4-0",
+  "date": "3-10-2020",
+  "address": "200 block of Broomall Street, Chester, Pennsylvania",
+  "geo": [
+    39.839,
+    -75.3743
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "Edward Harmon",
+      "age": "15",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Tayvonne Avery",
+      "age": "15",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "injured"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot%202020-03-10%20at%206.21.42%20PM.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot%202020-03-10%20at%206.21.42%20PM.png",
+      "url": "https://6abc.com/multiple-people-shot-in-chester-police/6000818/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/screencapture-delcotimes-news-two-shot-dead-two-wounded-near-chester-basketball-court-article-8252d8ea-6313-11ea-8238-eb540e4aae26-html-2020-03-10-18_40_21.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/screencapture-delcotimes-news-two-shot-dead-two-wounded-near-chester-basketball-court-article-8252d8ea-6313-11ea-8238-eb540e4aae26-html-2020-03-10-18_40_21.png",
+      "url": "https://www.delcotimes.com/news/two-shot-dead-two-wounded-near-chester-basketball-court/article_8252d8ea-6313-11ea-8238-eb540e4aae26.html"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1637520-philadelphia.cbslocal.com-1583899208.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1637520-philadelphia.cbslocal.com-1583899208.png",
+      "url": "https://philadelphia.cbslocal.com/2020/03/10/police-two-15-year-old-boys-killed-2-other-juveniles-injured-in-chester-quadruple-shooting/"
+    }
+  ],
+  "congressional_district": "5",
+  "state_senate_district": "9",
+  "state_house_district": "159"
+}

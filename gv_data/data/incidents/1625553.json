@@ -1,0 +1,87 @@
+{
+  "id": 1625553,
+  "url": "https://www.gunviolencearchive.org/incident/1625553",
+  "title": "2-20-2020 Idaho Caldwell 4-1",
+  "date": "2-20-2020",
+  "address": "Portstewart Senior Community, 4321 S 10th Ave, Caldwell, Idaho",
+  "geo": [
+    43.6335,
+    -116.693
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "participant_characteristics": [
+        "Law Enforcement"
+      ],
+      "name": "Officer",
+      "age_group": "adult 18+",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "name": "Darline Queen",
+      "age": "76",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Juanita Pressler",
+      "age": "79",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "name": "Kathleen Schlemmer",
+      "age": "58",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Roger Nordberg",
+      "age": "87",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Suicide^",
+    "Murder/Suicide",
+    "Officer Involved Incident",
+    "Officer Involved Shooting - Officer shot",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://www.idahostatesman.com/news/local/community/canyon-county/article240495336.html"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1625553-www.ktvb.com-1582259427.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1625553-www.ktvb.com-1582259427.png",
+      "url": "https://www.ktvb.com/article/news/crime/police-multiple-victims-in-caldwell-officer-involved-shooting-suspect-dead/277-ec20fd88-3a39-4b89-858d-c90320e2dc63"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1625553-www.ktvb.com-1582344011.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1625553-www.ktvb.com-1582344011.png",
+      "url": "https://www.ktvb.com/article/news/crime/police-3-shooting-victims-in-stable-condition-after-caldwell-murder-suicide/277-fd5be1e7-0710-42cc-ab6f-5352a747b5dd"
+    }
+  ],
+  "congressional_district": "1",
+  "state_senate_district": "10",
+  "state_house_district": "10"
+}

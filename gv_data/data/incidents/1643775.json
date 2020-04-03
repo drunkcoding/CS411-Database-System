@@ -1,0 +1,112 @@
+{
+  "id": 1643775,
+  "url": "https://www.gunviolencearchive.org/incident/1643775",
+  "title": "3-22-2020 South Carolina Hanahan 4-6",
+  "date": "3-22-2020",
+  "address": "Edinburgh Drive, Hanahan, South Carolina",
+  "geo": [
+    32.9072,
+    -80.0025
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "age": "16",
+      "age_group": "teen 12-17",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Willie Young",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "James Howell",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "age": "17",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Shane Zachary Wayne Driggers",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Andrew Miley",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "Drug involvement",
+    "Possession of gun by felon or prohibited person"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot%202020-03-22%20at%2010.43.42%20AM.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot%202020-03-22%20at%2010.43.42%20AM.png",
+      "url": "https://www.live5news.com/2020/03/22/police-injured-hanahan-shooting/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot%202020-03-25%20at%2011.51.43%20AM.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot%202020-03-25%20at%2011.51.43%20AM.png",
+      "url": "https://abcnews4.com/features/crime-watch/4-arrested-and-charged-for-edinburgh-drive-shooting"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1643775-www.live5news.com-1585792814.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1643775-www.live5news.com-1585792814.png",
+      "url": "https://www.live5news.com/2020/04/01/police-arrest-boy-hanahan-shooting-that-injured/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot%202020-04-02%20at%201.40.56%20PM.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot%202020-04-02%20at%201.40.56%20PM.png",
+      "url": "https://www.live5news.com/2020/04/02/police-arrest-th-suspect-shooting-that-injured/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot%202020-04-02%20at%201.45.32%20PM.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot%202020-04-02%20at%201.45.32%20PM.png",
+      "url": "https://www.live5news.com/2020/03/25/five-people-arrested-connection-hanahan-shooting-that-injured-four/"
+    }
+  ],
+  "congressional_district": "1",
+  "state_senate_district": "37",
+  "state_house_district": "99"
+}

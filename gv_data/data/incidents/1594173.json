@@ -1,0 +1,76 @@
+{
+  "id": 1594173,
+  "url": "https://www.gunviolencearchive.org/incident/1594173",
+  "title": "1-11-2020 Colorado Aurora 5-1",
+  "date": "1-11-2020",
+  "address": "Courtyards at Buckley, 17158 E Adriatic Place, Aurora, Colorado",
+  "geo": [
+    39.6765,
+    -104.787
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "age_group": "teen 12-17",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "teen 12-17",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "age": "16",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "House party / Block Party / Park Party"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1594173-kdvr.com-1578846607.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1594173-kdvr.com-1578846607.png",
+      "url": "https://kdvr.com/2020/01/12/5-shot-overnight-in-aurora-at-least-one-suspect-at-large/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1594173-www.thedenverchannel.com-1578980707.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1594173-www.thedenverchannel.com-1578980707.png",
+      "url": "https://www.thedenverchannel.com/news/crime/aurora-police-arrest-16-year-old-boy-in-shooting-that-left-5-injured-over-the-weekend"
+    }
+  ],
+  "congressional_district": "6",
+  "state_senate_district": "28",
+  "state_house_district": "40"
+}

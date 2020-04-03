@@ -1,0 +1,139 @@
+{
+  "id": 1631040,
+  "url": "https://www.gunviolencearchive.org/incident/1631040",
+  "title": "2-29-2020 Missouri Kansas City 5-5",
+  "date": "2-29-2020",
+  "address": "Throwback KC nightclub, 510 Westport Rd, Kansas City, Missouri",
+  "geo": [
+    39.0526,
+    -94.5923
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "Devin Harris",
+      "age": "17",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Devon L. Carter",
+      "age": "25",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Ernest P. Jones",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Lavont Carter",
+      "age": "18",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Christien Woody",
+      "age": "20",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Lamon O. Williams",
+      "age": "25",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Officer Involved Incident",
+    "Officer Involved Shooting - Shots fired, no injury",
+    "Drive-by (car to street, car to car)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "Bar/club incident - in or around establishment"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/screencapture-kctv5-news-local-news-kc-police-investigating-overnight-shooting-after-injured-dead-near-westport-article-5ab8e8e4-5ae2-11ea-872f-63b5c7b072ab-html-2020-02-29-10_34_35.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/screencapture-kctv5-news-local-news-kc-police-investigating-overnight-shooting-after-injured-dead-near-westport-article-5ab8e8e4-5ae2-11ea-872f-63b5c7b072ab-html-2020-02-29-10_34_35.png",
+      "url": "https://www.kctv5.com/news/local_news/kc-police-investigating-overnight-shooting-after-injured-dead-near-westport/article_5ab8e8e4-5ae2-11ea-872f-63b5c7b072ab.html"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/screencapture-kcur-org-post-1-person-dead-4-wounded-late-night-shooting-westport-2020-02-29-10_35_43.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/screencapture-kcur-org-post-1-person-dead-4-wounded-late-night-shooting-westport-2020-02-29-10_35_43.png",
+      "url": "https://www.kcur.org/post/1-person-dead-4-wounded-late-night-shooting-westport#stream/0"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1631040-www.wibw.com-1583099109.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1631040-www.wibw.com-1583099109.png",
+      "url": "https://www.wibw.com/content/news/Police-arrest-man-in-deadly-weekend-KC-shooting--568372741.html"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1631040-fox4kc.com-1583198104.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1631040-fox4kc.com-1583198104.png",
+      "url": "https://fox4kc.com/news/police-identify-victim-killed-in-westport-shooting-still-looking-for-suspects/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot%202020-03-13%20at%2012.16.37%20PM.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot%202020-03-13%20at%2012.16.37%20PM.png",
+      "url": "https://www.kmbc.com/article/second-man-charged-in-westport-shooting-that-killed-1-injured-4-people-earnest-jones-junior-kansas-city-missouri/31477291#"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1631040-fox4kc.com-1585862104.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1631040-fox4kc.com-1585862104.png",
+      "url": "https://fox4kc.com/news/three-more-men-charged-in-westport-shooting-that-left-17-year-old-dead/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/screencapture-kansascity-news-local-crime-article241724331-html-2020-04-02-22_29_52.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/screencapture-kansascity-news-local-crime-article241724331-html-2020-04-02-22_29_52.png",
+      "url": "https://www.kansascity.com/news/local/crime/article241724331.html"
+    }
+  ],
+  "congressional_district": "5",
+  "state_senate_district": "7",
+  "state_house_district": "24"
+}

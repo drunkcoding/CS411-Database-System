@@ -1,0 +1,98 @@
+{
+  "id": 1635796,
+  "url": "https://www.gunviolencearchive.org/incident/1635796",
+  "title": "3-08-2020 Maryland Rosedale 6-0",
+  "date": "3-08-2020",
+  "address": "Thriple Thread Dance, 6255 Kenwood Ave, Rosedale, Maryland",
+  "geo": [
+    39.3416,
+    -76.5064
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "Rickie Forehand",
+      "age": "13",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "age": "12",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "12",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "14",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "14",
+      "age_group": "teen 12-17",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "19",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "House party / Block Party / Park Party"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/screencapture-thecount-2020-03-08-kenwood-shopping-center-shooting-rosedale-2020-03-08-08_53_01.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/screencapture-thecount-2020-03-08-kenwood-shopping-center-shooting-rosedale-2020-03-08-08_53_01.png",
+      "url": "https://thecount.com/2020/03/08/kenwood-shopping-center-shooting-rosedale/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1635796-baltimore.cbslocal.com-1583706605.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1635796-baltimore.cbslocal.com-1583706605.png",
+      "url": "https://baltimore.cbslocal.com/2020/03/08/5-injured-and-1-killed-in-rosedale-overnight-shooting/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1635796-www.baltimorecountymd.gov-1583706606.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1635796-www.baltimorecountymd.gov-1583706606.png",
+      "url": "https://www.baltimorecountymd.gov/News/PoliceNews/iWatch/onedeadfiveinjuredinovernightshooting"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1635796-www.baltimoresun.com-1583706608.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1635796-www.baltimoresun.com-1583706608.png",
+      "url": "https://www.baltimoresun.com/news/crime/bs-md-co-cr-rosedale-shopping-center-shooting-20200308-vttdw3p65jbudjsezhvrbijy3i-story.html"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1635796-foxbaltimore.com-1583711104.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1635796-foxbaltimore.com-1583711104.png",
+      "url": "https://foxbaltimore.com/news/local/report-of-multiple-people-shot-1-killed-at-baltimore-county-shopping-center"
+    }
+  ],
+  "congressional_district": "2",
+  "state_senate_district": "8",
+  "state_house_district": "8"
+}

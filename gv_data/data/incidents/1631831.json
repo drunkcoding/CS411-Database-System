@@ -1,0 +1,83 @@
+{
+  "id": 1631831,
+  "url": "https://www.gunviolencearchive.org/incident/1631831",
+  "title": "2-29-2020 Colorado Brighton 5-3",
+  "date": "2-29-2020",
+  "address": "Starr Ln and County Rd 2, Brighton, Colorado",
+  "geo": [
+    40.0004,
+    -104.784
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed"
+    },
+    {
+      "type": "subject-suspect",
+      "age": "17",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    },
+    {
+      "type": "subject-suspect",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Drive-by (car to street, car to car)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/CO_Brighton_022920a.PNG",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/CO_Brighton_022920a.PNG",
+      "url": "https://www.denverpost.com/2020/03/01/brighton-shooting-starr-lane-weld-county-road-2/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1631831-www.denverpost.com-1583637306.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1631831-www.denverpost.com-1583637306.png",
+      "url": "https://www.denverpost.com/2020/03/07/suspect-weld-county-shooting-five-injured/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1631831-www.9news.com-1584153903.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1631831-www.9news.com-1584153903.png",
+      "url": "https://www.9news.com/article/news/crime/weld-county-shooting-5-injured-arrest/73-4db91d68-7376-4eac-a9d5-f658a37b5f5f"
+    }
+  ],
+  "congressional_district": "4",
+  "state_senate_district": "13",
+  "state_house_district": "63"
+}

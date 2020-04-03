@@ -1,0 +1,68 @@
+{
+  "id": 1588919,
+  "url": "https://www.gunviolencearchive.org/incident/1588919",
+  "title": "1-05-2020 Georgia Atlanta 4-1",
+  "date": "1-05-2020",
+  "address": "Compound, 1008 Brady Ave NW, Atlanta, Georgia",
+  "geo": [
+    33.7826,
+    -84.4144
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Accidental Shooting",
+    "Accidental Shooting - Injury",
+    "Accidental Shooting at a Business",
+    "Stray bullet",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "Bar/club incident - in or around establishment"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1588919-www.ajc.com-1578262506.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1588919-www.ajc.com-1578262506.png",
+      "url": "https://www.ajc.com/news/breaking-news/injured-shooting-near-atlanta-nightclub-gunman-sought/YHRsccNcUJgohfQkxk8D2N/"
+    }
+  ],
+  "congressional_district": "5",
+  "state_senate_district": "39",
+  "state_house_district": "56"
+}

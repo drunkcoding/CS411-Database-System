@@ -1,0 +1,74 @@
+{
+  "id": 1639413,
+  "url": "https://www.gunviolencearchive.org/incident/1639413",
+  "title": "3-13-2020 Illinois Rockford 4-1",
+  "date": "3-13-2020",
+  "address": "Auburn Manor Apartments, 4104 Auburn St, Rockford, Illinois",
+  "geo": [
+    42.2882,
+    -89.123
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "age": "39",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "22",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "26",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "37",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "name": "Marcus Carter",
+      "age": "36",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1639413-wrex.com-1584167404.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1639413-wrex.com-1584167404.png",
+      "url": "https://wrex.com/2020/03/13/4-people-shot-at-auburn-manor-suspect-on-the-loose/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot_2020-03-14%20Rockford%20man%20charged%20in%20Auburn%20Manor%20shooting.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot_2020-03-14%20Rockford%20man%20charged%20in%20Auburn%20Manor%20shooting.png",
+      "url": "https://www.rrstar.com/news/20200313/rockford-man-charged-in-auburn-manor-shooting"
+    }
+  ],
+  "congressional_district": "17",
+  "state_senate_district": "34",
+  "state_house_district": "67"
+}

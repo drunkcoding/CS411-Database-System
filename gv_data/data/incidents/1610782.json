@@ -1,0 +1,61 @@
+{
+  "id": 1610782,
+  "url": "https://www.gunviolencearchive.org/incident/1610782",
+  "title": "1-31-2020 Louisiana Shreveport 4-0",
+  "date": "1-31-2020",
+  "address": "Northwood II Apartments, 2000 Grimmett Dr, Shreveport, Louisiana",
+  "geo": [
+    32.5429,
+    -93.7692
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "age": "15",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "16",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "17",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "15",
+      "age_group": "teen 12-17",
+      "gender": "male",
+      "status": "injured"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1610782-www.arklatexhomepage.com-1580540414.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1610782-www.arklatexhomepage.com-1580540414.png",
+      "url": "https://www.arklatexhomepage.com/news/breaking-news/spd-4-teens-shot-in-n-shreveport/"
+    }
+  ],
+  "congressional_district": "4",
+  "state_senate_district": "39",
+  "state_house_district": "4"
+}

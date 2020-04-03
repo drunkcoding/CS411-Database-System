@@ -1,0 +1,100 @@
+{
+  "id": 1622406,
+  "url": "https://www.gunviolencearchive.org/incident/1622406",
+  "title": "2-16-2020 Connecticut Hartford 5-1",
+  "date": "2-16-2020",
+  "address": "Majestic Lounge, 451 Franklin Ave, Hartford, Connecticut",
+  "geo": [
+    41.7369,
+    -72.6756
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "Marquis Treadwell",
+      "age": "28",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "age": "30",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "34",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "30",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age": "19",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "relationship": "acquaintance",
+      "name": "Joshua Saez",
+      "age": "30",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured, arrested"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "Bar/club incident - in or around establishment"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/screencapture-bostonglobe-2020-02-16-nation-1-dead-4-wounded-connecticut-club-shooting-police-say-2020-02-16-04_02_17.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/screencapture-bostonglobe-2020-02-16-nation-1-dead-4-wounded-connecticut-club-shooting-police-say-2020-02-16-04_02_17.png",
+      "url": "https://www.bostonglobe.com/2020/02/16/nation/1-dead-4-wounded-connecticut-club-shooting-police-say/?camp=bg:brief:rss:feedly&rss_id=feedly_rss_brief"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/screencapture-wfsb-news-shot-dead-at-south-end-hartford-nightclub-article-ffc26834-50a5-11ea-94cd-0ba90c8517b2-html-2020-02-16-05_35_23.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/screencapture-wfsb-news-shot-dead-at-south-end-hartford-nightclub-article-ffc26834-50a5-11ea-94cd-0ba90c8517b2-html-2020-02-16-05_35_23.png",
+      "url": "https://www.wfsb.com/news/shot-dead-at-south-end-hartford-nightclub/article_ffc26834-50a5-11ea-94cd-0ba90c8517b2.html"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/screencapture-wfsb-news-shot-dead-at-south-end-hartford-nightclub-article-ffc26834-50a5-11ea-94cd-0ba90c8517b2-html-2020-02-16-08_49_31.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/screencapture-wfsb-news-shot-dead-at-south-end-hartford-nightclub-article-ffc26834-50a5-11ea-94cd-0ba90c8517b2-html-2020-02-16-08_49_31.png",
+      "url": "https://www.wfsb.com/news/shot-dead-at-south-end-hartford-nightclub/article_ffc26834-50a5-11ea-94cd-0ba90c8517b2.html"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/screencapture-wwlp-news-connecticut-police-identify-man-killed-in-hartford-nightclub-shooting-2020-02-17-16_38_57.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/screencapture-wwlp-news-connecticut-police-identify-man-killed-in-hartford-nightclub-shooting-2020-02-17-16_38_57.png",
+      "url": "https://www.wwlp.com/news/connecticut/police-identify-man-killed-in-hartford-nightclub-shooting/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/screencapture-wtnh-news-connecticut-hartford-hartford-police-arrest-identify-suspect-in-majestic-lounge-shooting-2020-02-18-05_59_50.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/screencapture-wtnh-news-connecticut-hartford-hartford-police-arrest-identify-suspect-in-majestic-lounge-shooting-2020-02-18-05_59_50.png",
+      "url": "https://www.wtnh.com/news/connecticut/hartford/hartford-police-arrest-identify-suspect-in-majestic-lounge-shooting/"
+    }
+  ],
+  "congressional_district": "1",
+  "state_senate_district": "1",
+  "state_house_district": "6"
+}

@@ -1,0 +1,58 @@
+{
+  "id": 1625787,
+  "url": "https://www.gunviolencearchive.org/incident/1625787",
+  "title": "2-20-2020 North Carolina Greensboro 4-0",
+  "date": "2-20-2020",
+  "address": "Martin Luther King Jr Ave and Randolph Dr, Greensboro, North Carolina",
+  "geo": [
+    36.0562,
+    -79.7845
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "gender": "male",
+      "status": "injured"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1625787-www.greensboro.com-1582275609.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1625787-www.greensboro.com-1582275609.png",
+      "url": "https://www.greensboro.com/news/crime/injured-in-greensboro-shooting/article_a0dbc22e-636a-5533-aec2-783cccdd0dd8.html"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1625787-www.wfmynews2.com-1582275611.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1625787-www.wfmynews2.com-1582275611.png",
+      "url": "https://www.wfmynews2.com/article/news/local/shooting-greensboro-crime-shooting/83-f0f5d013-92a1-4931-895b-629a8627820e"
+    }
+  ],
+  "congressional_district": "13",
+  "state_senate_district": "28",
+  "state_house_district": "61"
+}
