@@ -1,12 +1,10 @@
 import json
 import pymysql
+import db_helper 
 
-pymysql.install_as_MySQLdb()
+db_conn = pymysql.connect(host='10.10.0.56', user='root', password='qrwe1423', db='antientropy_cs411', charset='utf8')
 
-with open('1649473.json') as json_file:
-    data = json.load(json_file)
-
-def st_gunviolence(data)
+def st_gunviolence(db_conn, data):
     id = data["id"]
     url = data["url"]
     title = data["title"]
@@ -17,11 +15,32 @@ def st_gunviolence(data)
     state_id = data["congressional_district"]
     city_id = data["state_senate_district"] 
 
+    sql = "INSERT INTO 'gunviolence_gunviolence'\
+                       (id, title, url, state_id, city_id, latitude, longtitude, address, \
+                        date, created_at, updated_at)\
+                  VALUES (%s, %s, %s, %s, %s, %s, %s, %s, now(), now())"
+    try:
+        with db_conn.cursor() as cursor:
+            cursor.execute(sql, (id, title, url, state_id, city_id, latitude, longtitude, address, date))
 
-    sql = "INSERT INTO 'gunviolence' (id, url, state_id, city_id,\ 
-                                      latitude, longtitude, address, date)  
+        db_conn.commit()
+    except:
+        print ("db error")
+
+def st_incidentchar(db_conn, data):
+    id = data["id"]
+    state_id = data["congressional_district"]
+    city_id = data["state_senate_district"] 
+
+    for idx in data["characteristics"]:
+        sql = "INSERT INTO 'gunviolence_incidentcharacteristic'\
+                    (characteristic, count, city_id, state_id, created_at, updated_at)\
+               VALUES (%s, %s, %s, %s, %s, %s,)
+        
+    
+
+with open('1649473.json') as json_file:
+    data = json.load(json_file)
 
 
-
-for idx in data.items():
-    print ("-> %s" % idx[0])
+st_gunviolence(data)

@@ -1,0 +1,92 @@
+{
+  "id": 1649473,
+  "url": "https://www.gunviolencearchive.org/incident/1649473",
+  "title": "3-31-2020 Georgia Macon 4-1",
+  "date": "3-31-2020",
+  "address": "571 Moreland Ave, Macon, Georgia",
+  "geo": [
+    32.7958,
+    -83.6458
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "James Samuels",
+      "age": "69",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Janet Samuels",
+      "age": "67",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Lachesta Samuels",
+      "age": "47",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "relationship": "mass shooting - perp knows victims",
+      "name": "Cesar Crockett",
+      "age": "29",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "unharmed, arrested"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Officer Involved Incident",
+    "Officer Involved Incident - Weapon involved but no shots fired",
+    "Officer Involved Shooting - subject/suspect/perpetrator surrender at standoff",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "Domestic Violence"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1649473-wgxa.tv-1585713618.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1649473-wgxa.tv-1585713618.png",
+      "url": "https://wgxa.tv/news/local/at-least-three-people-found-dead-inside-home-on-moreland-avenue"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1649473-www.13wmaz.com-1585713619.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1649473-www.13wmaz.com-1585713619.png",
+      "url": "https://www.13wmaz.com/article/news/local/coroner-3-found-dead-in-macon-house/93-5e620eb5-d8ba-4e80-92d2-193a63d608f9"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1649473-www.abcactionnews.com-1585780204.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1649473-www.abcactionnews.com-1585780204.png",
+      "url": "https://www.abcactionnews.com/news/region-hillsborough/high-speed-chase-involving-amber-alert-suspect-leads-to-standoff-on-i-4-exit-ramp"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1649473-www.wyff4.com-1585792835.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1649473-www.wyff4.com-1585792835.png",
+      "url": "https://www.wyff4.com/article/triple-homicide-suspect-caesar-crockett-from-amber-alert-taken-into-custody-in-florida-police-say/32004251"
+    }
+  ],
+  "congressional_district": "2",
+  "state_senate_district": "26",
+  "state_house_district": "143"
+}

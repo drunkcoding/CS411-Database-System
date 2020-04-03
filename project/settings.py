@@ -103,9 +103,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'antientropy_cs411',
-        'USER': 'antientropy_cs411',
-        'PASSWORD': "I0t$$Gh#&TYkLniNcedbx4",
-        'HOST': '127.0.0.1',
+        'USER': 'root',
+        'PASSWORD': 'qrwe1423',
+        'HOST': '10.10.0.56',
         'PORT': '3306',
     }
 }
