@@ -98,18 +98,16 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # thtps://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'antientropy_cs411',
-        'USER': 'root',
+        'NAME': 'sean',
+        'USER': 'sean',
         'PASSWORD': 'qrwe1423',
         'HOST': '10.10.0.56',
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

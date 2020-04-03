@@ -34,8 +34,8 @@ def st_incidentchar(db_conn, data):
 
     for idx in data["characteristics"]:
         sql = "INSERT INTO 'gunviolence_incidentcharacteristic'\
-                    (characteristic, count, city_id, state_id, created_at, updated_at)\
-               VALUES (%s, %s, %s, %s, %s, %s,)
+                      (gv_id, characteristic, count, city_id, state_id, created_at, updated_at)\
+               VALUES (%s, 
         
     
 
