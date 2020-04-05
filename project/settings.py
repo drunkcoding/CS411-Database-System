@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'jquery',
     'djangoformsetjs',
     'gunviolence',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

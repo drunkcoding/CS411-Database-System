@@ -3,6 +3,8 @@
 
 {% block content %}
 
+{% load widget_tweaks %}
+
 <style>
 	body { margin: 0; padding: 0; }
   #map { position: absolute; top: 0; bottom: 0; width: 100%; }
@@ -14,15 +16,26 @@
       <div class="col pr-0">
         <div class="card overflow-auto">
           <div class="card-body">
+						<div class="container">
+
+							<p>Input data by clicking a city or a state in the map</p>
+
             <form id="incident_form" action="{% url 'save_incident_form' %}" method="post">{% csrf_token %}
-              {{ incident_form.as_ul }}
+              <!-- {{ incident_form.as_ul }} -->
+							{% for field in incident_form %}
+							<div class="form-group">
+								{{ field.label_tag}}
+								{% render_field field class="form-control" %}
+							</div>
+							{% endfor %}
               <button type="submit">Submit</button>
             </form>
-            <form id="characteristic_formset" action="{% url 'save_characteristic_formset' %}" method="post">{% csrf_token %}
+						</div>
+						<form id="characteristic_formset" action="{% url 'save_characteristic_formset' %}" method="post">{% csrf_token %}
               {% include 'characteristic_formset.html' %}
               <button type="submit">Submit</button>
             </form>
-            <form id="gun_formset" action="{% url 'save_gun_formset' %}" method="post">{% csrf_token %}
+						<form id="gun_formset" action="{% url 'save_gun_formset' %}" method="post">{% csrf_token %}
               {% include 'gun_formset.html' %}
               <button type="submit">Submit</button>
             </form>
@@ -47,7 +60,7 @@
     </div>
   </div>
 </div>
- 
+
 {% endblock %}
 
 {% block scripts %}
@@ -86,7 +99,7 @@
       $("#id_state").val(e.features[0].properties.NAME);
       console.log(e.features[0].properties);
     });
-  });  
+  });
 
   $(document).ready(function() {
     $("#id_state").prop("readonly", true);
