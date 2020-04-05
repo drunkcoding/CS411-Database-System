@@ -8,7 +8,7 @@
       <div class="col-2 pr-0">
         <div class="row">
           <div class="col pr-0">
-            <div class="card">
+            <div class="card" style="height: 20vh">
               <div class="card-body">
                 <h4 class="text-center">Total Killed</h4>
                 <h2 class="text-center red">{% if total_count %} {{ total_count.total_killed }} {% else %} -- {% endif %}</h2>
@@ -20,7 +20,7 @@
         </div>
         <div class="row">
           <div class="col pr-0">
-            <div class="card">
+            <div class="card" style="height: 40vh">
               <div class="card-body">
                 <div class="card-title text-center">People Harmed by State</div>
               </div>
@@ -36,10 +36,10 @@
         <!-- Date Range Selection -->
         <div class="row">
           <div class="col pr-0">
-            <div class="card">
+            <div class="card" style="height: 25vh">
               <div class="card-body">
                 <form method="post" action="" name='dateform'> {% csrf_token %}
-                  {{ date_form.as_table }}
+                  {{ date_form.as_ul }}
                   <input type="submit" value="Submit" name="querydate"/>
                 </form>                    
               </div>
@@ -57,6 +57,8 @@
       </div>             
 
     </div>
+
+    {% include "import_form.html" %}
 {% endblock %}
 
 {% block scripts %}
@@ -96,20 +98,24 @@ function alterFunc() {alert("a")}
       {
         'id': 'states-layer',
         'source': 'states',
-        'maxzoom': 9,
         'type': 'fill',
+        'maxzoom': 10,
         'paint': {
             'fill-color': [
                 'interpolate',
                 ['linear'],
                 ['get', 'involve'],
-                {{state_min}},
+                {% if state_min and state_max and state_min < state_max %} {{state_min}}, 
+                {% else %} 0,
+                {% endif %}
                 ['to-color', '#eff3ff'],
-                {{state_max}},
+                {% if state_min and state_max and state_min < state_max %} {{state_max}}, 
+                {% else %} 1,
+                {% endif %}
                 ['to-color', '#08519c']
             ],
             'fill-opacity': [
-                'interpolate',['linear'],['zoom'],0,1,9,0
+                'interpolate',['linear'],['zoom'],0,1,10,0
             ]
         }
       },
@@ -132,9 +138,13 @@ function alterFunc() {alert("a")}
                 'interpolate',
                 ['linear'],
                 ['get', 'involve'],
-                {{case_min}},
+                {% if case_min and case_max and case_min < case_max %} {{case_min}}, 
+                {% else %} 0,
+                {% endif %}
                 ['to-color', '#eff3ff'],
-                {{case_max}},
+                {% if case_min and case_max and case_min < case_max %} {{case_max}}, 
+                {% else %} 1,
+                {% endif %}
                 ['to-color', '#08519c']
             ],
             'circle-stroke-color': 'white',
@@ -147,27 +157,22 @@ function alterFunc() {alert("a")}
       'waterway-label'
   );
 
-  /*    
+  
   map.on('click', 'gunviolence-point', function(e) {
     console.log("gunviolence-point");
-    window.location.href = e.features[0].properties.source_url;
-  });
-  */
-
-  map.on('dblclick', 'gunviolence-point', function(e) {
-    console.log("gunviolence-del");
-
+    var incident_id = e.features[0].properties.incident_id;
     $.ajax({
         type: "POST",
-        url: "{% url 'delete_incident' %}",
+        url: "{% url 'save_incident_id' %}",
         dataType: "json",
         data: {
-            "incident_id": e.features[0].properties.incident_id,
+            "incident_id": incident_id,
         },
         success: function(data){
-            console.log("success");
-            console.log(data);
-            location.reload(true);
+            console.log("success save_incident_id");
+            if (data.Retcode == 0) {
+              location.reload(true);  
+            }
         },
         failure: function(data){
             console.log("failure");
@@ -175,7 +180,24 @@ function alterFunc() {alert("a")}
         },
     });
   });
+  
+  map.on('click', 'states-layer', function (e) {
+    console.log("states-layer");
+      $("#import_form #id_latitude").val(e.lngLat.toArray()[1]);
+      $("#import_form #id_longitude").val(e.lngLat.toArray()[0]);
+      $("#import_form #id_state").val(e.features[0].properties.NAME);
+      $('#import_form').show()
+      $('#button-update').hide()
+      $('#button-delete').hide()
+      $('#button-show').show()
 
+      $('body, html').animate({
+        scrollTop: $("#import_form").offset().top
+      }, 600);
+      console.log(e.features[0].properties);
+  });
+
+  /*
   map.on('click', 'states-layer', function(e) {
     console.log("click on states-layer");
     var state = e.features[0].properties.NAME;
@@ -190,6 +212,7 @@ function alterFunc() {alert("a")}
   map.on('mouseleave', 'states-layer', function() {
     map.getCanvas().style.cursor = '';
   });
+  */
 
   map.on('zoomend', function() {
           var features = map.queryRenderedFeatures({layers:['gunviolence-point']});

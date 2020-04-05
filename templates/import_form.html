@@ -1,0 +1,109 @@
+<div class="row" id="import_form">
+<form>
+<div class="row">
+    <div class="col pr-0"> 
+        <div class="card overflow-auto" style="height: 85vh">
+        <div class="card-body">
+            <form id="incident_form">
+            <h3> Incident Info</h3>
+            {{ incident_form.as_ul }}
+            </form>
+        </div>
+        </div>
+    </div>
+    <div class="col pr-0"> 
+        <div class="card overflow-auto" style="height: 85vh">
+        <div class="card-body">
+            {% include 'characteristics.html' %}
+        </div>
+        </div>
+    </div>
+    <div class="col pr-0"> 
+        <div class="card overflow-auto" style="height: 85vh">
+        <div class="card-body">
+            {% include 'guns.html' %}
+        </div>
+        </div>
+    </div>
+    <div class="col pr-0"> 
+        <div class="card overflow-auto" style="height: 85vh">
+        <div class="card-body">
+            {% include 'participants.html' %}
+        </div>
+        </div>
+    </div>
+</div>
+</form>
+<div class="row"> 
+    <div class="col" id="incident-save">
+    <div class="card">
+    <div class="card-body">
+        <button type="submit" onclick="submitImportForm({% url 'save_incident'%})">Save</button>
+    </div>
+    </div>
+    </div>
+    <div class="col" id="incident-delete">
+    <div class="card">
+    <div class="card-body">
+        <button type="submit" onclick="submitImportForm({% url 'delete_incident'%})">Delete</button>
+    </div>
+    </div>
+    </div>
+    <div class="col" id="incident-delete">
+    <div class="card">
+    <div class="card-body">
+        <button type="submit" onclick="$('#import_form').hide(); $('body, html').animate({scrollTop: $('#title').offset().top}, 600);">Cancel</button>
+    </div>
+    </div>
+    </div>
+</div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#import_form #id_state").prop("readonly", true);
+        $("#import_form #id_latitude").prop("readonly", true);
+        $("#import_form #id_longitude").prop("readonly", true);
+        $("#import_form #id_id").prop("readonly", true);
+        $('#import_form').hide();
+        
+        {% if scroll_to_form %}
+            $('#import_form').show();
+            //$('#incident-delete').show()  ;
+            //$('#incident-save').hide();
+            $('body, html').animate({
+                scrollTop: $("#import_form").offset().top
+            }, 600); 
+        {% else %}    
+            $('#import_form').hide();
+            $('body, html').animate({
+                scrollTop: $("#title").offset().top
+            }, 600);
+        {% endif %}
+    });
+
+    function submitImportForm(action) {
+        console.log(action)
+        $.ajax({ // create an AJAX call...
+            data: $('form').serialize(), // get the form data
+            type: 'POST', // GET or POST
+            url: action, // the file to call
+            success: function(response) { // on success..
+                console.log(response)
+                if (response.Retcode != 0) {
+                    alert('Invalid Form');
+                }
+                // $('#import_form').hide();
+                location.reload(true);
+            },
+            error: function(e, x, r) { // on error..
+                alert(e)
+            }
+        });
+    }
+
+    //importEventCapture('#incident_form');
+    //importEventCapture('#characteristic_formset');
+    //importEventCapture('#gun_formset');
+    //importEventCapture('#participant_formset');
+</script>

@@ -1,0 +1,20 @@
+<h3>Incident Characteristic</h3>
+{% for form in characteristic_formset %}
+    <div id="characteristic_form-{{forloop.counter0}}">
+        {{ form.as_ul }}
+        <button type="button" id="characteristic_form-{{forloop.counter0}}-delete" onclick="$('#characteristic_form-{{forloop.counter0}}').remove()">Delete form</button>
+    </div>
+{% endfor %}
+<button type="button" id="characteristic_formset_add">Add Another</button>
+
+<script>
+    characteristic_form_count = 99
+    $("#characteristic_formset_add").click(function() {
+        var delete_id = `characteristic_form-${characteristic_form_count}-delete`;
+        var form_id = `characteristic_form-${characteristic_form_count}`;
+        $(`<div id="${form_id}">{{characteristic_form.as_ul}}` 
+        + `<button type="button" id="${delete_id}" onclick="$('#${form_id}').remove()">Delete</button>`
+        + '</div>').insertBefore('#characteristic_formset_add');
+        characteristic_form_count++;
+    });
+</script>

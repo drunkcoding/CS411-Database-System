@@ -32,7 +32,7 @@ function urlLastSegment(url) {
     return lastSegment;
 }
 
-function formEventCapture(id) {
+function importEventCapture(id) {
     $(document).ready(function() {
         $(id).submit(function() { // catch the form's submit event
             $.ajax({ // create an AJAX call...
@@ -40,7 +40,11 @@ function formEventCapture(id) {
                 type: $(this).attr('method'), // GET or POST
                 url: $(this).attr('action'), // the file to call
                 success: function(response) { // on success..
-                    if (response.Retcode == 0) $(id).hide();
+                    if (response.Retcode == 0) {
+                        $(id + " input").prop("readonly", true);
+                        $(id + " select").prop("disabled", true);
+                        $(id + " button").hide();
+                    }
                     else alert('Invalid Form')
                 },
                 error: function(e, x, r) { // on error..

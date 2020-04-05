@@ -1,0 +1,20 @@
+<h3>Incident Guns</h3>
+{% for form in gun_formset %}
+    <div id="gun_form-{{forloop.counter0}}">
+        {{ form.as_ul }}
+        <button type="button" id="gun_form-{{forloop.counter0}}-delete" onclick="$('#gun_form-{{forloop.counter0}}').remove()">Delete form</button>
+    </div>
+{% endfor %}
+<button type="button" id="gun_formset_add">Add Another</button>
+
+<script>
+    gun_form_count = 99
+    $("#gun_formset_add").click(function() {
+        var delete_id = `gun_form-${gun_form_count}-delete`;
+        var form_id = `gun_form-${gun_form_count}`;
+        $(`<div id="${form_id}">{{gun_form.as_ul}}` 
+        + `<button type="button" id="${delete_id}" onclick="$('#${form_id}').remove()">Delete</button>`
+        + '</div>').insertBefore('#gun_formset_add');
+        gun_form_count++;
+    });
+</script>
