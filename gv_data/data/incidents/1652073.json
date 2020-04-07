@@ -1,0 +1,73 @@
+{
+  "id": 1652073,
+  "url": "https://www.gunviolencearchive.org/incident/1652073",
+  "title": "4-04-2020 Texas Lubbock 4-2",
+  "date": "4-04-2020",
+  "address": "2100 block of 49th St, Lubbock, Texas",
+  "geo": [
+    33.5497,
+    -101.862
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "Mia Altamirano",
+      "age": "17",
+      "age_group": "teen 12-17",
+      "gender": "female",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "name": "Michael Bean",
+      "age": "20",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "relationship": "acquaintance",
+      "status": "unharmed"
+    },
+    {
+      "type": "subject-suspect",
+      "relationship": "acquaintance",
+      "status": "unharmed"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1652073-www.everythinglubbock.com-1586033104.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1652073-www.everythinglubbock.com-1586033104.png",
+      "url": "https://www.everythinglubbock.com/news/local-news/lpd-2-dead-2-seriously-injured-in-shooting-early-saturday/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1652073-www.lubbockonline.com-1586120409.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1652073-www.lubbockonline.com-1586120409.png",
+      "url": "https://www.lubbockonline.com/news/20200405/report-suspects-confronted-group-of-friends-before-lubbock-apartment-shooting"
+    }
+  ],
+  "congressional_district": "19",
+  "state_senate_district": "28",
+  "state_house_district": "84"
+}

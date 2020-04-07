@@ -1,0 +1,71 @@
+{
+  "id": 1652734,
+  "url": "https://www.gunviolencearchive.org/incident/1652734",
+  "title": "4-05-2020 California Los Angeles 4-0",
+  "date": "4-05-2020",
+  "address": "89th St and Hobart Ave, Los Angeles, California",
+  "geo": [
+    33.9563,
+    -118.308
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "Gary Moody",
+      "age": "55",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Drive-by (car to street, car to car)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1652734-losangeles.cbslocal.com-1586135716.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1652734-losangeles.cbslocal.com-1586135716.png",
+      "url": "https://losangeles.cbslocal.com/2020/04/05/triple-shooting-in-south-la-leaves-1-dead/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1652734-ktla.com-1586135718.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1652734-ktla.com-1586135718.png",
+      "url": "https://ktla.com/news/local-news/3-wounded-in-gramercy-park-drive-by-attack/"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1652734-www.nbclosangeles.com-1586200503.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1652734-www.nbclosangeles.com-1586200503.png",
+      "url": "https://www.nbclosangeles.com/news/local/south-los-angeles-shooting-lapd/2341539/"
+    }
+  ],
+  "congressional_district": "43",
+  "state_senate_district": "30",
+  "state_house_district": "59"
+}

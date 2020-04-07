@@ -42,18 +42,6 @@ def geocode(address, city, state, tries=3):
 
 keyed_mass_shooting_data = {}
 
-"""
-with open(MASS_SHOOTINGS_JSON, encoding="utf-8") as json_file:
-    mass_shooting_data = json.load(json_file)
-
-for shooting in mass_shooting_data:
-    keyed_mass_shooting_data[shooting['id']] = shooting
-    shooting['date'] = parse(shooting['date'])
-
-print(
-    f'Loading existing mass shooting data with {len(mass_shooting_data)} incidents')
-"""
-
 def scrape_results(year, page):
     url = f'https://www.gunviolencearchive.org/reports/mass-shooting?page={page}&year={year}'
     res = scraper.get(url)
@@ -87,7 +75,7 @@ def merge_shooting_data(scraped_data):
     total_new = 0
     for shooting in scraped_data:
         if shooting['id'] not in keyed_mass_shooting_data:
-            print(f'New shooting found: {shooting["id"]}, {shooting["date"]}')
+            print(f'GV found: {shooting["id"]}, {shooting["date"]}')
             keyed_mass_shooting_data[shooting['id']] = {}
             total_new += 1
         keyed_mass_shooting_data[shooting['id']].update(shooting)

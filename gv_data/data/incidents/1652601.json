@@ -1,0 +1,54 @@
+{
+  "id": 1652601,
+  "url": "https://www.gunviolencearchive.org/incident/1652601",
+  "title": "4-04-2020 Texas Vidor 4-1",
+  "date": "4-04-2020",
+  "address": "100 block of Hebert St, Vidor, Texas",
+  "geo": [
+    30.1223,
+    -94.0165
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "status": "injured"
+    },
+    {
+      "type": "subject-suspect",
+      "relationship": "acquaintance",
+      "status": "unharmed, arrested"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1652601-kfdm.com-1586118606.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1652601-kfdm.com-1586118606.png",
+      "url": "https://kfdm.com/news/local/developing-accused-gunman-detained-after-four-shot-in-vidor"
+    }
+  ],
+  "congressional_district": "36",
+  "state_senate_district": "3",
+  "state_house_district": "21"
+}

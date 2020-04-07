@@ -668,8 +668,8 @@
     "killed": 0,
     "injured": 5,
     "source": "https://www.nola.com/news/crime_police/article_5d403ee4-657a-11ea-b045-97a27e3106ed.html",
-    "lat": 29.9329436,
-    "lng": -90.041536
+    "lat": 29.9502251,
+    "lng": -90.0396753
   },
   {
     "id": 1639542,
@@ -838,5 +838,89 @@
     "source": "https://www.wyff4.com/article/triple-homicide-suspect-caesar-crockett-from-amber-alert-taken-into-custody-in-florida-police-say/32004251",
     "lat": 32.795812,
     "lng": -83.64579479999999
+  },
+  {
+    "id": 1651742,
+    "date": "2020-04-03",
+    "state": "Kentucky",
+    "city": "Louisville",
+    "address": "1000 block of Cecil Ave",
+    "killed": 0,
+    "injured": 4,
+    "source": "https://www.wave3.com/2020/04/04/people-shot-near-west-broadway-cecil-ave/",
+    "lat": 38.2454069,
+    "lng": -85.82130470000001
+  },
+  {
+    "id": 1652601,
+    "date": "2020-04-04",
+    "state": "Texas",
+    "city": "Vidor",
+    "address": "100 block of Hebert St",
+    "killed": 0,
+    "injured": 4,
+    "source": "https://kfdm.com/news/local/developing-accused-gunman-detained-after-four-shot-in-vidor",
+    "lat": 30.1223195,
+    "lng": -94.0165274
+  },
+  {
+    "id": 1652073,
+    "date": "2020-04-04",
+    "state": "Texas",
+    "city": "Lubbock",
+    "address": "2100 block of 49th St",
+    "killed": 2,
+    "injured": 2,
+    "source": "https://www.lubbockonline.com/news/20200405/report-suspects-confronted-group-of-friends-before-lubbock-apartment-shooting",
+    "lat": 33.5497424,
+    "lng": -101.8617891
+  },
+  {
+    "id": 1652328,
+    "date": "2020-04-04",
+    "state": "Florida",
+    "city": "Hialeah",
+    "address": "W 69th St and 24th Ave",
+    "killed": 1,
+    "injured": 4,
+    "source": "https://wsvn.com/news/local/miami-dade/man-killed-in-standoff-with-police-in-hialeah-after-barricading-self-with-boy-officer-3-others-hurt/",
+    "lat": 25.8851597,
+    "lng": -80.3317155
+  },
+  {
+    "id": 1652642,
+    "date": "2020-04-05",
+    "state": "New York",
+    "city": "Brooklyn",
+    "address": "181 Rockaway Pky",
+    "killed": 0,
+    "injured": 4,
+    "source": "https://nypost.com/2020/04/05/four-men-injured-in-brooklyn-apartment-shooting/",
+    "lat": 40.662426,
+    "lng": -73.921058
+  },
+  {
+    "id": 1653012,
+    "date": "2020-04-05",
+    "state": "South Carolina",
+    "city": "Lancaster",
+    "address": "Mahaffey Line Dr",
+    "killed": 1,
+    "injured": 4,
+    "source": "https://www.wbtv.com/2020/04/06/one-killed-two-injured-lancaster-county-shooting/",
+    "lat": 34.7060908,
+    "lng": -80.80239379999999
+  },
+  {
+    "id": 1652734,
+    "date": "2020-04-05",
+    "state": "California",
+    "city": "Los Angeles",
+    "address": "89th St and Hobart Ave",
+    "killed": 1,
+    "injured": 3,
+    "source": "https://www.nbclosangeles.com/news/local/south-los-angeles-shooting-lapd/2341539/",
+    "lat": 33.956343,
+    "lng": -118.3079038
   }
 ]

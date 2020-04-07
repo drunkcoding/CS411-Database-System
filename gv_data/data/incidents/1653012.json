@@ -1,0 +1,64 @@
+{
+  "id": 1653012,
+  "url": "https://www.gunviolencearchive.org/incident/1653012",
+  "title": "4-05-2020 South Carolina Lancaster 5-0",
+  "date": "4-05-2020",
+  "address": "Mahaffey Line Dr, Lancaster, South Carolina",
+  "geo": [
+    34.7061,
+    -80.8024
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "name": "Shonquil Medley",
+      "age": "27",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "killed"
+    },
+    {
+      "type": "victim",
+      "gender": "female",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "gender": "male",
+      "status": "injured"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Shot - Dead (murder, accidental, suicide)",
+    "Drive-by (car to street, car to car)",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)",
+    "House party / Block Party / Park Party"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot%202020-04-06%20at%2011.04.45%20AM.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot%202020-04-06%20at%2011.04.45%20AM.png",
+      "url": "https://www.wbtv.com/2020/04/06/one-killed-two-injured-lancaster-county-shooting/"
+    }
+  ],
+  "congressional_district": "5",
+  "state_senate_district": "16",
+  "state_house_district": "44"
+}

@@ -1,0 +1,62 @@
+{
+  "id": 1651742,
+  "url": "https://www.gunviolencearchive.org/incident/1651742",
+  "title": "4-03-2020 Kentucky Louisville 4-0",
+  "date": "4-03-2020",
+  "address": "1000 block of Cecil Ave, Louisville, Kentucky",
+  "geo": [
+    38.2454,
+    -85.8213
+  ],
+  "participants": [
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "male",
+      "status": "injured"
+    },
+    {
+      "type": "victim",
+      "age_group": "adult 18+",
+      "gender": "female",
+      "status": "injured"
+    }
+  ],
+  "characteristics": [
+    "Shot - Wounded/Injured",
+    "Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)"
+  ],
+  "guns": [
+    {
+      "type": "unknown",
+      "stolen": "unknown"
+    }
+  ],
+  "sources": [
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/Screenshot%202020-04-03%20at%2010.19.47%20PM.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/Screenshot%202020-04-03%20at%2010.19.47%20PM.png",
+      "url": "https://www.wlky.com/article/lmpd-4-people-injured-following-shooting-in-west-louisville/32038900"
+    },
+    {
+      "img_thumb": "https://www.gunviolencearchive.org/sites/default/files/styles/incident_sources_thumbnail/public/source-screenshots/1651742-www.wave3.com-1585983610.png",
+      "img_full": "https://www.gunviolencearchive.org/sites/default/files/source-screenshots/1651742-www.wave3.com-1585983610.png",
+      "url": "https://www.wave3.com/2020/04/04/people-shot-near-west-broadway-cecil-ave/"
+    }
+  ],
+  "congressional_district": "3",
+  "state_senate_district": "33",
+  "state_house_district": "43"
+}
