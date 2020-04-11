@@ -8,28 +8,73 @@ from django.contrib.postgres.fields import ArrayField
 class State(models.Model):
     name = models.CharField(max_length=64)
     population = models.PositiveIntegerField()
-    land_area = models.FloatField()  
+    land_area = models.FloatField()
+
+    class Meta:
+        managed = False
+        db_table = 'gunviolence_state'
 
 class City(models.Model):
     name = models.CharField(max_length=64)
-    state = models.ForeignKey(State, on_delete=models.CASCADE)
     population = models.PositiveIntegerField()
-    land_area = models.FloatField()     
+    land_area = models.FloatField()
+    state = models.ForeignKey('State', models.DO_NOTHING)
 
-class IncidentCharacteristic(models.Model):
-    characteristic = models.CharField(max_length=1024, choices=settings.CHARACTER_CHOICES)
-    count = models.PositiveIntegerField(default=0)
-    state = models.ForeignKey(State, on_delete=models.CASCADE)
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    class Meta:
+        managed = False
+        db_table = 'gunviolence_city'
 
 class GunViolence(models.Model):
-    url = models.URLField()
+    id = models.CharField(primary_key=True, max_length=16)
+    title = models.CharField(max_length=256)
+    url = models.CharField(max_length=200)
     date = models.DateField()
-    latitude =  models.FloatField(default=40.1020)
-    longitude =  models.FloatField(default=-88.2272)
-    state = models.ForeignKey(State, on_delete=models.CASCADE)
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
-    characteristic = models.ManyToManyField(IncidentCharacteristic) 
+    city = models.ForeignKey(City, models.DO_NOTHING)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    state = models.ForeignKey('State', models.DO_NOTHING)
+    created_at = models.DateTimeField()
+    updated_at = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'gunviolence_gunviolence'
+
+class IncidentCharacteristic(models.Model):
+    gunviolence = models.ForeignKey(GunViolence, models.DO_NOTHING)
+    incidentcharacteristic = models.ForeignKey('Incidentcharacteristic', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'gunviolence_gunviolence_characteristic'
+        unique_together = (('gunviolence', 'incidentcharacteristic'),)
+
+class IncidentCharacteristic(models.Model):
+    characteristic = models.CharField(max_length=1024)
+    count = models.PositiveIntegerField()
+    city = models.ForeignKey(City, models.DO_NOTHING)
+    state = models.ForeignKey('State', models.DO_NOTHING)
+    created_at = models.DateTimeField()
+    updated_at = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'gunviolence_incidentcharacteristic'
+
+class Participant(models.Model):
+    name = models.CharField(max_length=64)
+    age = models.PositiveSmallIntegerField()
+    gender = models.PositiveSmallIntegerField()
+    harm = models.PositiveSmallIntegerField()
+    type = models.PositiveSmallIntegerField()
+    relationship = models.PositiveSmallIntegerField(blank=True, null=True)
+    involve = models.ForeignKey(GunViolence, models.DO_NOTHING)
+    created_at = models.DateTimeField()
+    updated_at = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'gunviolence_participant'
 
 class GunViolenceJson(models.Model):
     id = models.AutoField(primary_key=True)
@@ -76,12 +121,3 @@ class GunViolenceRaw(models.Model):
     sources = models.URLField(null=True)
     state_house_district = models.PositiveSmallIntegerField(null=True)
     state_senate_district = models.PositiveSmallIntegerField(null=True)
-
-class Participant(models.Model):
-    name = models.CharField(max_length=64)
-    age = models.PositiveSmallIntegerField()
-    gender = models.CharField(max_length = 10, choices=settings.GENDER_CHOICES)
-    harm = models.CharField(max_length = 64, choices=settings.HARM_CHOICES)
-    type = models.CharField(max_length = 64,choices=settings.PTYPE_CHOICES)
-    relationship = models.CharField(max_length = 64, choices=settings.RELATION_CHOICES, null=True, help_text="relation to all victims")
-    involve = models.ForeignKey(GunViolence, on_delete=models.CASCADE)
