@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col pr-0">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div id="gv_harm"></div>
+        </div>
+        <div class="row">
+          <div class="col pr-0">
+            <button type="button" onclick="gv_harm_selected=0;switchPlot('gv_harm')"> characteristic </button>
+          </div>
+          <div class="col pr-0">
+            <button type="button" onclick="gv_harm_selected=1;switchPlot('gv_harm')"> age density </button>
+          </div>
+          <div class="col pr-0">
+            <button type="button" onclick="gv_harm_selected=2;switchPlot('gv_harm')"> n_harmed </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(switchPlot("gv_harm"));
+</script>

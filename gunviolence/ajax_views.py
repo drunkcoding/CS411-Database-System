@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from django.db import transaction
+from django.conf import settings
 from .utils import *
 from .models import *
 from .forms import *
@@ -8,7 +9,8 @@ from .forms import *
 @require_http_methods(["POST"])
 def saveIncidentID(request):
     incident_id = int(request.POST.get('incident_id'))
-    print('saveIncidentID', request.POST)
+
+    settings.LOGGER.info('saveIncidentID', request.POST)
 
     if incident_id > 0 and incident_id != None:
         request.session['incident_id'] = incident_id
@@ -18,10 +20,12 @@ def saveIncidentID(request):
 
 @require_http_methods(["POST"])
 def deleteIncident(request):
+    settings.LOGGER.info('delete', request.POST)
+
     id = request.POST.get('id')
     if id == None or len(id) == 0: return JsonResponse({'Retcode':0})
     incident_id = int(id)
-    print("delete", incident_id)
+
     GunViolenceJson.objects.filter(id=incident_id).delete()
 
     try:
@@ -49,7 +53,6 @@ def saveIncidentForm(request):
 
 @require_http_methods(["POST"])
 def saveCharacteristicFormSet(request):
-    print(request.POST)
     characteristic_formset = CharacteristicFormSet(request.POST)
     if characteristic_formset.is_valid():
         request.session['characteristic_formset'] = request.POST
@@ -77,7 +80,7 @@ def saveParticipantFormSet(request):
 
 @require_http_methods(["POST"])
 def saveIncident(request):
-    print(request.POST)
+    settings.LOGGER.info('saveIncident', request.POST)
 
     incident_form = IncidentForm({
         'id': int(request.POST.get('id')) if request.POST.get('id') else None,

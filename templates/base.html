@@ -9,6 +9,7 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
     <!-- Bootstrap 4 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -47,17 +48,29 @@
     <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
     <link href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css" rel="stylesheet">
 
-    <script src="{% static 'js/helper.js' %}" type="text/javascript"></script>
+    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
+
+    {% include 'helper.html' %}
+    {% include 'vis_helper.html' %}
+    {% include 'ml.html' %}
 
     <script>
-        var csrftoken = getCookie('csrftoken');
-        $.ajaxSetup({
-            beforeSend: function (xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
+    function formatRediectUrl(source, replace, target) {
+        var redirect_url = source.replace(replace, target);
+        console.log(redirect_url);
+        return redirect_url;
+    }
+    
+
+    var csrftoken = getCookie('csrftoken');
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
             }
-        });
+        }
+    });
     </script>
 
     <style>
@@ -79,12 +92,14 @@
         }
 
         .card {
+            position: relative;
             background: #212121;
             border-radius: 0;
             border: 1px solid #363636;
         }
 
         .card-body {
+            position: relative;
             padding: 0.65rem;
         }
 
@@ -182,7 +197,7 @@
     <style>
         #map {
             position: relative;
-            height: 85vh;
+            height: 80vh;
         }
     </style>
 

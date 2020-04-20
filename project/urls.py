@@ -14,14 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import path, re_path
+from django.urls import path
+from django.conf.urls.static import static
 
 from gunviolence.views import *
-from gunviolence.data_views import *
 from gunviolence.ajax_views import *
 
 urlpatterns = [
-    path('', dashboard),
+    path('', dashboard, name='dashboard'),
     path('save_map_meta/', saveMapMeta, name='save_map_meta'),
     path('save_incident_form/', saveIncidentForm, name='save_incident_form'),
     path('save_characteristic_formset/', saveCharacteristicFormSet, name='save_characteristic_formset'),
@@ -31,6 +31,4 @@ urlpatterns = [
     path('delete_incident/', deleteIncident, name='delete_incident'),
     path('save_incident_id/', saveIncidentID, name='save_incident_id'),
     path('save_incident/', saveIncident, name='save_incident'),
-    path('manual_input/', manualInputRaw, name= 'manual_input'),
-    # path('state_count/<state>/', stateCountEachDate, name='state_count'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,33 +1,35 @@
 import cfscrape
 from datetime import datetime
 import json
-import re
+import re, sys
 from time import sleep
 from os import path
-from geopy.geocoders import GoogleV3
+#from geopy.geocoders import GoogleV3
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 
-start_year = 2020
+start_year = 2014
 current_year = datetime.now().year
 
+scrap_name = sys.argv[1]
 
-GOOGLE_GEOCODE_API_KEY="AIzaSyAZbJA9SsNx6vI4yALD8iOB5p0dpwKl6-s"
+
+#GOOGLE_GEOCODE_API_KEY="AIzaSyAZbJA9SsNx6vI4yALD8iOB5p0dpwKl6-s"
 
 MASS_SHOOTINGS_JSON = path.join(
     path.dirname(__file__),
-    'data/mass_shootings.json',
+    f'data/{scrap_name}.json',
 )
 
 MASS_SHOOTINGS_COMPACT_JSON = path.join(
     path.dirname(__file__),
-    'data/mass_shootings_compact.json',
+    f'data/{scrap_name}_compact.json',
 )
 
-geolocator = GoogleV3(GOOGLE_GEOCODE_API_KEY, timeout=10)
+#geolocator = GoogleV3(GOOGLE_GEOCODE_API_KEY, timeout=10)
 scraper = cfscrape.create_scraper()
 
-
+"""
 def geocode(address, city, state, tries=3):
     address_str = f'{city}, {state}, United States'
     if (address.lower() != 'n/a'):
@@ -39,12 +41,14 @@ def geocode(address, city, state, tries=3):
         if tries <= 0:
             raise e
         return geocode(address, city, state, tries=tries-1)
+"""
 
 keyed_mass_shooting_data = {}
 
 def scrape_results(year, page):
-    url = f'https://www.gunviolencearchive.org/reports/mass-shooting?page={page}&year={year}'
+    url = f'https://www.gunviolencearchive.org/{scrap_name}?page={page}&year={year}'
     res = scraper.get(url)
+    if res.status_code != 200: return []
     soup = BeautifulSoup(res.content, features="lxml")
     table = soup.find('table')
     headers = [re.sub(r'[^a-z]', '', th.get_text().lower())
@@ -94,6 +98,7 @@ for year in range(start_year, current_year + 1):
         sleep(1)
     print(f'Done importing {year}')
 
+"""
 print('Geocoding missing data')
 for shooting in keyed_mass_shooting_data.values():
     if not shooting.get('lat') and not shooting.get('lng'):
@@ -101,6 +106,7 @@ for shooting in keyed_mass_shooting_data.values():
         shooting['lat'] = loc.latitude
         shooting['lng'] = loc.longitude
         print(f'geocoded {loc.address}: {loc.latitude}, {loc.longitude}')
+"""
 
 print('Sorting results')
 updated_shooting_data = sorted(keyed_mass_shooting_data.values(),
@@ -110,7 +116,9 @@ updated_shootings_compact = []
 for shooting in updated_shooting_data:
     shooting['date'] = shooting['date'].strftime('%Y-%m-%d')
     updated_shootings_compact.append([
-        shooting['id'], shooting['date'], shooting['killed'], shooting['injured'], shooting['lat'], shooting['lng']
+        shooting['id'], shooting['date'], shooting['killed'], shooting['injured']
+        , shooting['lat'] if 'lat' in shooting else None
+        , shooting['lng'] if 'lng' in shooting else None
     ])
 
 

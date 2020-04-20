@@ -2,199 +2,226 @@
 {% load settings_value %}
 
 {% block content %}
+<div class="row">
+
+  <!-- Overall Statistics -->
+  <div class="col-2 pr-0">
     <div class="row">
-
-      <!-- Overall Statistics -->
-      <div class="col-2 pr-0">
-        <div class="row">
-          <div class="col pr-0">
-            <div class="card" style="height: 20vh">
-              <div class="card-body">
-                <h4 class="text-center">Total Killed</h4>
-                <h2 class="text-center red">{% if total_count %} {{ total_count.total_killed }} {% else %} -- {% endif %}</h2>
-                <h4 class="text-center">Total Injured</h4>
-                <h2 class="text-center red">{% if total_count %} {{ total_count.total_injured }} {% else %} -- {% endif %}</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col pr-0">
-            <div class="card" style="height: 40vh">
-              <div class="card-body">
-                <div class="card-title text-center">People Harmed by State</div>
-              </div>
-              <ul class="list-group list-group-flush tab-box-2">
-                {% for rank in state_count %}
-                  <li class="list-group-item"><span class="red"> {{ rank.total_harm }} </span> {{ rank.state }} </li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Date Range Selection -->
-        <div class="row">
-          <div class="col pr-0">
-            <div class="card" style="height: 25vh">
-              <div class="card-body">
-                <form method="post" action="" name='dateform'> {% csrf_token %}
-                  {{ date_form.as_ul }}
-                  <input type="submit" value="Submit" name="querydate"/>
-                </form>                    
-              </div>
-            </div>
+      <div class="col pr-0">
+        <div class="card" style="height: 20vh">
+          <div class="card-body">
+            <h4 class="text-center">Total Killed</h4>
+            <h2 class="text-center red">{% if total_count %} {{ total_count.total_killed }} {% else %} -- {% endif %}
+            </h2>
+            <h4 class="text-center">Total Injured</h4>
+            <h2 class="text-center red">{% if total_count %} {{ total_count.total_injured }} {% else %} -- {% endif %}
+            </h2>
           </div>
         </div>
       </div>
-
-      <div class="col">
-        <div class="card">
-          <div class="card-body map-box" id="mapid" ondblclick="alterFunc()">
-            <div id="map"></div>
+    </div>
+    <div class="row">
+      <div class="col pr-0">
+        <div class="card" style="height: 40vh">
+          <div class="card-body">
+            <div class="card-title text-center">People Harmed by State</div>
           </div>
+          <ul class="list-group list-group-flush tab-box-2">
+            {% for rank in state_count %}
+            <li class="list-group-item"><span class="red"> {{ rank.total_harm }} </span> {{ rank.state }} </li>
+            {% endfor %}
+          </ul>
         </div>
-      </div>             
-
+      </div>
     </div>
 
-    {% include "import_form.html" %}
+    <!-- Date Range Selection -->
+    <div class="row">
+      <div class="col pr-0">
+        <div class="card" style="height: 25vh">
+          <div class="card-body">
+            <form method="post" action="" name='dateform'> {% csrf_token %}
+              {{ date_form.as_ul }}
+              <input type="submit" value="Submit" name="querydate" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <div class="card-body map-box" id="mapid">
+        <pre id="info"></pre>
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% include "import_form.html" %}
+
+{% include "visualization.html" %}
 {% endblock %}
 
 {% block scripts %}
 
-<script>
+<style type="text/css">
+  #info {
+    display: block;
+    position: relative;
+    margin: 0px auto;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #222;
+    background: #fff;
+    top: 0;
+  }
+</style>
 
-function alterFunc() {alert("a")}
+<script>
 
   mapboxgl.accessToken = 'pk.eyJ1IjoidGhpbmtpbmdyZWVkIiwiYSI6ImNrN2JnODFpMTAzemEzZWxrdjVmMWs1aDgifQ.ilp7OlnOWSrRkVltnP8biQ';
   var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v10',
-      maxzoom: 20,
-      maxBounds: [['-133.41939491845818', '23.017523213871456'],['-63.82091914427555', '50.85158440021044']]
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v10',
+    maxzoom: 20,
+    maxBounds: [['-133.41939491845818', '23.017523213871456'], ['-63.82091914427555', '50.85158440021044']]
   });
-     
-  map.on('load', function() {
 
-  {% if map_zoom %} map.setZoom({{map_zoom}}); {% endif %}
-  {% if map_center %}  map.setCenter({{map_center}}); {% endif %}    
+  map.on('load', function () {
+
+    {% if map_zoom %} map.setZoom({{ map_zoom }}); {% endif %}
+  {% if map_center %} map.setCenter({{ map_center }}); {% endif %}
 
   // Add a geojson point source.
   // Heatmap layers also work with a vector tile source.
   map.addSource('gunviolence', {
-      'type': 'geojson',
-      'data': {{ points|safe }}
-      //cluster: true,
+    'type': 'geojson',
+    'data': "{{MEDIA_URL}}points.json"
+    //cluster: true,
   });
 
   // Add a source for the state polygons.
   map.addSource('states', {
-      'type': 'geojson',
-      'data': {{ states|safe }}
+    'type': 'geojson',
+    'data': "{{MEDIA_URL}}gz_states.json"
   });
 
   map.addLayer(
-      {
-        'id': 'states-layer',
-        'source': 'states',
-        'type': 'fill',
-        'maxzoom': 10,
-        'paint': {
-            'fill-color': [
-                'interpolate',
-                ['linear'],
-                ['get', 'involve'],
-                {% if state_min and state_max and state_min < state_max %} {{state_min}}, 
-                {% else %} 0,
-                {% endif %}
-                ['to-color', '#eff3ff'],
-                {% if state_min and state_max and state_min < state_max %} {{state_max}}, 
-                {% else %} 1,
-                {% endif %}
-                ['to-color', '#08519c']
+    {
+      'id': 'states-layer',
+      'source': 'states',
+      'type': 'fill',
+      'maxzoom': 10,
+      'paint': {
+        'fill-color': [
+          'interpolate',
+          ['linear'],
+          ['get', 'involve'],
+          {{ state_min }},
+      ['to-color', '#eff3ff'],
+                {{ state_max }},
+    ['to-color', '#08519c']
             ],
-            'fill-opacity': [
-                'interpolate',['linear'],['zoom'],0,1,10,0
-            ]
+    'fill-opacity': [
+    'interpolate', ['linear'], ['zoom'], 0, 1, 10, 0
+  ]
         }
       },
-      'waterway-label'
-  );
-  
-  map.addLayer(
-      {
-        'id': 'gunviolence-point',
-        'type': 'circle',
-        'source': 'gunviolence',
-        'minzoom': 7,
-        'paint': {
-            'circle-radius': [
-                'interpolate',['linear'],['zoom'],7,
-                ['interpolate', ['linear'], ['get', 'involve'], 0, 1, 10, 5],24,
-                ['interpolate', ['linear'], ['get', 'involve'], 0, 10, 10, 100]
-            ],
-            'circle-color': [
-                'interpolate',
-                ['linear'],
-                ['get', 'involve'],
-                {% if case_min and case_max and case_min < case_max %} {{case_min}}, 
-                {% else %} 0,
-                {% endif %}
-                ['to-color', '#eff3ff'],
-                {% if case_min and case_max and case_min < case_max %} {{case_max}}, 
-                {% else %} 1,
-                {% endif %}
-                ['to-color', '#08519c']
-            ],
-            'circle-stroke-color': 'white',
-            'circle-stroke-width': 1,
-            'circle-opacity': [
-                'interpolate',['linear'],['zoom'],7,0,9,1
-            ]
-        }
-      },
-      'waterway-label'
+    'waterway-label'
   );
 
-  
-  map.on('click', 'gunviolence-point', function(e) {
+  map.addLayer(
+    {
+      'id': 'gunviolence-point',
+      'type': 'circle',
+      'source': 'gunviolence',
+      'minzoom': 7,
+      'paint': {
+        'circle-radius': [
+          'interpolate', ['linear'], ['zoom'], 7,
+          ['interpolate', ['linear'], ['get', 'involve'], 0, 1, 10, 5], 24,
+          ['interpolate', ['linear'], ['get', 'involve'], 0, 10, 10, 100]
+        ],
+        'circle-color': [
+          'interpolate',
+          ['linear'],
+          ['get', 'involve'],
+          {{ case_min }},
+      ['to-color', '#eff3ff'],
+                 {{ case_max }},
+    ['to-color', '#08519c']
+            ],
+    'circle-stroke-color': 'white',
+    'circle-stroke-width': 1,
+    'circle-opacity': [
+    'interpolate', ['linear'], ['zoom'], 7, 0, 9, 1
+  ]
+        }
+      },
+    'waterway-label'
+  );
+
+  var features = map.queryRenderedFeatures({ layers: ['states-layer'] });
+  states_in_range = []
+  for (var i = 0; i < features.length; i++) {
+    states_in_range.push(features[i].properties.NAME);
+  }
+
+  map.on('mousemove', function (e) {
+    /*
+    (async () => {
+      var predict = await predictResult(e.lngLat.wrap());
+      document.getElementById('info').innerHTML = `probability get harmed: ${predict}`
+    })()
+    */
+    var predict = predictCluster(e.lngLat.wrap());
+    document.getElementById('info').innerHTML = `${JSON.stringify(predict)}`;
+  });
+
+
+  map.on('click', 'gunviolence-point', function (e) {
     console.log("gunviolence-point");
     var incident_id = e.features[0].properties.incident_id;
     $.ajax({
-        type: "POST",
-        url: "{% url 'save_incident_id' %}",
-        dataType: "json",
-        data: {
-            "incident_id": incident_id,
-        },
-        success: function(data){
-            console.log("success save_incident_id");
-            if (data.Retcode == 0) {
-              location.reload(true);  
-            }
-        },
-        failure: function(data){
-            console.log("failure");
-            console.log(data);
-        },
+      type: "POST",
+      url: "{% url 'save_incident_id' %}",
+      dataType: "json",
+      data: {
+        "incident_id": incident_id,
+      },
+      success: function (data) {
+        console.log("success save_incident_id");
+        if (data.Retcode == 0) {
+          location.reload(true);
+        }
+      },
+      failure: function (data) {
+        console.log("failure");
+        console.log(data);
+      },
     });
   });
-  
+
   map.on('click', 'states-layer', function (e) {
     console.log("states-layer");
-      $("#import_form #id_latitude").val(e.lngLat.toArray()[1]);
-      $("#import_form #id_longitude").val(e.lngLat.toArray()[0]);
-      $("#import_form #id_state").val(e.features[0].properties.NAME);
-      $('#import_form').show()
-      $('#button-update').hide()
-      $('#button-delete').hide()
-      $('#button-show').show()
+    $("#import_form #id_latitude").val(e.lngLat.toArray()[1]);
+    $("#import_form #id_longitude").val(e.lngLat.toArray()[0]);
+    $("#import_form #id_state").val(e.features[0].properties.NAME);
+    $('#import_form').show()
+    $('#button-update').hide()
+    $('#button-delete').hide()
+    $('#button-show').show()
 
-      $('body, html').animate({
-        scrollTop: $("#import_form").offset().top
-      }, 600);
-      console.log(e.features[0].properties);
+    scrollToID("import_form");
+    console.log(e.features[0].properties);
   });
 
   /*
@@ -214,29 +241,32 @@ function alterFunc() {alert("a")}
   });
   */
 
-  map.on('zoomend', function() {
-          var features = map.queryRenderedFeatures({layers:['gunviolence-point']});
-          console.log(features);
-          console.log(map.getZoom());
+  map.on('zoomend', function () {
+    var features = map.queryRenderedFeatures({ layers: ['states-layer'] });
+    console.log("features", features);
+    console.log("zoom", map.getZoom());
 
-          $.ajax({
-              type: "POST",
-              url: "{% url 'save_map_meta' %}",
-              dataType: "json",
-              data: {
-                  "map_zoom": map.getZoom(),
-                  "map_center": map.getCenter().toArray(),
-              },
-              success: function(data){
-                  console.log("success");
-                  console.log(data);
-              },
-              failure: function(data){
-                  console.log("failure");
-                  console.log(data);
-              },
-          });
-      }
+    updateStatesInRange(features);
+    switchPlot("gv_harm");
+
+    $.ajax({
+      type: "POST",
+      url: "{% url 'save_map_meta' %}",
+      dataType: "json",
+      data: {
+        "map_zoom": map.getZoom(),
+        "map_center": map.getCenter().toArray(),
+      },
+      success: function (data) {
+        console.log("success");
+        console.log(data);
+      },
+      failure: function (data) {
+        console.log("failure");
+        console.log(data);
+      },
+    });
+  }
   )
 
   });
