@@ -4,8 +4,6 @@
     const current_month = current_date.getMonth()+1;
     const current_day = current_date.getDate();
 
-    console.log(current_month, current_day);
-
     cluster_centers = null;
     n_killed = null;
     n_injured = null;
@@ -14,7 +12,6 @@
     $(document).ready(function () {
         d3.csv("{{MEDIA_URL}}cluster-3000.csv", function (data) {
             cluster_centers = data;
-            //console.log(data)
             n_killed = {
                 max:d3.max(data, function(d) { return d.n_killed; }),
                 min:d3.min(data, function(d) { return d.n_killed; }),
@@ -27,7 +24,6 @@
                 max:d3.max(data, function(d) { return d.n_guns_involved; }),
                 min:d3.min(data, function(d) { return d.n_guns_involved; }),
             }
-            console.log(n_killed);
         });
     })
 
@@ -50,8 +46,6 @@
         }
 
         closest = distance_arr.sort((a,b) => a.d-b.d).slice(0,5);
-        console.log(closest)
-        // console.log(min_dist, max_dist)
 
         return {
             n_killed:cluster_centers[min_idx].n_killed * Math.log(10/min_dist),

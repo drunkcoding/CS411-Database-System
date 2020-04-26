@@ -40,7 +40,7 @@ def insertData(item):
 
     for gun in guns:
         obj, created = Gun.objects.get_or_create(
-            incident_id=incident,
+            incident=incident,
             type = gun.get('type'),
             stolen = gun.get('stolen'),
         )
@@ -70,25 +70,3 @@ def importOriginalData():
         full_data = json.load(fp)
     pool = Pool(10)
     pool.map(insertData, [item for item in full_data])
-
-
-@background(schedule=0)
-def importJSON():
-     with open(os.path.join(settings.MEDIA_DIR, 'mass_shootings_full.json'), 'rb') as f:
-        data = json.load(f)
-        for item in data:
-            print(item.get('id'))
-            incident, created = GunViolenceJson.objects.get_or_create(
-                id=item.get('id'),
-                date=datetime.strptime(item.get('date'), '%Y-%m-%d').date(),
-                state = item.get('state'),
-                city = item.get('city'),
-                latitude = item.get('lat'),
-                longitude = item.get('lng'),
-                address = item.get('address'),
-                n_killed = item.get('killed'),
-                n_injured = item.get('injured'),
-                participants = json.dumps(item.get('details', {}).get('participants', [])),
-                characteristics = json.dumps([{'characteristic': x} for x in item.get('details', {}).get('characteristics', [])]),
-                guns = json.dumps(item.get('details', {}).get('guns', [])),
-            )

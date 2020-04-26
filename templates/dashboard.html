@@ -40,7 +40,7 @@
       <div class="col pr-0">
         <div class="card" style="height: 25vh">
           <div class="card-body">
-            <form method="post" action="" name='dateform'> {% csrf_token %}
+            <form method="post" action="/" name='dateform' id='dateform'> {% csrf_token %}
               {{ date_form.as_ul }}
               <input type="submit" value="Submit" name="querydate" />
             </form>
@@ -188,8 +188,14 @@
 
 
   map.on('click', 'gunviolence-point', function (e) {
-    console.log("gunviolence-point");
     var incident_id = e.features[0].properties.incident_id;
+    var n = location.href.indexOf("?");
+    var url = location.href;
+    if (n != -1) url = url.substring(0, n);
+    window.location.replace(url + `?incident_id=${incident_id}`);
+    //location.href = 
+    //location.reload(true);
+    /*
     $.ajax({
       type: "POST",
       url: "{% url 'save_incident_id' %}",
@@ -198,20 +204,19 @@
         "incident_id": incident_id,
       },
       success: function (data) {
-        console.log("success save_incident_id");
         if (data.Retcode == 0) {
           location.reload(true);
         }
       },
       failure: function (data) {
-        console.log("failure");
-        console.log(data);
+        console.log("save_incident_id failed", data);
       },
     });
+    */
   });
 
   map.on('click', 'states-layer', function (e) {
-    console.log("states-layer");
+    $('#import_form :input').val('');
     $("#import_form #id_latitude").val(e.lngLat.toArray()[1]);
     $("#import_form #id_longitude").val(e.lngLat.toArray()[0]);
     $("#import_form #id_state").val(e.features[0].properties.NAME);
@@ -221,30 +226,10 @@
     $('#button-show').show()
 
     scrollToID("import_form");
-    console.log(e.features[0].properties);
   });
-
-  /*
-  map.on('click', 'states-layer', function(e) {
-    console.log("click on states-layer");
-    var state = e.features[0].properties.NAME;
-  });
-  
-  // Change the cursor to a pointer when the mouse is over the states layer.
-  map.on('mouseenter', 'states-layer', function() {
-    map.getCanvas().style.cursor = 'pointer';
-  });
-    
-  // Change it back to a pointer when it leaves.
-  map.on('mouseleave', 'states-layer', function() {
-    map.getCanvas().style.cursor = '';
-  });
-  */
 
   map.on('zoomend', function () {
     var features = map.queryRenderedFeatures({ layers: ['states-layer'] });
-    console.log("features", features);
-    console.log("zoom", map.getZoom());
 
     updateStatesInRange(features);
     switchPlot("gv_harm");
@@ -258,12 +243,9 @@
         "map_center": map.getCenter().toArray(),
       },
       success: function (data) {
-        console.log("success");
-        console.log(data);
       },
       failure: function (data) {
-        console.log("failure");
-        console.log(data);
+        console.log("save_map_meta failed", data);
       },
     });
   }

@@ -23,12 +23,8 @@ from gunviolence.ajax_views import *
 urlpatterns = [
     path('', dashboard, name='dashboard'),
     path('save_map_meta/', saveMapMeta, name='save_map_meta'),
-    path('save_incident_form/', saveIncidentForm, name='save_incident_form'),
-    path('save_characteristic_formset/', saveCharacteristicFormSet, name='save_characteristic_formset'),
-    path('save_gun_formset/', saveGunFormSet, name='save_gun_formset'),
-    path('save_participant_formset/', saveParticipantFormSet, name='save_participant_formset'),
-    # path('select_location/', selectLocation, name='select_location'),
     path('delete_incident/', deleteIncident, name='delete_incident'),
     path('save_incident_id/', saveIncidentID, name='save_incident_id'),
     path('save_incident/', saveIncident, name='save_incident'),
+    path('get_fulltext/', getFullTextSearch, name='get_fulltext'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

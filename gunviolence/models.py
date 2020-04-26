@@ -17,7 +17,7 @@ class City(models.Model):
     state = models.ForeignKey(State, on_delete=models.DO_NOTHING, to_field='name')
 
 class GunViolence(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     #url = models.CharField(max_length=200)
     date = models.DateField()
     city = models.CharField(max_length=64)
@@ -48,9 +48,9 @@ class Characteristic(models.Model):
     characteristic = models.CharField(max_length=512)
 """
 class Gun(models.Model):
-    incident_id = models.ForeignKey(GunViolence, on_delete=models.DO_NOTHING)
-    type = models.CharField(max_length=64)
-    stolen = models.CharField(max_length=64)
+    incident = models.ForeignKey(GunViolence, on_delete=models.DO_NOTHING)
+    type = models.CharField(max_length=64, null=True)
+    stolen = models.CharField(max_length=64, null=True)
 
 """
 class IncidentCharacteristic(models.Model):
@@ -81,20 +81,3 @@ class Participant(models.Model):
         managed = False
         db_table = 'gunviolence_participant'
     """
-
-class GunViolenceJson(models.Model):
-    id = models.AutoField(primary_key=True)
-    date = models.DateField()
-    state = models.CharField(max_length=64)
-    city = models.CharField(max_length=64)
-    latitude =  models.FloatField(null=True)
-    longitude =  models.FloatField(null=True)
-    address = models.TextField(null=True)
-    n_killed = models.PositiveSmallIntegerField(null=True)
-    n_injured = models.PositiveSmallIntegerField(null=True)
-    participants = models.TextField(null=True)
-    characteristics = models.TextField(null=True)
-    guns = models.TextField(null=True)
-    congressional_district = models.CharField(max_length=64, null=True)
-    state_house_district = models.CharField(max_length=64, null=True)
-    state_senate_district = models.CharField(max_length=64, null=True)

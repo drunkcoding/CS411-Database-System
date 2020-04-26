@@ -13,38 +13,25 @@ from .async_requests import *
 def dashboard(request):
     template_name = 'dashboard.html'
     context = {}
-    context['date_form'] = DateRangeForm()
     context['characteristic_form'] = CharacteristicForm()
     context['participant_form'] = ParticipantForm()
     context['gun_form'] = GunForm()
-    #context['characteristic_formset'] = CharacteristicFormSet()
-    #context['gun_formset'] = GunFormSet()
     context['incident_form'] = IncidentForm()
-    #context['participant_formset'] = ParticipantFormSet()
+    context['scroll'] = False
+
+    try:
+        loop = asyncio.get_event_loop()
+    except:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+    tasks = []
+    rtasks = []
 
     settings.LOGGER.info('dashboard', request.POST)
     
-    incident_id = request.session.get('incident_id')
-    if incident_id != None:
-        print("incident_id", incident_id)
-        incident = GunViolenceJson.objects.get(id=incident_id)
-        if incident:
-            context['incident_form'] = IncidentForm(initial={
-                'id':incident.id,
-                'date':incident.date,
-                'state':incident.state,
-                'address':incident.address,
-                'n_killed':incident.n_killed,
-                'n_injured':incident.n_injured,
-                'latitude':incident.latitude,
-                'longitude':incident.longitude,
-            })
-            context['gun_formset'] = Json2formset(GunForm, incident.guns)
-            context['characteristic_formset'] = Json2formset(CharacteristicForm, incident.characteristics)
-            context['participant_formset'] = Json2formset(ParticipantForm, incident.participants)
-
-        del request.session['incident_id']
-        context['scroll_to_form'] = True
+    incident_id = request.GET.get('incident_id', None)
+    tasks.append(requestDataForms(incident_id, context))
 
     date_form = DateRangeForm(request.session.get('date_form'))
     total_count = request.session.get('total_count')
@@ -60,17 +47,38 @@ def dashboard(request):
     context['case_min'] = case_min
     context['case_max'] = case_max
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.POST.get('from_date', None) != None:
         date_form = DateRangeForm(request.POST)
 
-    if not date_form.is_valid(): return render(request, template_name, context)
+    if not date_form.is_valid():
+        # print("partial context", context)
+        loop.run_until_complete(asyncio.gather(*tasks))
+        return render(request, template_name, context)
 
-    asyncio.run(scheduleAsyncRequests(date_form))
+    tasks.append(loop.create_task(requestHarmedEachState(date_form)))
+    tasks.append(loop.create_task(requestCharactristicWords(date_form)))
+    tasks.append(loop.create_task(requestParticipantAge(date_form)))
 
-    total_count = requestTotalCount(date_form)
+    rtasks.append(loop.create_task(requestTotalCount(date_form)))
+    rtasks.append(loop.create_task(requestStateCount(date_form)))
+    rtasks.append(loop.create_task(requestCaseLocation(date_form)))
 
-    state_min, state_max, state_count = requestStateCount(date_form)
-    case_min, case_max = requestCaseLocation(date_form)
+    """
+    from_date = date_form.from_date.strftime("%Y-%m-%d")
+    to_date = date_form.to_date.strftime("%Y-%m-%d")
+
+    cursor = connection.cursor()
+    cursor.execute(
+        f"CREATE OR REPLACE VIEW gv_view AS \
+        SELECT * FROM gunviolence_gunviolence \
+        WHERE date BETWEEN {from_date} AND {to_date};"
+    )
+    """
+
+    total_count, state, case = loop.run_until_complete(asyncio.gather(*rtasks))
+
+    state_min, state_max, state_count = state
+    case_min, case_max = case
 
     context['date_form'] = date_form
     context['state_min'] = state_min
@@ -90,4 +98,7 @@ def dashboard(request):
     context['map_zoom'] = request.session.get('map_zoom')
     context['map_center'] = request.session.get('map_center')
 
+    # print("full context", context)
+
+    loop.run_until_complete(asyncio.gather(*tasks))
     return render(request, template_name, context)
