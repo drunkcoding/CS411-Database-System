@@ -34,6 +34,7 @@ def dashboard(request):
     tasks.append(requestDataForms(incident_id, context))
 
     date_form = DateRangeForm(request.session.get('date_form'))
+
     total_count = request.session.get('total_count')
     state_count = request.session.get('state_count')
     state_min, state_max = request.session.get('state_range', default=(0,1))
@@ -58,7 +59,8 @@ def dashboard(request):
     tasks.append(loop.create_task(requestHarmedEachState(date_form)))
     tasks.append(loop.create_task(requestCharactristicWords(date_form)))
     tasks.append(loop.create_task(requestParticipantAge(date_form)))
-
+    tasks.append(loop.create_task(requestRecentUpdate()))
+    
     rtasks.append(loop.create_task(requestTotalCount(date_form)))
     rtasks.append(loop.create_task(requestStateCount(date_form)))
     rtasks.append(loop.create_task(requestCaseLocation(date_form)))

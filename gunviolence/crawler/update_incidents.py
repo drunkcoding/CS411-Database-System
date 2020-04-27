@@ -6,20 +6,21 @@ from os import path, environ
 from time import sleep
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
+from django.conf import settings
 
 INCIDENTS_FOLDER = path.join(
-    path.dirname(__file__),
-    'data/incidents',
+    settings.MEDIA_DIR,
+    'incidents',
 )
 
 MASS_SHOOTINGS_JSON = path.join(
-    path.dirname(__file__),
-    'data/mass_shootings.json',
+    settings.MEDIA_DIR,
+    'mass_shootings.json',
 )
 
 MASS_SHOOTINGS_JSON_FULL = path.join(
-    path.dirname(__file__),
-    'data/mass_shootings_full.json',
+    settings.MEDIA_DIR,
+    'mass_shootings_full.json',
 )
 
 # refresh data for incidents less than this many days old

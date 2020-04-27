@@ -26,7 +26,7 @@ class GunViolence(models.Model):
     state = models.ForeignKey(State, on_delete=models.DO_NOTHING, to_field='name')
     address = models.TextField(null=True)
     #created_at = models.DateTimeField()
-    #updated_at = models.DateTimeField()
+    update_time = models.DateTimeField(auto_now=True)
     congressional_district = models.CharField(max_length=64, null=True)
     state_house_district = models.CharField(max_length=64, null=True)
     state_senate_district = models.CharField(max_length=64, null=True)

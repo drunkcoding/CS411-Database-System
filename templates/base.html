@@ -65,6 +65,11 @@
                 }
             }
         });
+
+        $('.list-group-item').hover(
+            function(){ $(this).addClass('active') },
+            function(){ $(this).removeClass('active') }
+        )
     </script>
 
     {% include 'style.html' %}
@@ -88,11 +93,12 @@
 
         <script>
             g_search_data = null;
+            g_update_data = null;
 
-            function navMap(idx) {
+            function navMap(data, idx) {
                 $("#search-dropdown").empty();
                 $("#search-dropdown").hide();
-                var v1 = new mapboxgl.LngLat(g_search_data[idx].longitude, g_search_data[idx].latitude);
+                var v1 = new mapboxgl.LngLat(data[idx].longitude, data[idx].latitude);
                 map.setZoom(12);
                 map.setCenter(v1);
             }
@@ -128,7 +134,7 @@
                         g_search_data = data;
                         for (var i = 0; i < g_search_data.length; i++) {
                             $("#search-dropdown").append(
-                                `<a class="dropdown-item" onclick="navMap(${i})">
+                                `<a class="dropdown-item" onclick="navMap(g_search_data,${i})">
                                         ${g_search_data[i].date},${g_search_data[i].city},${g_search_data[i].state},${g_search_data[i].address},${g_search_data[i].n_killed},${g_search_data[i].n_injured}
                                     </a>`
                             );

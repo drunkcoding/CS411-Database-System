@@ -7,8 +7,22 @@ class SQLForm(forms.Form):
     query = forms.CharField(label='rawsql', max_length=1024)
 
 class DateRangeForm(forms.Form):
-    from_date = forms.DateField(initial=datetime.date(year=2014,month=4,day=11))
-    to_date = forms.DateField(initial=datetime.date(year=2014,month=4,day=12))
+    from_date = forms.DateField(
+        initial=datetime.date(year=2014,month=4,day=11),
+        widget=forms.TextInput(attrs={
+            "placeholder":"Selected date",
+            "type":"text",
+            "class":"form-control datepicker"
+        })
+    )
+    to_date = forms.DateField(
+        initial=datetime.date(year=2014,month=4,day=12), 
+        widget=forms.TextInput(attrs={
+            "placeholder":"Selected date",
+            "type":"text",
+            "class":"form-control datepicker"
+        })
+    )
 
 class IncidentForm(forms.Form):
     id = forms.IntegerField(required=False)

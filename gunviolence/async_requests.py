@@ -84,6 +84,15 @@ async def requestParticipantAge(date_form):
     df = pd.DataFrame(rows)
     df.to_csv(fpath, index = False)
 
+async def requestRecentUpdate():
+    rows = list(filterGVEmptyData()\
+        .values('id', 'update_time', 'latitude', 'longitude', 'city').order_by('-update_time').all()[:20]
+        )
+    fpath = os.path.join(settings.MEDIA_DIR, "recent_update.csv")
+
+    df = pd.DataFrame(rows)
+    df.to_csv(fpath, index = False)
+
 async def requestDataForms(id, ctx):
     if id == None: return
     try:

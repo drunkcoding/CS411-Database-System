@@ -7,46 +7,22 @@ from os import path
 #from geopy.geocoders import GoogleV3
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
+from django.conf import settings
 
-start_year = 2014
+start_year = 2020
 current_year = datetime.now().year
 
-scrap_name = sys.argv[1]
-
-
-#GOOGLE_GEOCODE_API_KEY="AIzaSyAZbJA9SsNx6vI4yALD8iOB5p0dpwKl6-s"
-
 MASS_SHOOTINGS_JSON = path.join(
-    path.dirname(__file__),
-    f'data/{scrap_name}.json',
+    settings.MEDIA_DIR,
+    f'mass_shootings.json',
 )
 
-MASS_SHOOTINGS_COMPACT_JSON = path.join(
-    path.dirname(__file__),
-    f'data/{scrap_name}_compact.json',
-)
-
-#geolocator = GoogleV3(GOOGLE_GEOCODE_API_KEY, timeout=10)
 scraper = cfscrape.create_scraper()
-
-"""
-def geocode(address, city, state, tries=3):
-    address_str = f'{city}, {state}, United States'
-    if (address.lower() != 'n/a'):
-        address_str = address + ', ' + address_str
-    try:
-        return geolocator.geocode(address_str)
-    except Exception as e:
-        print(f'Geocoding failed: {address_str}')
-        if tries <= 0:
-            raise e
-        return geocode(address, city, state, tries=tries-1)
-"""
 
 keyed_mass_shooting_data = {}
 
 def scrape_results(year, page):
-    url = f'https://www.gunviolencearchive.org/{scrap_name}?page={page}&year={year}'
+    url = f'https://www.gunviolencearchive.org/mass_shootings?page={page}&year={year}'
     res = scraper.get(url)
     if res.status_code != 200: return []
     soup = BeautifulSoup(res.content, features="lxml")
@@ -85,28 +61,16 @@ def merge_shooting_data(scraped_data):
         keyed_mass_shooting_data[shooting['id']].update(shooting)
     return total_new
 
-
-for year in range(start_year, current_year + 1):
-    print(f'scraping year {year}')
-    page = 0
-    done_importing = False
-    while not done_importing:
-        results = scrape_results(year, page)
-        new_results_count = merge_shooting_data(results)
-        done_importing = new_results_count == 0
-        page += 1
-        sleep(1)
-    print(f'Done importing {year}')
-
-"""
-print('Geocoding missing data')
-for shooting in keyed_mass_shooting_data.values():
-    if not shooting.get('lat') and not shooting.get('lng'):
-        loc = geocode(shooting['address'], shooting['city'], shooting['state'])
-        shooting['lat'] = loc.latitude
-        shooting['lng'] = loc.longitude
-        print(f'geocoded {loc.address}: {loc.latitude}, {loc.longitude}')
-"""
+print(f'scraping year {current_year}')
+page = 0
+done_importing = False
+while not done_importing:
+    results = scrape_results(current_year, page)
+    new_results_count = merge_shooting_data(results)
+    done_importing = new_results_count == 0
+    page += 1
+    sleep(1)
+print(f'Done importing {current_year}')
 
 print('Sorting results')
 updated_shooting_data = sorted(keyed_mass_shooting_data.values(),
@@ -125,9 +89,5 @@ for shooting in updated_shooting_data:
 print('Writing results')
 with open(MASS_SHOOTINGS_JSON, mode='w', encoding="utf-8") as outfile:
     json.dump(updated_shooting_data, outfile, indent=2, ensure_ascii=False)
-
-with open(MASS_SHOOTINGS_COMPACT_JSON, 'w') as outfile:
-    json.dump(updated_shootings_compact, outfile,
-              separators=(',', ':'), ensure_ascii=False)
 
 print(f'Done! {len(updated_shooting_data)} shootings found')

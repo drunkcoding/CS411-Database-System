@@ -28,7 +28,7 @@
           </div>
           <ul class="list-group list-group-flush tab-box-2">
             {% for rank in state_count %}
-            <li class="list-group-item"><span class="red"> {{ rank.total_harm }} </span> {{ rank.state }} </li>
+            <li class="list-group-item list-group-item-action"><span class="red"> {{ rank.total_harm }} </span> {{ rank.state }} </li>
             {% endfor %}
           </ul>
         </div>
@@ -50,11 +50,30 @@
     </div>
   </div>
 
-  <div class="col">
+  <div class="col pr-0">
     <div class="card">
       <div class="card-body map-box" id="mapid">
         <pre id="info"></pre>
         <div id="map"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-2">
+    <div class="card">
+      <div class="card-body">
+        <ul class="list-group list-group-flush overflow-auto" id="recent-update" style="height: 85vh;">
+          <script>
+            d3.csv("{{MEDIA_URL}}recent_update.csv", function (data) {
+              g_update_data = data;
+              for (var i = 0; i < data.length; i++) {
+                $("#recent-update").append(
+                  `<li class="list-group-item list-group-item-action" onclick="navMap(g_update_data,${i})"><span class="red"> ${data[i].update_time} </span> ${data[i].id},${data[i].city} </li>`
+                )
+              }
+            }); 
+          </script>
+        </ul>
       </div>
     </div>
   </div>
