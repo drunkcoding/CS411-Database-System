@@ -12,6 +12,9 @@ import os
 import itertools
 import json
 
+import logging
+LOGGER = logging.getLogger(__name__)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
@@ -59,6 +62,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djangoformsetjs',
+    'background_task',
     'gunviolence',
 ]
 
@@ -97,18 +101,20 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # thtps://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'antientropy_cs411',
         'USER': 'antientropy_cs411',
-        'PASSWORD': "I0t$$Gh#&TYkLniNcedbx4",
         'HOST': '127.0.0.1',
         'PORT': '3306',
+        'PASSWORD': 'I0t$$Gh#&TYkLniNcedbx4',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+            'use_unicode': True, 
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -361,8 +367,4 @@ CHARACTER_CHOICES = makeChoices([
     "NAV"
 ])
 
-
-# GeoJSON US States data
-GEOSTATES = None
-with open(os.path.join(MEDIA_DIR, "gz_states.json"), "r") as f:
-    GEOSTATES = json.loads(f.read().strip())
+DATE_FORMAT = '%m-%d-%Y'

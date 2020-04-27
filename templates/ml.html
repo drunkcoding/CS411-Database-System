@@ -1,0 +1,70 @@
+<script>
+
+    const current_date = new Date();
+    const current_month = current_date.getMonth()+1;
+    const current_day = current_date.getDate();
+
+    cluster_centers = null;
+    n_killed = null;
+    n_injured = null;
+    n_guns_involved = null;
+
+    $(document).ready(function () {
+        d3.csv("{{MEDIA_URL}}cluster-3000.csv", function (data) {
+            cluster_centers = data;
+            n_killed = {
+                max:d3.max(data, function(d) { return d.n_killed; }),
+                min:d3.min(data, function(d) { return d.n_killed; }),
+            }
+            n_injured = {
+                max:d3.max(data, function(d) { return d.n_injured; }),
+                min:d3.min(data, function(d) { return d.n_injured; }),
+            }
+            n_guns_involved = {
+                max:d3.max(data, function(d) { return d.n_guns_involved; }),
+                min:d3.min(data, function(d) { return d.n_guns_involved; }),
+            }
+        });
+    })
+
+    function predictCluster(geo) {
+        var min_dist = 100000;
+        var max_dist = 0;
+        var min_idx = 0;
+        var distance_arr = []
+        for (var i = 0; i < cluster_centers.length; i++) {
+            var d = distance(
+                mapDict2Array({lat:geo.lat, lng:geo.lng, month:current_month, day:current_day}),
+                mapDict2Array(cluster_centers[i])
+            )
+            distance_arr.push({d:d,i:i});
+            if (d < min_dist) {
+                min_dist = d;
+                min_idx = i;
+            }
+            if (d > max_dist) max_dist = d;
+        }
+
+        closest = distance_arr.sort((a,b) => a.d-b.d).slice(0,5);
+
+        return {
+            n_killed:cluster_centers[min_idx].n_killed * Math.log(10/min_dist),
+            n_injured:cluster_centers[min_idx].n_injured * Math.log(10/min_dist),
+            n_guns_involved:cluster_centers[min_idx].n_guns_involved * Math.log(10/min_dist),
+        }
+
+        function mapDict2Array(dict) {
+            return Object.keys(dict).map(function(k) {
+                return dict[k];
+            });
+        }
+
+        function distance(x, y) {
+            return x
+                .map((e, i) => Math.abs(e - y[i]) ** 2) // square the difference
+                .reduce((sum, now) => sum + now) // sum
+                ** (1 / 2)
+        }
+    }
+
+</script>

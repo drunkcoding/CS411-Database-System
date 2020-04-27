@@ -1,5 +1,5 @@
 <div class="row" id="import_form">
-<form>
+<form action='/'>
 <div class="row">
     <div class="col pr-0"> 
         <div class="card overflow-auto" style="height: 85vh">
@@ -67,34 +67,25 @@
         $("#import_form #id_id").prop("readonly", true);
         $('#import_form').hide();
         
-        {% if scroll_to_form %}
+        {% if scroll %}
             $('#import_form').show();
-            //$('#incident-delete').show()  ;
-            //$('#incident-save').hide();
             $('body, html').animate({
                 scrollTop: $("#import_form").offset().top
-            }, 600); 
-        {% else %}    
-            $('#import_form').hide();
-            $('body, html').animate({
-                scrollTop: $("#title").offset().top
             }, 600);
         {% endif %}
     });
 
     function submitImportForm(action) {
-        console.log(action)
         $.ajax({ // create an AJAX call...
             data: $('form').serialize(), // get the form data
             type: 'POST', // GET or POST
             url: action, // the file to call
             success: function(response) { // on success..
-                console.log(response)
                 if (response.Retcode != 0) {
                     alert('Invalid Form');
                 }
                 // $('#import_form').hide();
-                location.reload(true);
+                window.location.replace(window.location.origin);
             },
             error: function(e, x, r) { // on error..
                 alert(e)

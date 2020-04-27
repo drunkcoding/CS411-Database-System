@@ -9,6 +9,7 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
     <!-- Bootstrap 4 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -17,10 +18,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
         integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
-    </script>
+        </script>
 
     <!-- Font Awesome -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
@@ -40,16 +41,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
     <!-- NVD3 -->
     <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
     <link href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css" rel="stylesheet">
 
-    <script src="{% static 'js/helper.js' %}" type="text/javascript"></script>
+    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
+
+    {% include 'helper.html' %}
+    {% include 'vis_helper.html' %}
+    {% include 'ml.html' %}
 
     <script>
+
         var csrftoken = getCookie('csrftoken');
         $.ajaxSetup({
             beforeSend: function (xhr, settings) {
@@ -58,147 +65,88 @@
                 }
             }
         });
+
+        $('.list-group-item').hover(
+            function(){ $(this).addClass('active') },
+            function(){ $(this).removeClass('active') }
+        )
     </script>
 
-    <style>
-        body {
-            background: #000000;
-            color: #bdbdbd;
-            font-family: "SST Vietnamese", "Lucida Grande", Arial, Verdana, Geneva, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container-fluid {
-            margin-top: 1%;
-            margin-bottom: 1%;
-        }
-
-        .row {
-            margin-bottom: 1%;
-        }
-
-        .card {
-            background: #212121;
-            border-radius: 0;
-            border: 1px solid #363636;
-        }
-
-        .card-body {
-            padding: 0.65rem;
-        }
-
-        .card-overlay {
-            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-            position: relative;
-            width: 25%;
-            bottom: 0;
-            left: 0;
-        }
-
-        .card-overlay .card-overlay-inner {
-            background-color: #272727;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-            border-radius: 3px;
-            margin-bottom: 5px;
-            margin-left: 5px;
-        }
-
-        h4 {
-            font-size: 2vh;
-        }
-
-        h1 {
-            font-size: 5vh;
-        }
-
-        .tab-box {
-            max-height: 57.2vh;
-            overflow-y: scroll;
-        }
-
-        .tab-box-2 {
-            height: 38vh;
-            overflow-y: scroll;
-            /*font-size: 1.5vh*/
-        }
-
-        .normal-box {
-            height: 11vh;
-        }
-
-        .chart-box {
-            height: 37.5vh;
-        }
-
-        .map-box {
-            height: 89vh;
-        }
-
-        .header-title {
-            font-size: 1rem;
-            font-weight: bold;
-        }
-
-        .card-title {
-            font-weight: 600;
-            font-size: 12px;
-            margin-bottom: 0;
-        }
-
-        .list-group-item {
-            padding: 4px 0px 4px 20px;
-            background: #212121;
-            border-bottom: 1px solid #5c5c5c;
-        }
-
-        ::-webkit-scrollbar {
-            -webkit-appearance: none;
-            width: 7px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            border-radius: 0;
-            background-color: #5c5c5c;
-            -webkit-box-shadow: 0 0 1px #404040
-        }
-
-        .red {
-            color: #e60000;
-            font-weight: 600;
-        }
-
-        .white {
-            color: #ededed;
-            font-weight: 600;
-        }
-
-        .green {
-            color: #70a800;
-            font-weight: 600;
-        }
-    </style>
-
-    <style>
-        #map {
-            position: relative;
-            height: 85vh;
-        }
-    </style>
+    {% include 'style.html' %}
 
 </head>
 
 <body>
+
+    <!--Navbar-->
     <div class="container-fluid">
-        <div class="row">
-            <div class="col" id="title">
-                <div class="card">
-                    <div class="card-body header-title text-center">
-                        USA Gun Violence Cases by Anti-Entropy Team
-                    </div>
+        <nav class="navbar navbar-dark indigo mb-4">
+            <a class="navbar-brand" href="#">USA Gun Violence Cases by Anti-Entropy Team</a>
+            <div class="dropdown mr-auto">
+                <div class="md-form my-0">
+                    <input id="search-input" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </div>
+                <div class="dropdown-menu" id="search-dropdown">
                 </div>
             </div>
-        </div>
+        </nav>
+
+        <script>
+            g_search_data = null;
+            g_update_data = null;
+
+            function navMap(data, idx) {
+                $("#search-dropdown").empty();
+                $("#search-dropdown").hide();
+                var v1 = new mapboxgl.LngLat(data[idx].longitude, data[idx].latitude);
+                map.setZoom(12);
+                map.setCenter(v1);
+            }
+
+
+            var typingTimer;                //timer identifier
+            var doneTypingInterval = 500;  //time in ms, 5 second for example
+            var $input = $('#search-input');
+
+            //on keyup, start the countdown
+            $input.on('keyup', function () {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+            });
+
+            //on keydown, clear the countdown 
+            $input.on('keydown', function () {
+                clearTimeout(typingTimer);
+            });
+
+            //user is "finished typing," do something
+            function doneTyping() {
+                $("#search-dropdown").empty();
+                $("#search-dropdown").show();
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'get_fulltext' %}",
+                    dataType: "json",
+                    data: {
+                        "text": $("#search-input").val()
+                    },
+                    success: function (data) {
+                        g_search_data = data;
+                        for (var i = 0; i < g_search_data.length; i++) {
+                            $("#search-dropdown").append(
+                                `<a class="dropdown-item" onclick="navMap(g_search_data,${i})">
+                                        ${g_search_data[i].date},${g_search_data[i].city},${g_search_data[i].state},${g_search_data[i].address},${g_search_data[i].n_killed},${g_search_data[i].n_injured}
+                                    </a>`
+                            );
+                        }
+                    },
+                    failure: function (data) {
+                        console.log("get_fulltext failed", data);
+                    },
+                });
+            }
+        </script>
+
         {% block content %}
         {% endblock %}
     </div>

@@ -1,0 +1,259 @@
+<script>
+
+    states_in_range = [];
+    gv_harm_selected = 0;
+    const N_KILLED_DATA = "{{MEDIA_URL}}n_killed.csv";
+    const N_INJURED_DATA = "{{MEDIA_URL}}n_injured.csv";
+    const N_TOTAL_DATA = "{{MEDIA_URL}}n_harmed.csv";
+    const CH_WORDS_DATA = "{{MEDIA_URL}}characteristics.csv";
+    const PART_AGE_DATA = "{{MEDIA_URL}}participant_age.csv";
+
+    function updateStatesInRange(features) {
+        states_in_range = []
+        for (var i = 0; i < features.length; i++) {
+            states_in_range.push(features[i].properties.NAME);
+        }
+    }
+
+    function searchState(state) {
+        if (states_in_range.length == 0) return true;
+        for (var i = 0; i < states_in_range.length; i++) {
+            if (states_in_range[i] == state) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function getGraphMargin() {
+        return { top: 20, right: 30, bottom: 0, left: 10 };
+    }
+
+    function getGraphSize() {
+        var margin = getGraphMargin();
+        var width = window.innerWidth - 10 - margin.left - margin.right;
+        var height = window.innerHeight - 10 - margin.top - margin.bottom;
+        return { w: width, h: height };
+    }
+
+    function setGraphMargin(id) {
+        var gsize = getGraphSize();
+        var gmargin = getGraphMargin();
+        var svg = d3.select(`#${id}`)
+            .append("svg")
+            .attr("width", gsize.w + gmargin.left + gmargin.right)
+            .attr("height", gsize.h + gmargin.top + gmargin.bottom)
+            .attr("id", `svg-${id}`)
+            .append("g")
+            .attr("transform",
+                "translate(" + gmargin.left + "," + gmargin.top + ")");
+        return { svg: svg, w: gsize.w, h: gsize.h };
+    }
+
+    function plotWordCloud(id, data) {
+        var value = setGraphMargin(id);
+        var svg = value.svg;
+        d3.csv(data, function (data) {
+            var nested_data = d3.nest().key(function (d) {
+                return d.word;
+            })
+                .rollup(function (leaves) {
+                    return d3.sum(leaves, function (d) {
+                        if (searchState(d.state) == true) {
+                            return parseInt(d.size);
+                        }
+                        else return 0;
+                    });
+                }).entries(data)
+                .map(function (d) {
+                    return { text: d.key, size: d.value };
+                });
+
+            var layout = d3.layout.cloud()
+                .size([value.w, value.h])
+                .words(nested_data)
+                .padding(5)        //space between words
+                .rotate(function () { return ~~(Math.random() * 2) * 90; })
+                .fontSize(function (d) { return d.size; })      // font size of words
+                .on("end", draw);
+            layout.start();
+            function draw(words) {
+                svg
+                    .append("g")
+                    .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+                    .selectAll("text")
+                    .data(words)
+                    .enter().append("text")
+                    .style("font-size", function (d) { return d.size; })
+                    .style("fill", "#ff0000")
+                    .attr("text-anchor", "middle")
+                    .style("font-family", "Impact")
+                    .attr("transform", function (d) {
+                        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                    })
+                    .text(function (d) { return d.text; });
+            }
+        });
+    }
+
+    function plotDensityGraph(id, data) {
+        var value = setGraphMargin(id);
+        var svg = value.svg;
+
+        d3.csv(data, function (data) {
+
+            nested_data = []
+            for (var i = 0; i < data.length; i++) {
+                if (searchState(data[i].incident__state) == true) nested_data.push(data[i]);
+            }
+
+            // add the x Axis
+            var x = d3.scaleLinear()
+                .domain([0, d3.max(nested_data, function(d){return parseInt(d.age)})])
+                .range([0, value.w]);
+            svg.append("g")
+                // .attr("transform", "translate(0," + value.h + ")")
+                .attr("transform", "translate(0,0)")
+                .call(d3.axisBottom(x)).selectAll("text").style("stroke", "white");
+
+            // add the y Axis
+
+            // Compute kernel density estimation
+            var kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(40))
+            var density = kde(nested_data.map(function (d) { return parseInt(d.age); }))
+
+            var y = d3.scaleLinear()
+                .range([value.h, 0])
+                .domain([0, d3.max(density, function(d){return d[1]*1.2})]);
+            svg.append("g")
+                .attr("transform", "translate(150,0)")
+                .call(d3.axisLeft(y)).selectAll("text").style("stroke", "white");
+
+            // Plot the area
+            svg.append("path")
+                .attr("class", "mypath")
+                .datum(density)
+                .attr("fill", "#ff0000")
+                .attr("opacity", ".8")
+                .attr("stroke", "#ffffff")
+                .attr("stroke-width", 1)
+                .attr("stroke-linejoin", "round")
+                .attr("d", d3.line()
+                    .curve(d3.curveBasis)
+                    .x(function (d) { return x(d[0]); })
+                    .y(function (d) { return y(d[1]); })
+                );
+
+        });
+
+
+        // Function to compute density
+        function kernelDensityEstimator(kernel, X) {
+            return function (V) {
+                return X.map(function (x) {
+                    return [x, d3.mean(V, function (v) { return kernel(x - v); })];
+                });
+            };
+        }
+        function kernelEpanechnikov(k) {
+            return function (v) {
+                return Math.abs(v /= k) <= 1 ? 0.75 * (1 - v * v) / k : 0;
+            };
+        }
+
+    }
+
+    function plotStreamGraph(id, data) {
+        var value = setGraphMargin(id);
+        var svg = value.svg;
+
+        d3.csv(data, function (data) {
+            // List of groups = header of the csv files
+            var keys = selectArray(data.columns.slice(1), states_in_range)
+
+            //stack the data?
+            var stackedData = d3.stack()
+                .offset(d3.stackOffsetNone)
+                .keys(keys)
+                (data)
+
+            // Add X axis
+            var x = d3.scaleTime()
+                .domain(d3.extent(data, function (d) { return d3.timeParse("%Y-%m-%d")(d.date); }))
+                .range([0, value.w]);
+            var xaxis = svg.append("g")
+                .attr("transform", "translate(0," + value.h * 0.9 + ")")
+                .call(d3.axisBottom(x))
+            xaxis.selectAll("text").style("stroke", "white");
+
+            // Add Y axis
+            var y = d3.scaleLinear()
+                .domain([d3.min(stackedData, function (d) { return d[0][0] - 5; }), d3.max(stackedData, function (d) { return d[0][0] + 10; })])
+                .range([value.h, 0]);
+
+            // color palette
+            var color = d3.scaleOrdinal()
+                .domain(keys)
+                .range(d3.schemeSet3);
+
+            // create a tooltip
+            var Tooltip = svg
+                .append("text")
+                .attr("x", 0)
+                .attr("y", 0)
+                .style("opacity", 0)
+                .style("font-size", 17)
+                .style("stroke", "white")
+
+            // Three function that change the tooltip when user hover / move / leave a cell
+            var mouseover = function (d) {
+                Tooltip.style("opacity", 1)
+                d3.selectAll(".gv_killed_area").style("opacity", .2)
+                d3.select(this)
+                    .style("stroke", "white")
+                    .style("opacity", 1)
+            }
+            var mousemove = function (d, i) {
+                grp = keys[i]
+                Tooltip.text(grp)
+            }
+            var mouseleave = function (d) {
+                Tooltip.style("opacity", 0)
+                d3.selectAll(".gv_killed_area").style("opacity", 1).style("stroke", "none")
+            }
+
+            // Area generator
+            var area = d3.area()
+                .x(function (d) { return x(d3.timeParse("%Y-%m-%d")(d.data.date)); })
+                .y0(function (d) { return y(d[0]); })
+                .y1(function (d) { return y(d[1]); })
+
+            // Show the areas
+            svg
+                .selectAll("gv_killed_layers")
+                .data(stackedData)
+                .enter()
+                .append("path")
+                .attr("class", "gv_killed_area")
+                .style("fill", function (d) { return color(d.key); })
+                .style("opacity", 0.6)
+                .attr("d", area)
+                .on("mouseover", mouseover)
+                .on("mousemove", mousemove)
+                .on("mouseleave", mouseleave)
+
+        })
+
+    }
+
+    function cleanupPlot(id) { d3.select(id).transition().remove() }
+
+    function switchPlot(id) {
+        cleanupPlot(`#svg-${id}`);
+        if (gv_harm_selected == 0) plotWordCloud(id, CH_WORDS_DATA);
+        if (gv_harm_selected == 1) plotDensityGraph(id, PART_AGE_DATA);
+        if (gv_harm_selected == 2) plotStreamGraph(id, N_TOTAL_DATA);
+        // scrollToID(id);
+    }
+
+</script>
