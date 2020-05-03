@@ -19,21 +19,13 @@ def saveIncidentID(request):
 
     return JsonResponse({'Retcode':-1})
 
-async def __deleteIncident(id):
-    if id == None or len(id) == 0: return
-    incident_id = int(id)
-    GunViolence.objects.filter(id=incident_id).delete()
-
 @require_http_methods(["POST"])
 def deleteIncident(request):
     settings.LOGGER.info('delete', request.POST)
     id = request.POST.get('id')
-    try:
-        loop = asyncio.get_event_loop()
-    except:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-    asyncio.ensure_future(__deleteIncident(id))
+    if id == None or len(id) == 0: return JsonResponse({'Retcode':-1})
+    incident_id = int(id)
+    GunViolence.objects.filter(id=incident_id).delete()
     return JsonResponse({'Retcode':0})
 
 @require_http_methods(["POST"])
@@ -91,6 +83,7 @@ def saveIncident(request):
 
     obj = GunViolence()
 
+    obj.id = incident_form['id'].value()
     obj.date = incident_form['date'].value()
     obj.state = State.objects.get(pk=incident_form['state'].value())
     obj.address = incident_form['address'].value()
@@ -98,7 +91,7 @@ def saveIncident(request):
     obj.n_injured = incident_form['n_injured'].value()
     obj.latitude = incident_form['latitude'].value()
     obj.longitude = incident_form['longitude'].value()
-    # obj.notes = incident_form['notes'].value()
+    obj.update_time = datetime.datetime.now()
 
     obj.characteristics = formset2JSON(characteristic_formset)
     obj.guns = formset2JSON(gun_formset)
@@ -109,6 +102,8 @@ def saveIncident(request):
             GunViolence.objects.filter(id=incident_form['id'].value()).delete()
         obj.save()
 
+        #print("new indident saved", incident_form)
+
         for form in gun_formset:
             gun = form.cleaned_data
             gun_obj, created = Gun.objects.get_or_create(
@@ -116,6 +111,7 @@ def saveIncident(request):
                 type = gun.get('gun_type'),
                 stolen = gun.get('stolen'),
             )
+            #print("new gun saved", gun)
         for form in participant_formset:
             participant = form.cleaned_data
             part_obj, created = Participant.objects.get_or_create(
@@ -127,6 +123,7 @@ def saveIncident(request):
                 type = participant.get('type'),
                 relationship = participant.get('relationship'),
             )
+            #print("new participant saved", participant)
 
     return JsonResponse({'Retcode':0})
 
@@ -136,7 +133,7 @@ def getFullTextSearch(request):
     if text is None: return JsonResponse([])
 
     date_form = DateRangeForm(request.session.get('date_form'))
-    if not date_form.is_valid(): return JsonResponse([])
+    if not date_form.is_valid(): return JsonResponse([], safe=False)
 
     date_form = date_form.cleaned_data
 

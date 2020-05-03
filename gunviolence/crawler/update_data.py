@@ -4,16 +4,14 @@ import json
 import re, sys
 from time import sleep
 from os import path
-#from geopy.geocoders import GoogleV3
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
-from django.conf import settings
 
 start_year = 2020
 current_year = datetime.now().year
 
 MASS_SHOOTINGS_JSON = path.join(
-    settings.MEDIA_DIR,
+    path.dirname(__file__),
     f'mass_shootings.json',
 )
 
@@ -22,7 +20,7 @@ scraper = cfscrape.create_scraper()
 keyed_mass_shooting_data = {}
 
 def scrape_results(year, page):
-    url = f'https://www.gunviolencearchive.org/mass_shootings?page={page}&year={year}'
+    url = f'https://www.gunviolencearchive.org/mass-shooting?page={page}&year={year}'
     res = scraper.get(url)
     if res.status_code != 200: return []
     soup = BeautifulSoup(res.content, features="lxml")

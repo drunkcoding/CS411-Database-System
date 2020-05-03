@@ -31,9 +31,15 @@ def dashboard(request):
     settings.LOGGER.info('dashboard', request.POST)
     
     incident_id = request.GET.get('incident_id', None)
+    print("incident_id", incident_id)
     tasks.append(requestDataForms(incident_id, context))
 
-    date_form = DateRangeForm(request.session.get('date_form'))
+    loop.run_until_complete(asyncio.gather(*tasks))
+    tasks.pop()
+    if incident_id != None and not context['scroll']: return redirect('/')
+
+    date_form = DateRangeForm()
+    if request.session.get('date_form') != None: date_form = DateRangeForm(request.session.get('date_form'))
 
     total_count = request.session.get('total_count')
     state_count = request.session.get('state_count')
@@ -50,6 +56,9 @@ def dashboard(request):
 
     if request.method == 'POST' and request.POST.get('from_date', None) != None:
         date_form = DateRangeForm(request.POST)
+
+    if request.method == 'GET':
+        date_form = DateRangeForm(request.GET)
 
     if not date_form.is_valid():
         # print("partial context", context)
@@ -81,6 +90,8 @@ def dashboard(request):
 
     state_min, state_max, state_count = state
     case_min, case_max = case
+
+    # print(type(total_count), type(state_min))
 
     context['date_form'] = date_form
     context['state_min'] = state_min

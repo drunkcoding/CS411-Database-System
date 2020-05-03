@@ -86,7 +86,7 @@ async def requestParticipantAge(date_form):
 
 async def requestRecentUpdate():
     rows = list(filterGVEmptyData()\
-        .values('id', 'update_time', 'latitude', 'longitude', 'city').order_by('-update_time').all()[:20]
+        .values('id', 'update_time', 'latitude', 'longitude', 'state').order_by('-update_time').all()[:20]
         )
     fpath = os.path.join(settings.MEDIA_DIR, "recent_update.csv")
 
@@ -97,9 +97,11 @@ async def requestDataForms(id, ctx):
     if id == None: return
     try:
         incident = GunViolence.objects.get(id=id)
+        print(incident, incident.id)
     except:
+        print("get value error")
         return
-    if incident is None: return
+    if incident is None or incident.id is None: return
     ctx['incident_form'] = IncidentForm(initial={
         'id':incident.id,
         'date':incident.date,
