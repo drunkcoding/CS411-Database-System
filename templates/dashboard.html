@@ -68,7 +68,7 @@
               g_update_data = data;
               for (var i = 0; i < data.length; i++) {
                 $("#recent-update").append(
-                  `<li class="list-group-item list-group-item-action" onclick="navMap(g_update_data,${i})"><span class="red"> ${data[i].update_time} </span> ${data[i].id},${data[i].city} </li>`
+                  `<li class="list-group-item list-group-item-action" onclick="navMap(g_update_data,${i})"><span class="red"> ${data[i].update_time} </span> ${data[i].id},${data[i].state} </li>`
                 )
               }
             }); 
@@ -211,7 +211,7 @@
     var n = location.href.indexOf("?");
     var url = location.href;
     if (n != -1) url = url.substring(0, n);
-    window.location.replace(url + `?incident_id=${incident_id}`);
+    window.location.replace(url + `?incident_id=${incident_id}&from_date=${$("#id_from_date").val()}&to_date=${$("#id_to_date").val()}`);
     //location.href = 
     //location.reload(true);
     /*

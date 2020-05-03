@@ -84,11 +84,14 @@
                 if (response.Retcode != 0) {
                     alert('Invalid Form');
                 }
-                // $('#import_form').hide();
-                window.location.replace(window.location.origin);
+                $('#import_form').hide();
+                $('body, html').animate({
+                    scrollTop: $(".navbar").offset().top
+                }, 600);
+                // window.location.replace(window.location.origin);
             },
             error: function(e, x, r) { // on error..
-                alert(e)
+                alert(e, x, r);
             }
         });
     }

@@ -6,20 +6,19 @@ from os import path, environ
 from time import sleep
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
-from django.conf import settings
 
 INCIDENTS_FOLDER = path.join(
-    settings.MEDIA_DIR,
+    path.dirname(__file__),
     'incidents',
 )
 
 MASS_SHOOTINGS_JSON = path.join(
-    settings.MEDIA_DIR,
+    path.dirname(__file__),
     'mass_shootings.json',
 )
 
 MASS_SHOOTINGS_JSON_FULL = path.join(
-    settings.MEDIA_DIR,
+    path.dirname(__file__),
     'mass_shootings_full.json',
 )
 
